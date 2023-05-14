@@ -1,0 +1,24 @@
+{
+	"name": "Registrar Cascos",
+	"short_name": "Cascos",
+	"start_url": "http://myflutter-adibattista.web.app/",
+	"scope": "/",
+	"display": "fullscreen",
+	"orientation": "portrait",
+	"background_color": "#0175C2",
+	"theme_color": "#0175C2",
+	"description": "Permite la registración del uso de cascos en Yerba Buena",
+	"prefer_related_applications": false,
+	"icons": [
+		{
+			"src": "icons/casco.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "icons/casco.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}
