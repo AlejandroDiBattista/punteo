@@ -60,12 +60,12 @@ class SheetsApi {
     return lineas.skip(1).map((valores) => Escuela.fromMap(Map.fromIterables(campos, valores))).toList();
   }
 
-  static Future<List<Votante>> traerVotantes() async {
-    await init();
-    final lineas = await votantes!.values.allRows();
-    final campos = lineas.first;
-    return lineas.skip(1).map((valores) => Votante.fromMap(Map.fromIterables(campos, valores))).toList();
-  }
+  // static Future<List<Votante>> traerVotantes() async {
+  //   await init();
+  //   final lineas = await votantes!.values.allRows();
+  //   final campos = lineas.first;
+  //   return lineas.skip(1).map((valores) => Votante.fromMap(Map.fromIterables(campos, valores))).toList();
+  // }
 
   static Future<Map<int, bool>> traerMesas([int documento = 0]) async {
     await init();
@@ -87,15 +87,27 @@ class SheetsApi {
     await init();
     var lineas = await favoritos!.values.allRows();
     proximoFavorito = lineas.length + 1;
-
+    // print('traerFavoritos($documento): Hay ${lineas.length} lineas:');
+    // // print(lineas.map((e) => e.length).toList());
+    // print("-----");
+    // print(" ejemplo de linea: ${lineas[0]} ${lineas[0].map((x) => x.runtimeType)}");
+    // print(" ejemplo de linea: ${lineas[3]} ${lineas[3].map((x) => x.runtimeType)}");
+    // print(" ejemplo de linea: ${lineas[5]} ${lineas[5].map((x) => x.runtimeType)}");
     lineas = lineas.skip(1).toList();
-    if (documento > 0) {
-      final dni = documento.toString();
-      lineas = lineas.where((element) => element[1] == dni).toList();
+    final salida = <int, bool>{};
+    // var n = 1;
+    for (final l in lineas) {
+      if (l.isEmpty) continue;
+      // print(' ${n++}) l: $l > ${l.length}');
+      // print(' - ${l[0]} - ${l[2]} - ${l[2].toLowerCase() == "s"}');
+      final dni = int.parse(l[0]);
+      final ref = int.parse(l[1]);
+      // print(' - $dni - ${l[2]} - ${l[2].toLowerCase() == "s"}');
+      if (documento == 0 || ref == documento) {
+        salida[dni] = l[2].toLowerCase() == "s";
+      }
     }
 
-    final salida = <int, bool>{};
-    lineas.forEach((element) => salida[int.parse(element[0])] = element[2] == "S");
     return salida;
   }
 
@@ -103,13 +115,15 @@ class SheetsApi {
     final fila = [votante.dni, referente, votante.favorito ? "S" : "N", votante.nombre, votante.mesa, horaActual()];
 
     await init();
-    await favoritos!.values.insertRow(proximoFavorito++, fila);
+    // await favoritos!.values.insertRow(proximoFavorito++, fila);
+    await favoritos!.values.appendRow(fila);
   }
 
   static Future<void> marcarMesa(Mesa mesa, int referente) async {
     final fila = [mesa.numero, referente, mesa.cerrada ? "cerrar" : "abrir", horaActual()];
 
     await init();
-    mesas!.values.insertRow(proximaMesa++, fila);
+    // mesas!.values.insertRow(proximaMesa++, fila);
+    mesas!.values.appendRow(fila);
   }
 }

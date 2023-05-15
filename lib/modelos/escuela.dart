@@ -1,5 +1,6 @@
 import 'dart:convert';
 import './mesa.dart';
+import 'package:collection/collection.dart';
 
 class Escuela {
   String escuela;
@@ -27,6 +28,17 @@ class Escuela {
   void agregar(Mesa mesa) {
     mesas.add(mesa);
   }
+
+  factory Escuela.noIdentificada() => Escuela(
+      escuela: "Sin definir",
+      direccion: "sin dirección",
+      desde: 0,
+      hasta: 0,
+      circuito: "",
+      departamento: "",
+      seccion: "",
+      latitude: 0,
+      longitude: 0);
 
   factory Escuela.fromMap(Map<String, dynamic> data) {
     return Escuela(
@@ -88,8 +100,11 @@ class Escuela {
   get totalMesas => mesas.length;
   get totalCerradas => mesas.where((mesa) => mesa.cerrada).length;
 
-  get totalVotantes => mesas.map((mesa) => mesa.votantes.length).reduce((value, element) => value + element);
-  get totalFavoritos => mesas.map((mesa) => mesa.favoritos.length).reduce((value, element) => value + element);
+  int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
+
+  int get totalFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;
+  int get totalAnalizados => mesas.map((m) => m.favoritos.length > 0 ? 1 : 0).sum;
+
   @override
   String toString() =>
       'Escuela(escuela: $escuela, direccion: $direccion, desde: $desde, hasta: $hasta, mesas: $mesas, votantes: $totalVotantes, circuito: $circuito, departamento: $departamento, seccion: $seccion, latitude: $latitude, longitude: $longitude)';

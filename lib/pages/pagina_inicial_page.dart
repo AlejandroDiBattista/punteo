@@ -1,62 +1,63 @@
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+// import 'package:myapp/pages/buscar_page.dart';
 import 'package:myapp/pages/escuelas_page.dart';
+import 'package:myapp/pages/estadisticas_page.dart';
 
-class PaginaInicialPage extends StatelessWidget {
-  final int cantidadVotantesAnalizados;
-  final int cantidadVotantesMarcados;
+// import '../modelos/datos.dart';
 
-  const PaginaInicialPage({
-    Key? key,
-    required this.cantidadVotantesAnalizados,
-    required this.cantidadVotantesMarcados,
-  }) : super(key: key);
+// ignore: must_be_immutable
+class PaginaInicialPage extends StatefulWidget {
+  PaginaInicialPage({Key? key}) : super(key: key);
+  int index = 0;
+  List<Widget> paginas = [
+    EscuelasPage(),
+    // BuscarPage(),
+    EstadisticasPage(),
+  ];
 
+  @override
+  State<PaginaInicialPage> createState() => _PaginaInicialPageState();
+}
+
+class _PaginaInicialPageState extends State<PaginaInicialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Página Inicial'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text('Cantidad de votantes analizados: $cantidadVotantesAnalizados'),
-          Text('Cantidad de votantes marcados: $cantidadVotantesMarcados'),
-        ],
-      ),
+      body: widget.paginas[widget.index],
       bottomNavigationBar: Container(
-        height: 60.0,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Marcar Votantes'),
-                  ),
-                  onPressed: () async {
-                    await Navigator.push(context, MaterialPageRoute(builder: (context) => EscuelasPage()));
-                  },
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+          child: GNav(
+              gap: 8,
+              color: Colors.white,
+              activeColor: Colors.white,
+              backgroundColor: Theme.of(context).primaryColor,
+              tabBackgroundColor: Theme.of(context).primaryColorDark,
+              iconSize: 24,
+              padding: EdgeInsets.all(16),
+              onTabChange: (index) {
+                setState(() {
+                  widget.index = index;
+                });
+              },
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // style: ,
+              tabs: [
+                GButton(
+                  icon: Icons.check,
+                  text: 'Marcar',
                 ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Buscar donde voto'),
-                  ),
-                  onPressed: () {
-                    // Lógica para marcar votantes
-                  },
+                // GButton(
+                //   icon: Icons.search,
+                //   text: 'Buscar',
+                // ),
+                GButton(
+                  icon: Icons.bar_chart,
+                  text: 'Estadisticas',
                 ),
-              ),
-            ],
-          ),
+              ]),
         ),
       ),
     );

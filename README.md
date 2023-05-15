@@ -1,16 +1,18 @@
-# myapp
+# Punteo Yerba Buena
 
-A new Flutter project.
+Marca a tus amigos que podrían votar a la lista 151
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+La app web está en línea en [Punteo YB](https://punteo.netlify.app)
 
-A few resources to get you started if this is your first Flutter project:
+## Como se usa
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+1. Debes ingresar tu DNI e ingresar.
+2. Luego podras elegir el colegio (observa que esta indicado el colegio en el que votas) 
+3. luego la mesas a marcar (tambien esta indicada la mesa en que votas) 
+4. por ultimo tocar a la persona que crees votaria a la lista.
+5. Al marcar a todas las personas pulsar "Mesa completa"
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Cuanto todas las mesa de la escuela esten completa se completará automaticamente la Escuela.
+
+ 

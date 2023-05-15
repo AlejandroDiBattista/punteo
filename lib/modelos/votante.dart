@@ -15,6 +15,7 @@ class Votante {
   double ucr;
 
   bool favorito = false;
+  bool agrupar = false;
 
   Votante(
     this.mesa,
@@ -30,6 +31,10 @@ class Votante {
     this.cyb,
     this.ucr,
   );
+
+  factory Votante.anonimo() => Votante(0, 0, 0, "Anonimo", "sin domicilio", "X", 0, 0, 0, 0, 0, 0);
+  factory Votante.alejandro() =>
+      Votante(3333, 0, 18627585, "Di Battista, Alejandro", "Av. Central 4124", "M", 1967, 0, 0, 0, 0, 0);
 
   Map<String, dynamic> toMap() {
     return {

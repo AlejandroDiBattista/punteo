@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import '../sheets_api.dart';
 import './escuela.dart';
 import './mesa.dart';
@@ -7,6 +5,7 @@ import './votante.dart';
 
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:collection/collection.dart';
 
 class Datos {
   static List<Escuela> escuelas = [];
@@ -14,7 +13,8 @@ class Datos {
   static Map<int, bool> favoritos = {};
   static Map<int, bool> cerradas = {};
 
-  static int usuario = 18627585;
+  static int usuario = 0;
+  // static int usuario = 18627585;
 
   static Future<void> cargarEscuelas() async {
     final texto = await rootBundle.loadString("datos/escuelas.json");
@@ -30,6 +30,7 @@ class Datos {
 
   static Future<void> cargarFavoritos() async {
     favoritos = await SheetsApi.traerFavoritos(usuario);
+    print("Bajamos ${favoritos.length} favoritos");
   }
 
   static Future<void> cargarMesas() async {
@@ -40,7 +41,7 @@ class Datos {
     print("Hay ${escuelas.length} escuelas y ${votantes.length} votantes");
     for (var e in escuelas) {
       for (var m = e.desde; m <= e.hasta; m++) {
-        var mesa = Mesa(m, 0, 0);
+        var mesa = Mesa(m);
         for (var v = 0; v < votantes.length; v++) {
           var votante = votantes[v];
           if (votante.mesa == m) {
@@ -55,7 +56,7 @@ class Datos {
     }
   }
 
-  static void marcarFavoritos() {
+  static Future<void> marcarFavoritos() async {
     print("Hay ${favoritos.length} favoritos y ${cerradas.length} mesas cerradas");
     for (final votante in votantes) {
       votante.favorito = favoritos[votante.dni] ?? false;
@@ -68,6 +69,7 @@ class Datos {
   }
 
   static final reloj = Stopwatch();
+
   static void comenzar() {
     reloj.reset();
     reloj.start();
@@ -89,23 +91,14 @@ class Datos {
     comenzar();
     await cargarFavoritos();
     await cargarMesas();
-    terminar("Cargando Favoritos (${favoritos.length}) y Mesas Cerradas (${cerradas.length})");
+    terminar("Cargamos Favoritos (${favoritos.length}) y Mesas Cerradas (${cerradas.length})");
 
     comenzar();
     crearEscuelas();
+    marcarFavoritos();
     terminar("Creando Escuelas y Mesas");
 
     print("Datos cargados.");
-  }
-
-  static Future<void> marcar() async {
-    print("Marcando datos...");
-
-    comenzar();
-    marcarFavoritos();
-    terminar("Marcando Favoritos y Mesas Cerradas");
-
-    print("Datos marcados.");
   }
 
   static Future<void> marcarFavorito(Votante votante) async {
@@ -124,4 +117,24 @@ class Datos {
       }
     }
   }
+
+  static Votante get usuarioActual {
+    final dni = Datos.usuario;
+    if (dni == 18627585) return Votante.alejandro();
+    return votantes.firstWhere((v) => v.dni == dni, orElse: () => Votante.anonimo());
+  }
+
+  static Escuela get escuelaActual {
+    final mesa = usuarioActual.mesa;
+    return escuelas.firstWhere((e) => e.desde <= mesa && mesa <= e.hasta , orElse: () => Escuela.noIdentificada());
+  }
+
+  static get cantidadVotantes => votantes.length;
+  static get cantidadVotantesAnalizados => escuelas.map((e) => e.totalAnalizados).sum;
+  static get cantidadVotantesMarcados => escuelas.map((e) => e.totalFavoritos).sum;
+
+  static get cantidadMesas => escuelas.map((e) => e.mesas.length).sum;
+  static get cantidadMesasCerradas => escuelas.map((e) => e.mesas.where((m) => m.cerrada).length).sum;
+
+  static get cantidadEscuelasCompletas => escuelas.where((e) => e.completa).length;
 }

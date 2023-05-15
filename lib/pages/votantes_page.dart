@@ -20,8 +20,8 @@ class VotantesPage extends StatefulWidget {
 class _VotantesPageState extends State<VotantesPage> {
   Future<void> marcarFavorito(Votante votante) async {
     votante.cambiarFavorito();
-    await Datos.marcarFavorito(votante);
     setState(() {});
+    Datos.marcarFavorito(votante);
   }
 
   void borrarMarcasFavoritos() {
@@ -32,7 +32,7 @@ class _VotantesPageState extends State<VotantesPage> {
   void cerrarMesa() {
     widget.mesa.cerrada = true;
     Datos.marcarMesa(widget.mesa);
-    print("Cerrando mesa ${widget.mesa.numero} > cerrada: ${widget.mesa.cerrada ? "SI" : "NO"}");
+    print('Cerrando mesa ${widget.mesa.numero} > cerrada: ${widget.mesa.cerrada ? 'SI' : 'NO'}');
     setState(() {});
   }
 
@@ -45,34 +45,79 @@ class _VotantesPageState extends State<VotantesPage> {
       appBar: AppBar(
           title: Text('Mesa ${widget.mesa.numero} | ${votantes.length} votantes', style: TextStyle(fontSize: 22))),
       body: Center(
-        child: ListView.separated(
-          itemCount: votantes.length,
-          itemBuilder: (BuildContext context, int index) {
-            final Votante votante = votantes[index];
-            final color = votante.favorito ? Colors.green : Colors.black;
-            return ListTile(
-              title: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(votante.domicilio, style: TextStyle(fontSize: 16, color: Colors.black)),
-                  Text('DNI: ${votante.dni} | Mesa: ${mesa.numero}, #${votante.orden}'),
-                ],
-              ),
-              trailing: votante.favorito ? Icon(Icons.star, color: Colors.amber) : Icon(Icons.star_border),
-              onTap: () => marcarFavorito(votante),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => Divider(),
+        child: Scrollbar(
+          child: ListView.separated(
+            itemCount: votantes.length,
+            itemBuilder: (BuildContext context, int index) {
+              final Votante votante = votantes[index];
+              final color = votante.favorito ? Theme.of(context).primaryColor : Colors.black;
+              return ListTile(
+                dense: false,
+                title: crearNombre(index, votante, color),
+                subtitle: Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 8),
+                        Text(votante.domicilio, style: TextStyle(fontSize: 16, color: Colors.black)),
+                        SizedBox(height: 4),
+                        Text(
+                            'DNI: ${votante.dni} ${votante.clase > 0 ? '| Edad: ${2023 - votante.clase} ' : ''}| Mesa: ${mesa.numero}, #${votante.orden}'),
+                      ],
+                    ),
+                  ],
+                ),
+                trailing: votante.favorito ? Icon(Icons.star, color: Colors.amber) : Icon(Icons.star_border),
+                onTap: () => marcarFavorito(votante),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => Divider(),
+          ),
         ),
       ),
       floatingActionButton: mesa.cerrada ? null : crearCerrar(context),
     );
   }
 
+  Widget crearNombre(int indice, Votante votante, Color color) {
+    var apellido = votante.nombre;
+    var nombre = '';
+
+    if (apellido.contains(',')) {
+      var partes = apellido.split(', ');
+      apellido = partes[0];
+      nombre = partes[1];
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          width: 20,
+          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w100, color: color)),
+        ),
+        Text(apellido,
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: votante.agrupar ? FontWeight.normal : FontWeight.bold,
+                fontStyle: votante.agrupar ? FontStyle.italic : FontStyle.normal,
+                color: color)),
+        if (nombre.isNotEmpty)
+          Text(', $nombre',
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: !votante.agrupar ? FontWeight.normal : FontWeight.bold,
+                  fontStyle: votante.agrupar ? FontStyle.italic : FontStyle.normal,
+                  color: color)),
+      ],
+    );
+  }
+
   FloatingActionButton crearCerrar(BuildContext context) => FloatingActionButton.extended(
-        icon: Icon(Icons.check_sharp, color: Colors.amber),
-        label: Text("Completar Mesa"),
+        // icon: Icon(Icons.check_sharp, color: Colors.amber),
+        label: Text('Mesa completa'),
         onPressed: () {
           cerrarMesa();
           Navigator.pop(context);

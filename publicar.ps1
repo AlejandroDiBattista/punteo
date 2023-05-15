@@ -2,7 +2,7 @@
 Write-Host "Construyendo sitio web..."
 
 flutter clean
-flutter build web
+flutter build web --no-tree-shake-icons --release
 
 # copiar archivos generados a carpeta de repositorio
 Write-Host "Copiando datos al repositorio..."

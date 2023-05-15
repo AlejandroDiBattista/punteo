@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/votantes_page.dart';
+import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
 import '../modelos/mesa.dart';
 // import '../modelos/votante.dart';
@@ -19,29 +20,34 @@ class _MesasPageState extends State<MesasPage> {
     final mesas = this.widget.escuela.mesas;
     return Scaffold(
       appBar: AppBar(title: Text(widget.escuela.escuela, style: TextStyle(fontSize: 20))),
-      body: ListView.separated(
-        itemCount: mesas.length,
-        itemBuilder: crearMesa,
-        separatorBuilder: (BuildContext context, int index) => Divider(),
+      body: Scrollbar(
+        child: ListView.separated(
+          itemCount: mesas.length,
+          itemBuilder: crearMesa,
+          separatorBuilder: (BuildContext context, int index) => Divider(),
+        ),
       ),
     );
   }
 
   Widget crearMesa(BuildContext context, int index) {
     final mesa = this.widget.escuela.mesas[index];
-    final votantes = mesa.votantes;
 
     return ListTile(
-        title: crearDesdeHasta(mesa),
+        title: crearDesdeHasta(index, mesa),
         subtitle: crearRangoVotantes(mesa),
         onTap: () => irVotantes(mesa),
-        trailing: Icon(Icons.check_sharp, color: mesa.cerrada ? Colors.amber : Colors.grey));
+        trailing: Icon(Icons.check, color: mesa.cerrada ? Colors.amber : Colors.grey));
   }
 
-  Widget crearDesdeHasta(Mesa mesa) {
-    final color = mesa.cerrada ? Colors.green : Colors.black;
+  Widget crearDesdeHasta(int indice, Mesa mesa) {
+    final color = mesa.cerrada ? Theme.of(context).primaryColor : Colors.black;
     return Row(
       children: [
+        Container(
+          width: 20,
+          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w100, color: color)),
+        ),
         Text('Mesa ${mesa.numero}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
         Expanded(child: Container()),
         crearCantidadVotantes(mesa)
@@ -53,20 +59,25 @@ class _MesasPageState extends State<MesasPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          crearNombre("de: ", mesa.votantes.first.nombre),
-          crearNombre("a : ", mesa.votantes.last.nombre),
+          SizedBox(height: 10),
+          crearNombre("de ", mesa.votantes.first.nombre),
+          crearNombre("a  ", mesa.votantes.last.nombre),
         ],
       );
 
   Widget crearCantidadVotantes(Mesa mesa) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(' ${mesa.votantes.length} votantes', style: TextStyle(fontSize: 12)),
-        Text(' ${mesa.favoritos.length} favoritos', style: TextStyle(fontSize: 12)),
+        if (mesa.favoritos.length > 0)
+          Text(' ${mesa.favoritos.length} favoritos',
+              style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
+        if (mesa.numero == Datos.usuarioActual.mesa)
+          Text('(Votas en esta mesa)', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
       ]);
 
   Widget crearNombre(String etiqueta, String nombre) => Row(children: [
-        SizedBox(height: 10),
-        Text(etiqueta, style: TextStyle(fontSize: 10)),
-        Text(nombre, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
+        SizedBox(width: 20),
+        Container(child: Text(etiqueta, style: TextStyle(fontSize: 12)), width: 20),
+        Text(nombre, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
       ]);
 
   void irVotantes(Mesa mesa) async {

@@ -12,20 +12,31 @@ class IngresarPage extends StatefulWidget {
 class _IngresarPageState extends State<IngresarPage> {
   final _formKey = GlobalKey<FormState>();
   late String _dni;
+  bool cargando = false;
 
-  void _ingresar() async {
-    if (_formKey.currentState!.validate()) {
-      await Datos.marcar();
-
+  void irPaginaInicio() {
+    setState(() => cargando = true);
+    Datos.cargar().then((value) {
+      setState(() => cargando = false);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-            builder: (context) => PaginaInicialPage(cantidadVotantesAnalizados: 1, cantidadVotantesMarcados: 3)),
+        MaterialPageRoute(builder: (context) => PaginaInicialPage()),
       );
+    });
+  }
+
+  void ingresar() async {
+    if (_formKey.currentState!.validate()) {
+      irPaginaInicio();
     }
   }
 
-  String? _validarDni(String? value) {
+  void ingresarAlejandro() {
+    Datos.usuario = 18627585;
+    irPaginaInicio();
+  }
+
+  String? validarDNI(String? value) {
     if (value == null || value.isEmpty) {
       return 'Por favor ingrese un DNI';
     }
@@ -40,31 +51,44 @@ class _IngresarPageState extends State<IngresarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ingreso de DNI')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'DNI',
-                  hintText: 'Ingrese su DNI',
-                ),
-                validator: _validarDni,
-                onSaved: (value) {
-                  _dni = value!;
-                },
+      appBar: AppBar(
+          title: Text(
+        'Punteo de votantes',
+        style: TextStyle(fontSize: 30, color: Theme.of(context).primaryColor),
+      )),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Container(
+              width: 300,
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Punteo YB", style: TextStyle(fontSize: 30, color: Theme.of(context).primaryColor)),
+                  SizedBox(height: 30.0),
+                  Text("Ingresar"),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(labelText: 'DNI', hintText: 'Ingrese su DNI'),
+                    validator: validarDNI,
+                    onSaved: (value) {
+                      _dni = value!;
+                    },
+                  ),
+                  SizedBox(height: 16.0),
+                  this.cargando
+                      ? CircularProgressIndicator()
+                      : FilledButton(
+                          onPressed: ingresar,
+                          onLongPress: ingresarAlejandro,
+                          child: Text('Ingresar'),
+                        ),
+                ],
               ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: _ingresar,
-                child: Text('Ingresar'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
