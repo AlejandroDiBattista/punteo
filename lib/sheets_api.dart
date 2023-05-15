@@ -2,10 +2,16 @@ import 'package:gsheets/gsheets.dart';
 import 'modelos/mesa.dart';
 import 'modelos/votante.dart';
 import 'modelos/escuela.dart';
+import 'package:intl/intl.dart';
 
 typedef Json = Map<String, dynamic>;
 
-String horaActual() => DateTime.now().toIso8601String();
+String horaActual() {
+  final fecha = DateTime.now();
+  final formato = DateFormat('dd/MM/yyyy HH:mm:ss');
+  final fechaFormateada = formato.format(fecha);
+  return fechaFormateada;
+}
 
 class SheetsApi {
   static const _credencial = {

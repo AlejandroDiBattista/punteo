@@ -17,23 +17,27 @@ class _EscuelasPageState extends State<EscuelasPage> {
         body: Center(
             child: ListView.separated(
           itemCount: datos.length,
-          itemBuilder: (BuildContext context, int index) => crearEscuela(context, datos[index]),
+          itemBuilder: (BuildContext context, int index) => crearEscuela(datos[index]),
           separatorBuilder: (BuildContext context, int index) => Divider(),
         )));
   }
 
-  Widget crearEscuela(BuildContext context, Escuela escuela) {
+  Widget crearEscuela(Escuela escuela) {
+    final color = escuela.completa ? Colors.green : Colors.black;
     return ListTile(
-      title: Text(
-        '${escuela.escuela} ${escuela.completa ? "(completa)" : ""}',
-        style: TextStyle(fontSize: 24, color: escuela.completa ? Colors.green : Colors.black),
+      title: Row(
+        children: [
+          Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+          Expanded(child: Container()),
+          Text(escuela.completa ? "(completa)" : "", style: TextStyle(fontSize: 12)),
+        ],
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(escuela.direccion, style: TextStyle(fontSize: 20)),
+          Text(escuela.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
           Text(
-              '${escuela.mesas.length} mesas | Desde ${escuela.desde} hasta ${escuela.hasta} | ${escuela.totalCerradas} cerradas'),
+              '${escuela.mesas.length} mesas (${escuela.totalCerradas} cerradas)  | desde: ${escuela.desde} hasta: ${escuela.hasta} '),
           Text('${escuela.totalVotantes} votantes | ${escuela.totalFavoritos} favoritos')
         ],
       ),

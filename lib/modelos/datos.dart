@@ -87,19 +87,25 @@ class Datos {
     terminar('Cargando Escuelas (${escuelas.length}) y Votantes ${votantes.length}');
 
     comenzar();
-    cargarFavoritos();
-    cargarMesas();
+    await cargarFavoritos();
+    await cargarMesas();
     terminar("Cargando Favoritos (${favoritos.length}) y Mesas Cerradas (${cerradas.length})");
 
     comenzar();
     crearEscuelas();
     terminar("Creando Escuelas y Mesas");
 
+    print("Datos cargados.");
+  }
+
+  static Future<void> marcar() async {
+    print("Marcando datos...");
+
     comenzar();
     marcarFavoritos();
     terminar("Marcando Favoritos y Mesas Cerradas");
 
-    print("Datos cargados.");
+    print("Datos marcados.");
   }
 
   static Future<void> marcarFavorito(Votante votante) async {

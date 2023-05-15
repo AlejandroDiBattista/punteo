@@ -1,12 +1,12 @@
 // import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:myapp/modelos/votante.dart';
-import 'package:myapp/pages/action_button.dart';
-import 'package:scroll_to_index/util.dart';
+// import 'package:myapp/pages/action_button.dart';
+// import 'package:scroll_to_index/util.dart';
 
 import '../modelos/datos.dart';
 import '../modelos/mesa.dart';
-import '../sheets_api.dart';
+// import '../sheets_api.dart';
 
 class VotantesPage extends StatefulWidget {
   final Mesa mesa;
@@ -29,8 +29,8 @@ class _VotantesPageState extends State<VotantesPage> {
     setState(() {});
   }
 
-  void cambiarEstadoMesa() {
-    widget.mesa.cerrada = !widget.mesa.cerrada;
+  void cerrarMesa() {
+    widget.mesa.cerrada = true;
     Datos.marcarMesa(widget.mesa);
     print("Cerrando mesa ${widget.mesa.numero} > cerrada: ${widget.mesa.cerrada ? "SI" : "NO"}");
     setState(() {});
@@ -49,12 +49,13 @@ class _VotantesPageState extends State<VotantesPage> {
           itemCount: votantes.length,
           itemBuilder: (BuildContext context, int index) {
             final Votante votante = votantes[index];
+            final color = votante.favorito ? Colors.green : Colors.black;
             return ListTile(
-              title: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              title: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(votante.domicilio),
+                  Text(votante.domicilio, style: TextStyle(fontSize: 16, color: Colors.black)),
                   Text('DNI: ${votante.dni} | Mesa: ${mesa.numero}, #${votante.orden}'),
                 ],
               ),
@@ -65,16 +66,16 @@ class _VotantesPageState extends State<VotantesPage> {
           separatorBuilder: (BuildContext context, int index) => Divider(),
         ),
       ),
-      floatingActionButton: crearCerrar(context),
+      floatingActionButton: mesa.cerrada ? null : crearCerrar(context),
     );
   }
 
   FloatingActionButton crearCerrar(BuildContext context) => FloatingActionButton.extended(
+        icon: Icon(Icons.check_sharp, color: Colors.amber),
+        label: Text("Completar Mesa"),
         onPressed: () {
-          cambiarEstadoMesa();
+          cerrarMesa();
           Navigator.pop(context);
         },
-        label: Text(widget.mesa.cerrada ? "Abrir Mesa" : "Cerrar Mesa"),
-        icon: Icon(Icons.close),
       );
 }
