@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Clasificar Vecinos',
-      theme: ThemeData(primarySwatch: Colors.green, useMaterial3: false),
+      title: 'Clasificar Vecinos v0.4',
+      theme: ThemeData(primarySwatch: Colors.purple, useMaterial3: false),
       debugShowCheckedModeBanner: false,
       home: EscuelasPage(),
     );

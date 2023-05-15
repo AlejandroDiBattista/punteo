@@ -1,48 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/votantes_page.dart';
-// import 'package:googleapis/androiddeviceprovisioning/v1.dart';
-// import '../modelos/escuela.dart';
-// import '../sheets_api.dart';
-import './escuela_widget.dart';
+import '../modelos/escuela.dart';
 import '../modelos/datos.dart';
+import 'mesas_page.dart';
 
-class EscuelasPage extends StatelessWidget {
+class EscuelasPage extends StatefulWidget {
+  @override
+  State<EscuelasPage> createState() => _EscuelasPageState();
+}
+
+class _EscuelasPageState extends State<EscuelasPage> {
   @override
   Widget build(BuildContext context) {
     final datos = Datos.escuelas;
     return Scaffold(
         appBar: AppBar(title: Text('Escuelas de YB')),
         body: Center(
-            child: ListView.builder(
-                itemCount: datos.length,
-                itemBuilder: (BuildContext context, int index) => EscuelaWidget(escuela: datos[index]))));
+            child: ListView.separated(
+          itemCount: datos.length,
+          itemBuilder: (BuildContext context, int index) => crearEscuela(context, datos[index]),
+          separatorBuilder: (BuildContext context, int index) => Divider(),
+        )));
   }
-}
 
-@override
-Widget build(BuildContext context) {
-  return ListView.builder(
-    itemCount: Datos.escuelas.length,
-    itemBuilder: (BuildContext context, int index) {
-      final escuela = Datos.escuelas[index];
-      return ListTile(
-        title: Text(escuela.escuela),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(escuela.direccion),
-            Text('Desde ${escuela.desde} hasta ${escuela.hasta}, ${escuela.mesas} mesas, ${escuela.totalVotantes} votantes'),
-          ],
-        ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => VotantesPage(escuela: escuela),
-            ),
-          );
-        },
-      );
-    },
-  );
+  Widget crearEscuela(BuildContext context, Escuela escuela) {
+    return ListTile(
+      title: Text(
+        '${escuela.escuela} ${escuela.completa ? "(completa)" : ""}',
+        style: TextStyle(fontSize: 24, color: escuela.completa ? Colors.green : Colors.black),
+      ),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(escuela.direccion, style: TextStyle(fontSize: 20)),
+          Text(
+              '${escuela.mesas.length} mesas | Desde ${escuela.desde} hasta ${escuela.hasta} | ${escuela.totalCerradas} cerradas'),
+          Text('${escuela.totalVotantes} votantes | ${escuela.totalFavoritos} favoritos')
+        ],
+      ),
+      onTap: () => irMesa(context, escuela),
+    );
+  }
+
+  Future<void> irMesa(BuildContext context, Escuela escuela) async {
+    print('irMesa: ${escuela.escuela}');
+    await Navigator.push(context, MaterialPageRoute(builder: (context) => MesasPage(escuela: escuela)));
+    setState(() {});
+  }
 }

@@ -1,3 +1,6 @@
+import 'dart:js_interop';
+
+import '../sheets_api.dart';
 import './escuela.dart';
 import './mesa.dart';
 import './votante.dart';
@@ -8,33 +11,33 @@ import 'package:flutter/services.dart' show rootBundle;
 class Datos {
   static List<Escuela> escuelas = [];
   static List<Votante> votantes = [];
+  static Map<int, bool> favoritos = {};
+  static Map<int, bool> cerradas = {};
 
-  static Future<void> cargarVotantes() async {
-    final texto = await rootBundle.loadString("datos/votantes.json");
-    final datos = json.decode(texto) as List<dynamic>;
-    print(">> Cargando Votantes ${datos.length}");
-    votantes = datos.map((dato) => Votante.fromMap(dato)).toList();
-    print(">> Votantes cargados ${votantes.length}");
-  }
+  static int usuario = 18627585;
 
   static Future<void> cargarEscuelas() async {
     final texto = await rootBundle.loadString("datos/escuelas.json");
     final datos = json.decode(texto) as List<dynamic>;
-    print(">> Cargando Escuelas ${datos.length}");
-    // print(datos.first);
     escuelas = datos.map((dato) => Escuela.fromMap(dato)).toList();
-    print(">> Escuelas cargadas ${escuelas.length}");
   }
 
-  static Future<void> cargar() async {
-    print("Cargando datos");
-    final stopwatch = Stopwatch()..start();
-    await cargarEscuelas();
-    await cargarVotantes();
-    stopwatch.stop();
-    print('cargar: ${stopwatch.elapsedMilliseconds} ms (escuelas: ${escuelas.length}, votantes: ${votantes.length})');
+  static Future<void> cargarVotantes() async {
+    final texto = await rootBundle.loadString("datos/votantes.json");
+    final datos = json.decode(texto) as List<dynamic>;
+    votantes = datos.map((dato) => Votante.fromMap(dato)).toList();
+  }
 
-    stopwatch.start();
+  static Future<void> cargarFavoritos() async {
+    favoritos = await SheetsApi.traerFavoritos(usuario);
+  }
+
+  static Future<void> cargarMesas() async {
+    cerradas = await SheetsApi.traerMesas(usuario);
+  }
+
+  static void crearEscuelas() {
+    print("Hay ${escuelas.length} escuelas y ${votantes.length} votantes");
     for (var e in escuelas) {
       for (var m = e.desde; m <= e.hasta; m++) {
         var mesa = Mesa(m, 0, 0);
@@ -47,9 +50,72 @@ class Datos {
           mesa.cantidad++;
         }
         e.agregar(mesa);
+        mesa.ordenar();
       }
     }
-    stopwatch.stop();
-    print('agregar: ${stopwatch.elapsedMilliseconds}');
+  }
+
+  static void marcarFavoritos() {
+    print("Hay ${favoritos.length} favoritos y ${cerradas.length} mesas cerradas");
+    for (final votante in votantes) {
+      votante.favorito = favoritos[votante.dni] ?? false;
+    }
+    for (final e in escuelas) {
+      for (final m in e.mesas) {
+        m.cerrada = cerradas[m.numero] ?? false;
+      }
+    }
+  }
+
+  static final reloj = Stopwatch();
+  static void comenzar() {
+    reloj.reset();
+    reloj.start();
+  }
+
+  static void terminar(String titulo) {
+    reloj.stop();
+    print("- $titulo > (${reloj.elapsedMilliseconds}ms)");
+  }
+
+  static Future<void> cargar() async {
+    print("Cargando datos...");
+
+    comenzar();
+    await cargarEscuelas();
+    await cargarVotantes();
+    terminar('Cargando Escuelas (${escuelas.length}) y Votantes ${votantes.length}');
+
+    comenzar();
+    cargarFavoritos();
+    cargarMesas();
+    terminar("Cargando Favoritos (${favoritos.length}) y Mesas Cerradas (${cerradas.length})");
+
+    comenzar();
+    crearEscuelas();
+    terminar("Creando Escuelas y Mesas");
+
+    comenzar();
+    marcarFavoritos();
+    terminar("Marcando Favoritos y Mesas Cerradas");
+
+    print("Datos cargados.");
+  }
+
+  static Future<void> marcarFavorito(Votante votante) async {
+    await SheetsApi.marcarFavorito(votante, usuario);
+  }
+
+  static void marcarMesa(Mesa mesa) async {
+    await SheetsApi.marcarMesa(mesa, usuario);
+  }
+
+  static void borrarFavoritos(Mesa mesa) async {
+    for (var votante in mesa.votantes) {
+      if (votante.favorito) {
+        votante.favorito = false;
+        await SheetsApi.marcarFavorito(votante, Datos.usuario);
+      }
+    }
   }
 }

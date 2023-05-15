@@ -1,8 +1,11 @@
 import 'package:gsheets/gsheets.dart';
+import 'modelos/mesa.dart';
 import 'modelos/votante.dart';
 import 'modelos/escuela.dart';
 
 typedef Json = Map<String, dynamic>;
+
+String horaActual() => DateTime.now().toIso8601String();
 
 class SheetsApi {
   static const _credencial = {
@@ -25,93 +28,82 @@ class SheetsApi {
 
   static final gsheets = GSheets(_credencial);
   static Spreadsheet? libro;
-  static Worksheet? votantes;
+
   static Worksheet? escuelas;
+  static Worksheet? votantes;
+  static Worksheet? mesas;
+  static int proximaMesa = 0;
   static Worksheet? favoritos;
+  static int proximoFavorito = 0;
+  static bool cargado = false;
 
   static Future init() async {
+    if (cargado) return;
     libro ??= await gsheets.spreadsheet(_sheetsId);
     escuelas ??= libro!.worksheetByTitle("escuelas");
     votantes ??= libro!.worksheetByTitle("votantes");
     favoritos ??= libro!.worksheetByTitle("favoritos");
+    mesas ??= libro!.worksheetByTitle("mesas");
+    cargado = true;
   }
 
   static Future<List<Escuela>> traerEscuelas() async {
     await init();
-
     final lineas = await escuelas!.values.allRows();
-
-    final campos = lineas.first.where((x) => !x.contains("*")).toList();
-    final List<Escuela> salida =
-        lineas.skip(1).map((valores) => Escuela.fromMap(Map.fromIterables(campos, valores))).toList();
-    return salida;
+    final campos = lineas.first;
+    return lineas.skip(1).map((valores) => Escuela.fromMap(Map.fromIterables(campos, valores))).toList();
   }
-
-  // static Future<List<Votante>> traerVotantesEscuela(Escuela escuela) async {
-  //   await init();
-
-  //   final lineas = await votantes!.values.allRows(fromRow: escuela.inicio, length: escuela.votantes );
-  //   final favoritos = await traerFavoritos();
-
-  //   final campos = lineas.first.where((x) => !x.contains("*")).toList();
-  //   return lineas.skip(1).map((valores) {
-  //     final data = Map.fromIterables(campos, valores);
-  //     data['favorito'] = favoritos[data['dni']] ?? " ";
-  //     return Votante.fromMap(data);
-  //   }).toList();
-  // }
 
   static Future<List<Votante>> traerVotantes() async {
     await init();
-
     final lineas = await votantes!.values.allRows();
-    final favoritos = await traerFavoritos();
-
-    final campos = lineas.first.where((x) => !x.contains("*")).toList();
-    return lineas.skip(1).map((valores) {
-      final data = Map.fromIterables(campos, valores);
-      data['favorito'] = favoritos[data['dni']] ?? " ";
-      return Votante.fromMap(data);
-    }).toList();
+    final campos = lineas.first;
+    return lineas.skip(1).map((valores) => Votante.fromMap(Map.fromIterables(campos, valores))).toList();
   }
 
-  static Future<Map<String, String>> traerFavoritos() async {
+  static Future<Map<int, bool>> traerMesas([int documento = 0]) async {
     await init();
-    final lineas = await favoritos!.values.allRows();
-    final salida = <String, String>{};
-    lineas.skip(1).forEach((element) => salida[element[0]] = element[2]);
+    var lineas = await mesas!.values.allRows();
+    proximaMesa = lineas.length + 1;
+
+    lineas = lineas.skip(1).toList();
+    if (documento > 0) {
+      final dni = documento.toString();
+      lineas = lineas.where((element) => element[1] == dni).toList();
+    }
+
+    final salida = <int, bool>{};
+    lineas.forEach((m) => salida[int.parse(m[0])] = m[2].toLowerCase() == "cerrar");
     return salida;
   }
 
-  static Future<void> marcarFavorito(Votante votante, int referente, String favorito) async {
+  static Future<Map<int, bool>> traerFavoritos([int documento = 0]) async {
     await init();
-    favoritos!.values.appendRow([votante.dni, referente, favorito]);
+    var lineas = await favoritos!.values.allRows();
+    proximoFavorito = lineas.length + 1;
+
+    lineas = lineas.skip(1).toList();
+    if (documento > 0) {
+      final dni = documento.toString();
+      lineas = lineas.where((element) => element[1] == dni).toList();
+    }
+
+    final salida = <int, bool>{};
+    lineas.forEach((element) => salida[int.parse(element[0])] = element[2] == "S");
+    return salida;
+  }
+
+  static Future<void> marcarFavorito(Votante votante, int referente) async {
+    final fila = [votante.dni, referente, votante.favorito ? "S" : "N", votante.nombre, votante.mesa, horaActual()];
+
+    await init();
+    await favoritos!.values.insertRow(proximoFavorito++, fila);
+  }
+
+  static Future<void> marcarMesa(Mesa mesa, int referente) async {
+    final fila = [mesa.numero, referente, mesa.cerrada ? "cerrar" : "abrir", horaActual()];
+
+    await init();
+    mesas!.values.insertRow(proximaMesa++, fila);
   }
 }
-
-// class Posiciones {
-//   static late Position position;
-//   static late LatLng location;
-//   static List<LatLng> callLocations = [];
-
-//   get locations => callLocations;
-
-//   static Future registrarPosicion() async {
-//     final position = await Geolocator.getCurrentPosition();
-//     final location = LatLng(position.latitude, position.longitude);
-//     callLocations.add(location);
-//   }
-
-//   static Future<void> registrar(double latitude, double longitude, int duracion) async {
-//     print("Registrando >> Lat: $latitude, Log: $longitude Duracion: $duracion");
-
-//     Map<String, dynamic> dato = {};
-
-//     dato['hora'] = DateTime.now().toString();
-//     dato['latitude'] = latitude;
-//     dato['longitude'] = longitude;
-//     dato['duracion'] = duracion;
-
-//     // datos.values.map .insertRow(entradas.length + 1, dato);
-//   }
-// }

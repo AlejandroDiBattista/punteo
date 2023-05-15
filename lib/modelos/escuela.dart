@@ -1,6 +1,5 @@
 import 'dart:convert';
 import './mesa.dart';
-// import './votante.dart';
 
 class Escuela {
   String escuela;
@@ -30,10 +29,6 @@ class Escuela {
   }
 
   factory Escuela.fromMap(Map<String, dynamic> data) {
-    // print(">> Escuela.fromMap");
-    // for (var e in data.entries) {
-    //   print(" - ${e.key}: ${e.value} (${e.value.runtimeType})");
-    // }
     return Escuela(
       escuela: data['escuela'],
       direccion: data['direccion'],
@@ -44,15 +39,6 @@ class Escuela {
       seccion: data['seccion'],
       latitude: data['latitude'],
       longitude: data['longitude'],
-      // escuela: data['escuela'],
-      // direccion: data['direccion'],
-      // desde: int.parse(data['desde']),
-      // hasta: int.parse(data['hasta']),
-      // circuito: data['circuito'],
-      // departamento: data['departamento'],
-      // seccion: data['seccion'],
-      // latitude: double.parse(data['latitude']),
-      // longitude: double.parse(data['longitude']),
     );
   }
 
@@ -97,11 +83,13 @@ class Escuela {
   String toJson() => json.encode(toMap());
 
   factory Escuela.fromJson(String source) => Escuela.fromMap(json.decode(source));
+  get completa => totalCerradas == totalMesas;
 
   get totalMesas => mesas.length;
+  get totalCerradas => mesas.where((mesa) => mesa.cerrada).length;
 
   get totalVotantes => mesas.map((mesa) => mesa.votantes.length).reduce((value, element) => value + element);
-
+  get totalFavoritos => mesas.map((mesa) => mesa.favoritos.length).reduce((value, element) => value + element);
   @override
   String toString() =>
       'Escuela(escuela: $escuela, direccion: $direccion, desde: $desde, hasta: $hasta, mesas: $mesas, votantes: $totalVotantes, circuito: $circuito, departamento: $departamento, seccion: $seccion, latitude: $latitude, longitude: $longitude)';
