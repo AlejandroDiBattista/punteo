@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/ingresar_page.dart';
+import '/pages/ingresar_page.dart';
 import '../modelos/datos.dart';
 
 class EstadisticasPage extends StatelessWidget {

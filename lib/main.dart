@@ -1,8 +1,8 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/pages/ingresar_page.dart';
-import 'package:myapp/pages/pagina_inicial_page.dart';
+import '/pages/ingresar_page.dart';
+import '/pages/pagina_inicial_page.dart';
 
 import 'modelos/datos.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Clasificar Vecinos v0.6',
-      theme: ThemeData(primarySwatch: Colors.deepPurple, useMaterial3: false),
+      theme: ThemeData(primarySwatch: Colors.deepOrange, useMaterial3: false),
       debugShowCheckedModeBanner: false,
       home: Datos.usuario > 0 ? PaginaInicialPage() : IngresarPage(),
     );

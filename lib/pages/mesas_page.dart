@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/pages/votantes_page.dart';
+import '/pages/votantes_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
 import '../modelos/mesa.dart';

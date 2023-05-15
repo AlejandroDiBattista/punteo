@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 // import 'package:myapp/pages/buscar_page.dart';
-import 'package:myapp/pages/escuelas_page.dart';
-import 'package:myapp/pages/estadisticas_page.dart';
+import '/pages/escuelas_page.dart';
+import '/pages/estadisticas_page.dart';
 
 // import '../modelos/datos.dart';
 
@@ -38,9 +39,7 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
               iconSize: 24,
               padding: EdgeInsets.all(16),
               onTabChange: (index) {
-                setState(() {
-                  widget.index = index;
-                });
+                setState(() => widget.index = index);
               },
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               // style: ,
@@ -54,7 +53,7 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
                 //   text: 'Buscar',
                 // ),
                 GButton(
-                  icon: Icons.bar_chart,
+                  icon: Icons.check,
                   text: 'Estadisticas',
                 ),
               ]),

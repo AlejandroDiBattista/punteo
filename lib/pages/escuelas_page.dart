@@ -49,8 +49,8 @@ class _EscuelasPageState extends State<EscuelasPage> {
           Text(escuela.completa ? "(completa)" : "", style: TextStyle(fontSize: 12)),
           if (escuela == Datos.escuelaActual)
             Text(
-              "(Votas es esta escuela)",
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              "(Votas en esta escuela)",
+              style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),
             )
         ],
       ),

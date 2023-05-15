@@ -1,6 +1,7 @@
 // import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/modelos/votante.dart';
+import '/modelos/votante.dart';
 // import 'package:myapp/pages/action_button.dart';
 // import 'package:scroll_to_index/util.dart';
 
@@ -116,7 +117,7 @@ class _VotantesPageState extends State<VotantesPage> {
   }
 
   FloatingActionButton crearCerrar(BuildContext context) => FloatingActionButton.extended(
-        // icon: Icon(Icons.check_sharp, color: Colors.amber),
+        icon: Icon(CupertinoIcons.add, color: Colors.amber),
         label: Text('Mesa completa'),
         onPressed: () {
           cerrarMesa();
