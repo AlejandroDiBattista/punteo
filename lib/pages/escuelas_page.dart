@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../modelos/escuela.dart';
+
 import '../modelos/datos.dart';
+import '../modelos/escuela.dart';
 import 'mesas_page.dart';
 
 class EscuelasPage extends StatefulWidget {
@@ -12,9 +13,9 @@ class _EscuelasPageState extends State<EscuelasPage> {
   @override
   void initState() {
     super.initState();
-    if (Datos.escuelas.isEmpty) {
-      Datos.cargar().then((value) => setState(() {}));
-    }
+    Datos.iniciar(() {
+      setState(() {});
+    });
     print('EscuelasPage.initState');
   }
 
@@ -36,8 +37,9 @@ class _EscuelasPageState extends State<EscuelasPage> {
   }
 
   Widget crearEscuela(int indice, Escuela escuela) {
-    final color = escuela.completa ? Theme.of(context).primaryColor : Colors.black;
+    final color = escuela.esCompleta ? Theme.of(context).primaryColor : Colors.black;
     return ListTile(
+      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColorLight.withAlpha(128) : Colors.white,
       title: Row(
         children: [
           Container(
@@ -46,10 +48,10 @@ class _EscuelasPageState extends State<EscuelasPage> {
           ),
           Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           Expanded(child: Container()),
-          Text(escuela.completa ? "(completa)" : "", style: TextStyle(fontSize: 12)),
+          Text(escuela.esCompleta ? "(completa)" : "", style: TextStyle(fontSize: 12)),
           if (escuela == Datos.escuelaActual)
             Text(
-              "(Votas en esta escuela)",
+              "Votas acá",
               style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),
             )
         ],
@@ -62,8 +64,8 @@ class _EscuelasPageState extends State<EscuelasPage> {
             children: [
               Text(escuela.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
               Text(
-                  '${escuela.mesas.length} mesas (${escuela.totalCerradas} cerradas)  | desde: ${escuela.desde} hasta: ${escuela.hasta} '),
-              Text('${escuela.totalVotantes} votantes | ${escuela.totalFavoritos} favoritos')
+                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasCerradas} cerradas)  | desde: ${escuela.desde} hasta: ${escuela.hasta} '),
+              Text('${escuela.totalVotantes} votantes | ${escuela.totalVotantesFavoritos} favoritos')
             ],
           ),
         ],
@@ -74,6 +76,7 @@ class _EscuelasPageState extends State<EscuelasPage> {
 
   Future<void> irMesa(BuildContext context, Escuela escuela) async {
     print('irMesa: ${escuela.escuela}');
+    escuela.ordenar();
     await Navigator.push(context, MaterialPageRoute(builder: (context) => MesasPage(escuela: escuela)));
     setState(() {});
   }

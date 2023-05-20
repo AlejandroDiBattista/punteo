@@ -34,6 +34,8 @@ class _MesasPageState extends State<MesasPage> {
     final mesa = this.widget.escuela.mesas[index];
 
     return ListTile(
+        tileColor:
+            mesa.numero == Datos.usuarioActual.mesa ? Theme.of(context).primaryColorLight.withAlpha(128) : Colors.white,
         title: crearDesdeHasta(index, mesa),
         subtitle: crearRangoVotantes(mesa),
         onTap: () => irVotantes(mesa),
@@ -71,7 +73,7 @@ class _MesasPageState extends State<MesasPage> {
           Text(' ${mesa.favoritos.length} favoritos',
               style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
         if (mesa.numero == Datos.usuarioActual.mesa)
-          Text('(Votas en esta mesa)', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
+          Text('Votas acá', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
       ]);
 
   Widget crearNombre(String etiqueta, String nombre) => Row(children: [

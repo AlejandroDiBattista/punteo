@@ -1,17 +1,4 @@
 import 'package:gsheets/gsheets.dart';
-import 'modelos/mesa.dart';
-import 'modelos/votante.dart';
-import 'modelos/escuela.dart';
-import 'package:intl/intl.dart';
-
-typedef Json = Map<String, dynamic>;
-
-String horaActual() {
-  final fecha = DateTime.now();
-  final formato = DateFormat('dd/MM/yyyy HH:mm:ss');
-  final fechaFormateada = formato.format(fecha);
-  return fechaFormateada;
-}
 
 class SheetsApi {
   static const _credencial = {
@@ -34,96 +21,40 @@ class SheetsApi {
 
   static final gsheets = GSheets(_credencial);
   static Spreadsheet? libro;
-
-  static Worksheet? escuelas;
-  static Worksheet? votantes;
-  static Worksheet? mesas;
-  static int proximaMesa = 0;
   static Worksheet? favoritos;
-  static int proximoFavorito = 0;
-  static bool cargado = false;
+  static Worksheet? mesas;
 
-  static Future init() async {
-    if (cargado) return;
-    libro ??= await gsheets.spreadsheet(_sheetsId);
-    escuelas ??= libro!.worksheetByTitle("escuelas");
-    votantes ??= libro!.worksheetByTitle("votantes");
-    favoritos ??= libro!.worksheetByTitle("favoritos");
-    mesas ??= libro!.worksheetByTitle("mesas");
-    cargado = true;
+  static Future<List<Map<String, dynamic>>> traerFavoritos() async {
+    await _init();
+    return await _traer(favoritos!);
   }
 
-  static Future<List<Escuela>> traerEscuelas() async {
-    await init();
-    final lineas = await escuelas!.values.allRows();
-    final campos = lineas.first;
-    return lineas.skip(1).map((valores) => Escuela.fromMap(Map.fromIterables(campos, valores))).toList();
+  static Future<List<Map<String, dynamic>>> traerCierres() async {
+    await _init();
+    return await _traer(mesas!);
   }
 
-  // static Future<List<Votante>> traerVotantes() async {
-  //   await init();
-  //   final lineas = await votantes!.values.allRows();
-  //   final campos = lineas.first;
-  //   return lineas.skip(1).map((valores) => Votante.fromMap(Map.fromIterables(campos, valores))).toList();
-  // }
-
-  static Future<Map<int, bool>> traerMesas([int documento = 0]) async {
-    await init();
-    var lineas = await mesas!.values.allRows();
-    proximaMesa = lineas.length + 1;
-
-    lineas = lineas.skip(1).toList();
-    if (documento > 0) {
-      final dni = documento.toString();
-      lineas = lineas.where((element) => element[1] == dni).toList();
-    }
-
-    final salida = <int, bool>{};
-    lineas.forEach((m) => salida[int.parse(m[0])] = m[2].toLowerCase() == "cerrar");
-    return salida;
+  static Future<void> regisrarFavorito(List<dynamic> datos) async {
+    await _init();
+    await favoritos!.values.appendRow(datos);
   }
 
-  static Future<Map<int, bool>> traerFavoritos([int documento = 0]) async {
-    await init();
-    var lineas = await favoritos!.values.allRows();
-    proximoFavorito = lineas.length + 1;
-    // print('traerFavoritos($documento): Hay ${lineas.length} lineas:');
-    // // print(lineas.map((e) => e.length).toList());
-    // print("-----");
-    // print(" ejemplo de linea: ${lineas[0]} ${lineas[0].map((x) => x.runtimeType)}");
-    // print(" ejemplo de linea: ${lineas[3]} ${lineas[3].map((x) => x.runtimeType)}");
-    // print(" ejemplo de linea: ${lineas[5]} ${lineas[5].map((x) => x.runtimeType)}");
-    lineas = lineas.skip(1).toList();
-    final salida = <int, bool>{};
-    // var n = 1;
-    for (final l in lineas) {
-      if (l.isEmpty) continue;
-      // print(' ${n++}) l: $l > ${l.length}');
-      // print(' - ${l[0]} - ${l[2]} - ${l[2].toLowerCase() == "s"}');
-      final dni = int.parse(l[0]);
-      final ref = int.parse(l[1]);
-      // print(' - $dni - ${l[2]} - ${l[2].toLowerCase() == "s"}');
-      if (documento == 0 || ref == documento) {
-        salida[dni] = l[2].toLowerCase() == "s";
-      }
-    }
-
-    return salida;
+  static Future<void> registrarCierre(List<dynamic> datos) async {
+    await _init();
+    mesas!.values.appendRow(datos);
   }
 
-  static Future<void> marcarFavorito(Votante votante, int referente) async {
-    final fila = [votante.dni, referente, votante.favorito ? "S" : "N", votante.nombre, votante.mesa, horaActual()];
-
-    await init();
-    // await favoritos!.values.insertRow(proximoFavorito++, fila);
-    await favoritos!.values.appendRow(fila);
+  static Future _init() async {
+    libro ??= await gsheets.spreadsheet(_sheetsId,
+        render: ValueRenderOption.formattedValue, input: ValueInputOption.userEntered);
+    mesas ??= libro!.worksheetByTitle('mesas');
+    favoritos ??= libro!.worksheetByTitle('favoritos');
   }
 
-  static Future<void> marcarMesa(Mesa mesa, int referente) async {
-    final fila = [mesa.numero, referente, mesa.cerrada ? "cerrar" : "abrir", horaActual()];
+  static Future<List<Map<String, dynamic>>> _traer(Worksheet origen) async {
+    var lineas = await origen.values.allRows();
 
-    await init();
-    // mesas!.values.insertRow(proximaMesa++, fila);
-    mesas!.values.appendRow(fila);
+    final campos = lineas.first.map((e) => e.toLowerCase()).toList();
+    return lineas.skip(1).map((valores) => Map.fromIterables(campos, valores)).toList();
   }
 }

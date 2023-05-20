@@ -1,103 +1,111 @@
 import 'dart:convert';
+import '../utils.dart';
+
+import 'datos.dart';
+import 'favorito.dart';
 
 class Votante {
-  int mesa;
-  int orden;
   int dni;
   String nombre;
   String domicilio;
   String sexo;
   int clase;
-  double latitude;
-  double longitude;
+  int mesa;
+  int orden;
   double pj;
   double cyb;
   double ucr;
+  double latitude;
+  double longitude;
 
   bool favorito = false;
   bool agrupar = false;
+  int escuela = 0;
+  String textoCompleto = "";
+  List<Favorito> referentes = [];
 
   Votante(
-    this.mesa,
-    this.orden,
     this.dni,
     this.nombre,
     this.domicilio,
     this.sexo,
     this.clase,
-    this.latitude,
-    this.longitude,
+    this.mesa,
+    this.orden,
     this.pj,
     this.cyb,
     this.ucr,
-  );
+    this.latitude,
+    this.longitude,
+  ) {
+    textoCompleto = nombre.toLowerCase().sinEspacios.sinAcentos;
+  }
 
-  factory Votante.anonimo() => Votante(0, 0, 0, "Anonimo", "sin domicilio", "X", 0, 0, 0, 0, 0, 0);
-  factory Votante.alejandro() =>
-      Votante(3333, 0, 18627585, "Di Battista, Alejandro", "Av. Central 4124", "M", 1967, 0, 0, 0, 0, 0);
+  factory Votante.anonimo([int dni = 0]) =>
+      Votante(dni, "Sin identificar", "sin domicilio", "X", 0, 0, 0, 0, 0, 0, 0, 0);
 
   Map<String, dynamic> toMap() {
     return {
-      'mesa': mesa,
-      'orden': orden,
       'dni': dni,
       'nombre': nombre,
       'domicilio': domicilio,
       'sexo': sexo,
       'clase': clase,
-      'latitude': latitude,
-      'longitude': longitude,
+      'mesa': mesa,
+      'orden': orden,
       'pj': pj,
       'cyb': cyb,
       'ucr': ucr,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
   Votante copyWith({
-    int? mesa,
-    int? orden,
     int? dni,
     String? nombre,
     String? domicilio,
     String? sexo,
     int? clase,
-    double? latitude,
-    double? longitude,
+    int? mesa,
+    int? orden,
     double? pj,
     double? cyb,
     double? ucr,
+    double? latitude,
+    double? longitude,
     String favorito = " ",
   }) {
     return Votante(
-      mesa ?? this.mesa,
-      orden ?? this.orden,
       dni ?? this.dni,
       nombre ?? this.nombre,
       domicilio ?? this.domicilio,
       sexo ?? this.sexo,
       clase ?? this.clase,
-      latitude ?? this.latitude,
-      longitude ?? this.longitude,
+      mesa ?? this.mesa,
+      orden ?? this.orden,
       pj ?? this.pj,
       cyb ?? this.cyb,
       ucr ?? this.ucr,
+      latitude ?? this.latitude,
+      longitude ?? this.longitude,
     );
   }
 
   factory Votante.fromMap(Map<String, dynamic> map) {
     return Votante(
-      map['mesa'],
-      map['orden'],
       map['dni'],
       map['nombre'] ?? '',
       map['domicilio'] ?? '',
       map['sexo'] ?? '',
       map['clase'],
-      map['latitude'],
-      map['longitude'],
+      map['mesa'],
+      map['orden'],
       map['pj'],
       map['cyb'],
       map['ucr'],
+      map['latitude'],
+      map['longitude'],
     );
   }
 
@@ -117,4 +125,57 @@ class Votante {
 
   @override
   int get hashCode => dni.hashCode;
+
+  static void organizar(List<Votante> votantes) {
+    var apellido = "";
+
+    for (final v in votantes) {
+      if (v.nombre.contains(",")) {
+        final nuevo = v.nombre.split(",").first;
+        v.agrupar = nuevo == apellido;
+        if (nuevo != apellido) {
+          apellido = nuevo;
+        }
+      } else {
+        apellido = "";
+        v.agrupar = false;
+      }
+    }
+  }
+
+  static List<Votante> ordenarVotantes(List<Votante> votantes) {
+    votantes.sort((a, b) => a.nombre.compareTo(b.nombre));
+    Votante.organizar(votantes);
+    return votantes;
+  }
+
+  static List<Votante> buscar(List<Votante> votantes, String texto) {
+    List<Votante> salida = [];
+    medir("Buscado '$texto'", () {
+      texto = texto.sinEspacios.toLowerCase();
+
+      if (texto.isEmpty) {
+        salida = votantes;
+      } else if (texto == 'mios') {
+        salida = votantes.where((v) => v.favorito).toList();
+      } else if (texto == 'todos' || texto == 'otros' || texto == 'repetidos') {
+        final marcas = Favorito.contar(Datos.favoritos);
+        final minimo = texto == 'repetidos' ? 2 : 1;
+        salida = votantes.where((v) => (marcas[v.dni] ?? 0) >= minimo).toList();
+        if (texto == 'otros') {
+          salida = salida.where((v) => !v.favorito).toList();
+        }
+      } else if (RegExp(r'^[0-9]{4}$').hasMatch(texto)) {
+        final mesa = int.parse(texto);
+        salida = votantes.where((v) => v.mesa == mesa).toList();
+      } else {
+        final palabras = texto.palabras;
+        salida = votantes.where((v) => v.textoCompleto.contienePalabras(palabras)).toList();
+      }
+      Votante.ordenarVotantes(salida);
+      print(" - Encontrados ${salida.length} votantes");
+    });
+
+    return salida;
+  }
 }

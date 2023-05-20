@@ -1,5 +1,7 @@
 import 'dart:convert';
-import './mesa.dart';
+// import 'votante.dart';
+
+import 'mesa.dart';
 import 'package:collection/collection.dart';
 
 class Escuela {
@@ -14,59 +16,17 @@ class Escuela {
   int hasta;
   List<Mesa> mesas = [];
 
-  Escuela(
-      {required this.escuela,
-      required this.direccion,
-      required this.desde,
-      required this.hasta,
-      required this.circuito,
-      required this.departamento,
-      required this.seccion,
-      required this.latitude,
-      required this.longitude});
-
-  void agregar(Mesa mesa) {
-    mesas.add(mesa);
-  }
-
-  factory Escuela.noIdentificada() => Escuela(
-      escuela: "Sin definir",
-      direccion: "sin dirección",
-      desde: 0,
-      hasta: 0,
-      circuito: "",
-      departamento: "",
-      seccion: "",
-      latitude: 0,
-      longitude: 0);
-
-  factory Escuela.fromMap(Map<String, dynamic> data) {
-    return Escuela(
-      escuela: data['escuela'],
-      direccion: data['direccion'],
-      desde: data['desde'],
-      hasta: data['hasta'],
-      circuito: data['circuito'],
-      departamento: data['departamento'],
-      seccion: data['seccion'],
-      latitude: data['latitude'],
-      longitude: data['longitude'],
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'escuela': escuela,
-      'direccion': direccion,
-      'desde': desde,
-      'hasta': hasta,
-      'circuito': circuito,
-      'departamento': departamento,
-      'seccion': seccion,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
+  Escuela({
+    required this.escuela,
+    required this.direccion,
+    required this.desde,
+    required this.hasta,
+    required this.circuito,
+    required this.departamento,
+    required this.seccion,
+    required this.latitude,
+    required this.longitude,
+  });
 
   Escuela copyWith({
     String? escuela,
@@ -92,26 +52,76 @@ class Escuela {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  factory Escuela.noIdentificada() => Escuela(
+        escuela: "Sin definir",
+        direccion: "sin dirección",
+        desde: 0,
+        hasta: 0,
+        circuito: "",
+        departamento: "",
+        seccion: "",
+        latitude: 0,
+        longitude: 0,
+      );
+
+  factory Escuela.fromMap(Map<String, dynamic> data) {
+    return Escuela(
+      escuela: data['escuela'],
+      direccion: data['direccion'],
+      desde: data['desde'],
+      hasta: data['hasta'],
+      circuito: data['circuito'],
+      departamento: data['departamento'],
+      seccion: data['seccion'],
+      latitude: data['latitude'],
+      longitude: data['longitude'],
+    );
+  }
 
   factory Escuela.fromJson(String source) => Escuela.fromMap(json.decode(source));
-  get completa => totalCerradas == totalMesas;
 
-  get totalMesas => mesas.length;
-  get totalCerradas => mesas.where((mesa) => mesa.cerrada).length;
+  Map<String, dynamic> toMap() {
+    return {
+      'escuela': escuela,
+      'direccion': direccion,
+      'desde': desde,
+      'hasta': hasta,
+      'circuito': circuito,
+      'departamento': departamento,
+      'seccion': seccion,
+      'latitude': latitude,
+      'longitude': longitude,
+    };
+  }
 
-  int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
-
-  int get totalFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;
-  int get totalAnalizados => mesas.map((m) => m.favoritos.length > 0 ? 1 : 0).sum;
+  String toJson() => json.encode(toMap());
 
   @override
   String toString() =>
       'Escuela(escuela: $escuela, direccion: $direccion, desde: $desde, hasta: $hasta, mesas: $mesas, votantes: $totalVotantes, circuito: $circuito, departamento: $departamento, seccion: $seccion, latitude: $latitude, longitude: $longitude)';
+
+  // Acciones
+  void agregar(Mesa mesa) => mesas.add(mesa);
+
+  bool get esCompleta => cantidadMesasCerradas == cantidadMesas;
+  bool get esAnalizada => cantidadMesasAnalizadas > 0;
+
+  int get cantidadMesas => mesas.length;
+  int get cantidadMesasAnalizadas => mesas.where((mesa) => mesa.favoritos.isNotEmpty).length;
+  int get cantidadMesasCerradas => mesas.where((mesa) => mesa.cerrada).length;
+
+  int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
+  int get totalVotantesFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;
+  // int get totalVotantesAnalizados => mesas.map((m) => m.cerrada ? m.votantes.length : 0).sum;
+  int get totalVotantesAnalizados => mesas.map((m) => m.favoritos.isEmpty ? 0 : m.votantes.length).sum;
+
+  get favoritos => mesas.map((mesa) => mesa.favoritos).expand((element) => element).toList();
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is Escuela && other.escuela == escuela;
 
   @override
   int get hashCode => escuela.hashCode;
+
+  void ordenar() => mesas.forEach((mesa) => mesa.ordenar());
 }
