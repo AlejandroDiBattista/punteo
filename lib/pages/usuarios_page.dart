@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../colores.dart';
 import '/modelos/votante.dart';
 import '../modelos/datos.dart';
 import '../modelos/favorito.dart';
@@ -27,21 +28,22 @@ class _UsuariosPageState extends State<UsuariosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Ranking de Usuarios', style: TextStyle(fontSize: 22))),
-        body: Center(child: mostrarUsuarios()));
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(title: Text('Ranking de Usuarios', style: TextStyle(fontSize: 22))),
+          body: Center(child: mostrarUsuarios())),
+    );
   }
 
   Widget mostrarUsuarios() {
     final usuarios = Datos.usuarios;
 
-    // usuarios.sort((a, b) => a.nombre.compareTo(b.nombre));
     usuarios.sort((a, b) => Datos.cantidadFavoritos(b.dni).compareTo(Datos.cantidadFavoritos(a.dni)));
 
     return ListView.separated(
       itemBuilder: (_, i) => mostrarUsuario(usuarios[i]),
       itemCount: usuarios.length,
-      separatorBuilder: (BuildContext context, int index) => Divider(),
+      separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
     );
   }
 
@@ -68,10 +70,8 @@ class _UsuariosPageState extends State<UsuariosPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              "${sesiones.length} sesiones, $tiempo minutos",
-              style: TextStyle(fontSize: 16, color: Colors.cyan),
-            ),
+            child: Text("${sesiones.length} sesiones, $tiempo minutos",
+                style: TextStyle(fontSize: 16, color: Colors.cyan)),
           ),
         ],
       ),

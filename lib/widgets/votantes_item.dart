@@ -28,6 +28,7 @@ class _VotanteItemState extends State<VotanteItem> {
   Widget build(BuildContext context) {
     final votante = widget.votante;
     final edad = (votante.clase < 0 ? "~" : "") + '${2023 - votante.clase.abs()}';
+    final r = votante.referentes.length;
     return ListTile(
       dense: false,
       title: crearNombre(votante, widget.color, widget.index),
@@ -37,18 +38,19 @@ class _VotanteItemState extends State<VotanteItem> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 8),
+              SizedBox(height: 4),
               Text(votante.domicilio, style: TextStyle(fontSize: 16, color: Colors.black, overflow: TextOverflow.clip)),
               SizedBox(height: 4),
               Text('Edad: $edad  |  DNI: ${votante.dni}'),
               SizedBox(height: 4),
-              Text('${Datos.traerEscuela(votante.mesa).escuela}  |  Mesa: ${votante.mesa} #${votante.orden}',
+              Text(
+                  '${Datos.traerEscuela(votante.mesa).escuela} | Mesa: ${votante.mesa} #${votante.orden} ${r > 1 ? 'x $r' : ''}',
                   style: TextStyle(fontSize: 12)),
             ],
           ),
         ],
       ),
-      trailing: Icon(Icons.star, color: votante.favorito ? Colors.amber : Colors.grey),
+      trailing: Icon(Icons.star, color: votante.favorito ? (r > 1 ? Colors.red : Colors.amber) : Colors.grey),
       onTap: () => widget.alMarcar(votante),
     );
   }
@@ -72,11 +74,11 @@ class _VotanteItemState extends State<VotanteItem> {
         ),
         Text(apellido,
             style: TextStyle(
-                fontSize: 18, fontWeight: votante.agrupar ? FontWeight.normal : FontWeight.bold, color: color)),
+                fontSize: 20, fontWeight: votante.agrupar ? FontWeight.normal : FontWeight.bold, color: color)),
         if (nombre.isNotEmpty)
           Text(', $nombre',
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontStyle: votante.agrupar ? FontStyle.italic : FontStyle.normal,
                   color: color)),

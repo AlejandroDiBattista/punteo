@@ -21,8 +21,11 @@ class Votante {
   bool favorito = false;
   bool agrupar = false;
   int escuela = 0;
-  String textoCompleto = "";
-  List<Favorito> referentes = [];
+
+  int get edad => 2023 - clase.abs();
+
+  String textoCompleto = '';
+  List<int> get referentes => Datos.favoritos.where((f) => f.dni == dni).map((f) => f.referente).toList();
 
   Votante(
     this.dni,
@@ -38,11 +41,11 @@ class Votante {
     this.latitude,
     this.longitude,
   ) {
-    textoCompleto = nombre.toLowerCase().sinEspacios.sinAcentos;
+    textoCompleto = " " + nombre.toLowerCase().sinEspacios.sinAcentos;
   }
 
   factory Votante.anonimo([int dni = 0]) =>
-      Votante(dni, "Sin identificar", "sin domicilio", "X", 0, 0, 0, 0, 0, 0, 0, 0);
+      Votante(dni, 'Sin identificar', 'sin domicilio', 'X', 0, 0, 0, 0, 0, 0, 0, 0);
 
   Map<String, dynamic> toMap() {
     return {
@@ -74,7 +77,7 @@ class Votante {
     double? ucr,
     double? latitude,
     double? longitude,
-    String favorito = " ",
+    String favorito = ' ',
   }) {
     return Votante(
       dni ?? this.dni,
@@ -127,17 +130,17 @@ class Votante {
   int get hashCode => dni.hashCode;
 
   static void organizar(List<Votante> votantes) {
-    var apellido = "";
+    var apellido = '';
 
     for (final v in votantes) {
-      if (v.nombre.contains(",")) {
-        final nuevo = v.nombre.split(",").first;
+      if (v.nombre.contains(',')) {
+        final nuevo = v.nombre.split(',').first;
         v.agrupar = nuevo == apellido;
         if (nuevo != apellido) {
           apellido = nuevo;
         }
       } else {
-        apellido = "";
+        apellido = '';
         v.agrupar = false;
       }
     }
@@ -149,33 +152,64 @@ class Votante {
     return votantes;
   }
 
-  static List<Votante> buscar(List<Votante> votantes, String texto) {
-    List<Votante> salida = [];
-    medir("Buscado '$texto'", () {
-      texto = texto.sinEspacios.toLowerCase();
+  static Map<String, int> contarDomicilio(List<Votante> votantes) {
+    final mapa = <String, int>{};
+    for (final v in Datos.votantes) {
+      mapa[v.domicilio] = (mapa[v.domicilio] ?? 0) + 1;
+    }
+    return mapa;
+  }
 
-      if (texto.isEmpty) {
-        salida = votantes;
-      } else if (texto == 'mios') {
-        salida = votantes.where((v) => v.favorito).toList();
-      } else if (texto == 'todos' || texto == 'otros' || texto == 'repetidos') {
-        final marcas = Favorito.contar(Datos.favoritos);
-        final minimo = texto == 'repetidos' ? 2 : 1;
-        salida = votantes.where((v) => (marcas[v.dni] ?? 0) >= minimo).toList();
-        if (texto == 'otros') {
-          salida = salida.where((v) => !v.favorito).toList();
+  static List<Votante> buscar(List<Votante> votantes, String texto) {
+    List<Votante> origen = votantes;
+    final palabras = texto.toLowerCase().palabras;
+
+    medir('Buscado "$texto"', () {
+      for (final palabra in palabras) {
+        if (palabra == 'mios') {
+          origen = origen.where((v) => v.favorito).toList();
+        } else if (palabra == 'repetidos') {
+          final marcas = Favorito.contar(Datos.favoritos);
+          origen = origen.where((v) => (marcas[v.dni] ?? 0) >= 2).toList();
+        } else if (palabra == 'todos') {
+          final marcas = Favorito.contar(Datos.favoritos);
+          origen = origen.where((v) => (marcas[v.dni] ?? 0) >= 1).toList();
+        } else if (palabra == 'familia') {
+          final marcas = contarDomicilio(origen);
+          origen = origen.where((v) => (marcas[v.domicilio] ?? 0) >= 2).toList();
+        } else if (palabra == 'solo' || palabra == 'familias' || palabra == 'muchos') {
+          final minimo = palabra == 'solo'
+              ? 1
+              : palabra == 'familia'
+                  ? 2
+                  : 4;
+          final maximo = palabra == 'solo'
+              ? 1
+              : palabra == 'familia'
+                  ? 3
+                  : 100;
+          final marcas = contarDomicilio(origen);
+          origen = origen.where((v) {
+            final cantidad = marcas[v.domicilio] ?? 0;
+            return cantidad >= minimo && cantidad <= maximo;
+          }).toList();
+        } else if (RegExp(r'^[0-9]{4}$').hasMatch(palabra)) {
+          final mesa = int.parse(palabra);
+          origen = origen.where((v) => v.mesa == mesa).toList();
+        } else if ((RegExp(r'^[+-][0-9]{2}$').hasMatch(palabra))) {
+          final edad = int.parse(palabra);
+          origen = origen.where((v) => edad < 0 ? v.edad < edad.abs() : v.edad > edad).toList();
+        } else if ((RegExp(r'^-[a-zñ]+$').hasMatch(palabra))) {
+          final aux = ' ' + palabra.substring(1);
+          origen = origen.where((v) => !v.textoCompleto.contains(aux)).toList();
+        } else if ((RegExp(r'^[a-zñ]+$').hasMatch(palabra))) {
+          final aux = ' ' + palabra;
+          origen = origen.where((v) => v.textoCompleto.contains(aux)).toList();
         }
-      } else if (RegExp(r'^[0-9]{4}$').hasMatch(texto)) {
-        final mesa = int.parse(texto);
-        salida = votantes.where((v) => v.mesa == mesa).toList();
-      } else {
-        final palabras = texto.palabras;
-        salida = votantes.where((v) => v.textoCompleto.contienePalabras(palabras)).toList();
       }
-      Votante.ordenarVotantes(salida);
-      print(" - Encontrados ${salida.length} votantes");
+      print('Hay ${origen.length} votantes');
     });
 
-    return salida;
+    return origen;
   }
 }

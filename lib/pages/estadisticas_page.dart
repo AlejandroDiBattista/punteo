@@ -1,3 +1,4 @@
+// import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 import '/pages/ingresar_page.dart';
@@ -17,18 +18,23 @@ class EstadisticasPage extends StatefulWidget {
 class _EstadisticasPageState extends State<EstadisticasPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Estadisticas')),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: ListView(children: [
-            mostrarUsuario(context),
-            mostrarEstadistica(context),
-            mostrarCerrar(context),
-            mostrarActualizar(context),
-            if (Datos.usuario == 18627585) mostrarProbar(context)
-          ]),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('Estadisticas')),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: FittedBox(
+              child: Column(children: [
+                Container(constraints: BoxConstraints(maxWidth: 200)),
+                mostrarUsuario(context),
+                mostrarEstadistica(context),
+                mostrarCerrar(context),
+                // mostrarActualizar(context),
+                // if (Datos.usuario == 18627585) mostrarProbar(context)
+              ]),
+            ),
+          ),
         ),
       ),
     );
@@ -37,7 +43,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
   Widget mostrarCerrar(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 80, right: 80, top: 20, bottom: 10),
-      child: FilledButton(
+      child: FilledButton.tonal(
         onPressed: () => cerrarSesion(context),
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -76,7 +82,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     );
   }
 
-  Card mostrarUsuario(BuildContext context) {
+  Widget mostrarUsuario(BuildContext context) {
     final usuario = Datos.usuarioActual;
     final escuela = Datos.escuelaActual;
 
@@ -84,8 +90,8 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     return Card(
       elevation: 8,
       child: Container(
+        width: 380,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        width: 300,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -111,50 +117,47 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
   }
 
   Widget mostrarEstadistica(BuildContext context) {
-    return Container(
-      width: 300,
-      child: Card(
-        elevation: 8,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          width: 300,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Estadisticas',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
-              Divider(),
-              subtitulo("Escuelas"),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                Indicador(etiqueta: "Total", valor: Datos.escuelas.length.toDouble()),
-                Indicador(etiqueta: "Analizadas", valor: Datos.cantidadEscuelasAnalizadas),
-                Indicador(etiqueta: "Completas", valor: Datos.cantidadEscuelasCompletas),
-              ]),
-              Divider(),
-              subtitulo("Mesas"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Indicador(etiqueta: "Total", valor: Datos.cantidadMesas.toDouble()),
-                  Indicador(etiqueta: "Analizadas", valor: Datos.cantidadMesasAnalizadas),
-                  Indicador(etiqueta: "Cerradas", valor: Datos.cantidadMesasCerradas),
-                ],
-              ),
-              Divider(),
-              subtitulo("Votantes"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Indicador(etiqueta: "Analizados", valor: Datos.cantidadVotantesAnalizados),
-                  Indicador(etiqueta: "Marcados", valor: Datos.cantidadVotantesMarcados),
-                  if (Datos.cantidadVotantesMarcados > 0)
-                    Indicador(
-                        etiqueta: "Efectividad",
-                        valor: 1.0 * (Datos.cantidadVotantesMarcados / Datos.cantidadVotantesAnalizados)),
-                ],
-              )
-            ],
-          ),
+    return Card(
+      elevation: 8,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        width: 380,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Estadisticas',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)),
+            Divider(),
+            subtitulo("Escuelas"),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Indicador(etiqueta: "Total", valor: Datos.escuelas.length.toDouble()),
+              Indicador(etiqueta: "Analizadas", valor: Datos.cantidadEscuelasAnalizadas),
+              Indicador(etiqueta: "Completas", valor: Datos.cantidadEscuelasCompletas),
+            ]),
+            Divider(),
+            subtitulo("Mesas"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Indicador(etiqueta: "Total", valor: Datos.cantidadMesas.toDouble()),
+                Indicador(etiqueta: "Analizadas", valor: Datos.cantidadMesasAnalizadas),
+                Indicador(etiqueta: "Cerradas", valor: Datos.cantidadMesasCerradas),
+              ],
+            ),
+            Divider(),
+            subtitulo("Votantes"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Indicador(etiqueta: "Analizados", valor: Datos.cantidadVotantesAnalizados),
+                Indicador(etiqueta: "Marcados", valor: Datos.cantidadVotantesMarcados),
+                if (Datos.cantidadVotantesMarcados > 0)
+                  Indicador(
+                      etiqueta: "Efectividad",
+                      valor: 1.0 * (Datos.cantidadVotantesMarcados / Datos.cantidadVotantesAnalizados)),
+              ],
+            )
+          ],
         ),
       ),
     );

@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '/pages/escuelas_page.dart';
-import '/pages/estadisticas_page.dart';
-import '../modelos/datos.dart';
+import 'escuelas_page.dart';
 import 'buscar_page.dart';
-// import 'package:google_nav_bar/google_nav_bar.dart';
-// import '../iconos.dart';
+import 'estadisticas_page.dart';
 import 'usuarios_page.dart';
+
+import '../modelos/datos.dart';
 
 // ignore: must_be_immutable
 class PaginaInicialPage extends StatefulWidget {
@@ -31,22 +30,46 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
     final color = Theme.of(context).primaryColor;
     return Scaffold(
       body: widget.paginas[widget.index],
-      bottomNavigationBar: CupertinoTabBar(
-        activeColor: Colors.white,
-        inactiveColor: Colors.black,
-        backgroundColor: color,
-        iconSize: 24,
-        items: [
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.checkmark_alt), label: "Marcar", backgroundColor: color),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.search), label: "Buscar", backgroundColor: color),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), label: "Perfil", backgroundColor: color),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.graph_square), label: "Monitoreo", backgroundColor: color),
-        ],
-        currentIndex: widget.index,
-        onTap: (index) {
-          setState(() => widget.index = index);
-        },
-      ),
+      bottomNavigationBar: crearNavegacion(color),
+    );
+  }
+
+  Widget crearNavegacion(Color color) {
+    return NavigationBar(
+      onDestinationSelected: (index) {
+        setState(() => widget.index = index);
+      },
+      selectedIndex: widget.index,
+      destinations: [
+        NavigationDestination(icon: Icon(Icons.check_rounded), label: 'Marcar'),
+        NavigationDestination(icon: Icon(Icons.search_rounded), label: 'Buscar'),
+        NavigationDestination(icon: Icon(Icons.person_rounded), label: 'Perfil'),
+        if (Datos.esAdministrador) NavigationDestination(icon: Icon(Icons.graphic_eq_rounded), label: 'Ranking'),
+      ],
+    );
+  }
+
+  Widget crearNavegacionCupertino(Color color) {
+    return CupertinoTabBar(
+      activeColor: Colors.white,
+      inactiveColor: Colors.black,
+      backgroundColor: color,
+      iconSize: 24,
+      items: [
+        BottomNavigationBarItem(
+            icon: Badge.count(count: 10, backgroundColor: Colors.red, child: Icon(CupertinoIcons.checkmark_alt)),
+            // icon: Badge.count(count: Datos.cantidadFavoritos(Datos.usuario), child: Icon(CupertinoIcons.checkmark_alt)),
+            label: "Marcar",
+            backgroundColor: color),
+        BottomNavigationBarItem(icon: Icon(CupertinoIcons.search), label: "Buscar", backgroundColor: color),
+        BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), label: "Perfil", backgroundColor: color),
+        if (Datos.esAdministrador)
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.graph_square), label: "Ranking", backgroundColor: color),
+      ],
+      currentIndex: widget.index,
+      onTap: (index) {
+        setState(() => widget.index = index);
+      },
     );
   }
 

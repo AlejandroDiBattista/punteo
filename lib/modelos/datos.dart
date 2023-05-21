@@ -14,7 +14,7 @@ class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.0.2";
+  static String version = "1.1.5";
 
   static const admistradores = [18627585, 17041793, 24409480, 37096832];
   // Susana  21327900
@@ -36,12 +36,17 @@ class Datos {
   static Future<void> iniciar(Function alTerminar, {bool forzar = false}) async {
     if (forzar) Datos.cargado = false;
 
-    while (!Datos.estaCargado) {
-      await Future.delayed(Duration(milliseconds: 100));
-    }
+    // if (!Datos.cargado ) {
+    //   await cargar();
+    // } else {
+    //   while (!Datos.estaCargado) {
+    //     await Future.delayed(Duration(milliseconds: 100));
+    //   }
+    // }
 
     marcarFavoritos();
     marcarCierres();
+
     alTerminar();
   }
 
@@ -55,25 +60,19 @@ class Datos {
 
     print(">> Cargando datos..${DateTime.now().hora}");
 
-    // medir("Cargando Escuelas & Votantes", () async {
     await cargarEscuelas();
     await cargarVotantes();
     print(" - Cargamos ${escuelas.length} escuelas & ${votantes.length} votantes");
     print("1. ${DateTime.now().hora}");
-    // });
 
-    // medir("Cargando Favoritos & Mesas Cerradas", () async {
     await cargarFavoritos();
     await cargarCierres();
     print(" - Cargamos ${favoritos.length} Favoritos & ${cierres.length} Mesas Cerradas ");
     print("2. ${DateTime.now().hora}");
-    // });
 
-    // medir("Crear Escuelas, Mesas y Marcar Favoritos", () async {
     crearEscuelas();
     marcarFavoritos();
     marcarCierres();
-    // });
 
     print("Datos cargados.");
     cargado = true;
@@ -92,26 +91,26 @@ class Datos {
     votantes = datos.map((dato) => Votante.fromMap(dato)).toList();
   }
 
+  static Future<void> cargarFavoritos() async {
+    favoritos = await bajarFavoritos();
+    print("Bajamos ${favoritos.length} favoritos");
+  }
+
+  static Future<void> cargarCierres() async {
+    cierres = await bajarCierres();
+    print("Bajamos ${cierres.length} cierres");
+  }
+
   static Future<List<Favorito>> bajarFavoritos() async {
     final datos = await SheetsApi.traerFavoritos();
     final nuevos = datos.map((dato) => Favorito.fromMap(dato)).toList();
     return Favorito.compactar(nuevos);
   }
 
-  static Future<void> cargarFavoritos() async {
-    favoritos = await bajarFavoritos();
-    print("Bajamos ${favoritos.length} favoritos");
-  }
-
   static Future<List<Cierre>> bajarCierres() async {
     final datos = await SheetsApi.traerCierres();
     final nuevos = datos.map((dato) => Cierre.fromMap(dato)).toList();
     return Cierre.compactar(nuevos);
-  }
-
-  static Future<void> cargarCierres() async {
-    cierres = await bajarCierres();
-    print("Bajamos ${cierres.length} cierres");
   }
 
   static void crearEscuelas() {
@@ -137,10 +136,8 @@ class Datos {
     }
 
     escuelas.forEach((e) => e.ordenar());
-    print(escuelas.first.mesas.map((m) => m.numero).toList());
   }
 
-  // Acciones
   static marcarFavoritos() {
     print("Hay ${favoritos.length} favoritos");
 
@@ -175,9 +172,11 @@ class Datos {
       votante.mesa,
       DateTime.now().fechaHora
     ];
+
     favoritos.add(Favorito(dni: votante.dni, referente: usuario, favorito: votante.favorito, hora: DateTime.now()));
     favoritos = Favorito.compactar(favoritos);
-    await SheetsApi.regisrarFavorito(datos);
+
+    await SheetsApi.registrarFavorito(datos);
   }
 
   static void marcarMesa(Mesa mesa) async {
@@ -190,6 +189,7 @@ class Datos {
 
     cierres.add(Cierre(mesa: mesa.numero, referente: usuario, hora: DateTime.now()));
     cierres = Cierre.compactar(cierres);
+
     await SheetsApi.registrarCierre(datos);
   }
 
@@ -202,8 +202,6 @@ class Datos {
     }
   }
 
-  // Consultas
-
   static Votante get usuarioActual => traerUsuario(Datos.usuario);
   static Escuela get escuelaActual => traerEscuela(usuarioActual.mesa);
   static get esAdministrador => admistradores.contains(usuarioActual.dni);
@@ -215,13 +213,14 @@ class Datos {
       escuelas.firstWhere((e) => e.desde <= mesa && mesa <= e.hasta, orElse: () => Escuela.noIdentificada());
 
   static get cantidadUsuarios => usuarios.length;
+
   static get cantidadVotantes => votantes.length;
   static get cantidadVotantesAnalizados => escuelas.map((e) => e.totalVotantesAnalizados).sum;
   static get cantidadVotantesMarcados => escuelas.map((e) => e.totalVotantesFavoritos).sum;
 
-  static get cantidadMesas => escuelas.map((e) => e.mesas.length).sum;
+  static get cantidadMesas => escuelas.map((e) => e.cantidadMesas).sum;
   static get cantidadMesasAnalizadas => escuelas.map((e) => e.cantidadMesasAnalizadas).sum;
-  static get cantidadMesasCerradas => escuelas.map((e) => e.mesas.where((m) => m.cerrada).length).sum;
+  static get cantidadMesasCerradas => escuelas.map((e) => e.cantidadMesasCerradas).sum;
 
   static get cantidadEscuelasCompletas => escuelas.where((e) => e.esCompleta).length;
   static get cantidadEscuelasAnalizadas => escuelas.where((e) => e.esAnalizada).length;

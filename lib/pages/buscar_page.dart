@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../colores.dart';
 import '/modelos/votante.dart';
 import '../modelos/datos.dart';
-import 'votantes_item.dart';
+import '../widgets/votantes_item.dart';
 
 class BuscarPage extends StatefulWidget {
   @override
@@ -13,6 +15,13 @@ class _BuscarPageState extends State<BuscarPage> {
   final controlador = TextEditingController();
   var votantes = Datos.votantes;
 
+  Timer? _debounceTimer;
+
+  void debouncing(Function() fn, {int waitForMs = 100}) {
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(Duration(milliseconds: waitForMs), () => setState(fn));
+  }
+
   Future<void> marcarFavorito(Votante votante) async {
     votante.cambiarFavorito();
     setState(() {});
@@ -20,7 +29,7 @@ class _BuscarPageState extends State<BuscarPage> {
   }
 
   void alBuscar(String texto) {
-    setState(() {
+    debouncing(() {
       votantes = Datos.buscar(texto);
     });
   }
@@ -42,25 +51,25 @@ class _BuscarPageState extends State<BuscarPage> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             child: TextField(
-              style: TextStyle(fontSize: 22),
-              controller: controlador,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                prefixIcon: Icon(Icons.search),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    controlador.clear();
-                    alBuscar('');
-                  },
+                textInputAction: TextInputAction.search,
+                style: TextStyle(fontSize: 22),
+                controller: controlador,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      controlador.clear();
+                      alBuscar('');
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(width: 1, color: Colors.grey),
+                  ),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide(width: 1, color: Colors.grey),
-                ),
-              ),
-              onChanged: alBuscar,
-            ),
+                onChanged: alBuscar),
           ),
           Expanded(
             child: ListView.separated(
@@ -81,8 +90,8 @@ class _BuscarPageState extends State<BuscarPage> {
   Widget divisor(int index) {
     if (index < votantes.length - 1) {
       final siguiente = votantes[index + 1];
-      if (!siguiente.agrupar) return Divider(thickness: 2);
+      if (!siguiente.agrupar) return Divider(color: Colores.divisor, height: 1);
     }
-    return Divider();
+    return Divider(color: Colors.transparent, height: 1);
   }
 }

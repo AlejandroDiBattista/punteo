@@ -18,8 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-    sdk: '>= 3.0.0'
-
+    sdk: '>=3.0.0 <4.0.0'
+    
 dependencies:
     flutter:
         sdk: flutter
@@ -36,6 +36,7 @@ dependencies:
     googleapis: ^8.1.0
     gsheets: ^0.4.2
     google_nav_bar: ^5.0.6
+    # url_launcher: ^6.1.11
 
 flutter_launcher_name:
     name: 'PunteoYB'

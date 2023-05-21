@@ -34,7 +34,7 @@ class SheetsApi {
     return await _traer(mesas!);
   }
 
-  static Future<void> regisrarFavorito(List<dynamic> datos) async {
+  static Future<void> registrarFavorito(List<dynamic> datos) async {
     await _init();
     await favoritos!.values.appendRow(datos);
   }

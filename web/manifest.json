@@ -1,6 +1,6 @@
 {
 	"name": "Punteo YB",
-	"short_name": "Punteo",
+	"short_name": "PunteoYB",
 	"start_url": "https://punteo.netlify.app/",
 	"scope": "/",
 	"display": "fullscreen",

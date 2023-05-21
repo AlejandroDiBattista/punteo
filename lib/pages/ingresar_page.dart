@@ -13,32 +13,45 @@ class IngresarPage extends StatefulWidget {
 
 class _IngresarPageState extends State<IngresarPage> {
   final _formKey = GlobalKey<FormState>();
-  // late String _dni;
   bool cargando = false;
   final controlador = TextEditingController();
 
   @override
+  void initState() {
+    this.cargando = true;
+    Datos.cargar().then((_) {
+      setState(() => this.cargando = false);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: crearFondo(),
-        alignment: Alignment.center,
-        // color: Theme.of(context).primaryColorLight,r
-        child: Container(
-          width: 350,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                crearTitulo(context),
-                crearVersion(context),
-                SizedBox(height: 100.0),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [crearIngresoDNI(), SizedBox(width: 10), crearIngresar()]),
-                SizedBox(height: 16.0),
-              ]),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          decoration: crearFondo(),
+          alignment: Alignment.center,
+          child: Container(
+            width: 350,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  this.cargando
+                      ? LinearProgressIndicator(backgroundColor: Colores.terminar, minHeight: 1)
+                      : SizedBox(height: 2),
+                  Expanded(child: Container()),
+                  crearTitulo(context),
+                  crearVersion(context),
+                  SizedBox(height: 100.0),
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [crearIngresoDNI(), SizedBox(width: 10), crearIngresar()]),
+                  Expanded(child: Container()),
+                ]),
+              ),
             ),
           ),
         ),
@@ -47,21 +60,19 @@ class _IngresarPageState extends State<IngresarPage> {
   }
 
   FilledButton crearIngresar() {
-    return FilledButton(
+    return FilledButton.tonal(
       onPressed: ingresar,
       onLongPress: ingresarAlejandro,
-      child: const Padding(
+      child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+          // child: Text('Ingresar', style: TextStyle(fontSize: 16))),
           child: Text('Ingresar', style: TextStyle(fontSize: 16))),
     );
   }
 
   BoxDecoration crearFondo() => BoxDecoration(
           gradient: LinearGradient(
-        colors: [
-          Colores.comenzar,
-          Colores.terminar,
-        ],
+        colors: [Colores.comenzar, Colores.terminar],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ));
@@ -97,14 +108,13 @@ class _IngresarPageState extends State<IngresarPage> {
         ),
       );
 
-  void irPaginaInicio() {
+  void irPaginaInicio() async {
     setState(() => this.cargando = true);
     print('antes: irPaginaInicio para ${Datos.usuario}');
-    Datos.iniciar(() {
-      print('despues: irPaginaInicio para ${Datos.usuario}');
-      setState(() => this.cargando = false);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PaginaInicialPage()));
-    });
+
+    // await Datos.cargar();
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PaginaInicialPage()));
+    // });
   }
 
   void ingresar() async {

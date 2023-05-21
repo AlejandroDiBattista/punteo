@@ -1,11 +1,11 @@
 # construir sitio web
 Write-Host "Construyendo sitio web..."
 
-flutter clean
-# flutter build web #--no-tree-shake-icons 
+# flutter clean
+flutter build web #--no-tree-shake-icons 
 # flutter run -d chrome --web-renderer html
 # flutter build web --web-renderer canvaskit --no-tree-shake-icons 
-flutter build web --web-renderer html --no-tree-shake-icons 
+# flutter build web --web-renderer html --no-tree-shake-icons 
 
 
 # copiar archivos generados a carpeta de repositorio
@@ -30,5 +30,5 @@ Set-Location $PSScriptRoot
 
 Write-Host "Arrancamos el sitio..."
 # ejecutar el sitio web en el navegador
-flutter run -d chrome
+# flutter run -d chrome
 

@@ -1,31 +1,30 @@
-import 'dart:core';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '/pages/ingresar_page.dart';
 import 'modelos/datos.dart';
+import 'pages/ingresar_page.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+import 'colores.dart';
 
-  print("ANTES");
-  await Datos.cargar();
-  print("DESPUES");
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Punteo YB v${Datos.version}',
-      theme: ThemeData(primarySwatch: Colors.green, useMaterial3: false),
+      title: 'Punteo YB ${Datos.version}',
       debugShowCheckedModeBanner: false,
-      home: IngresarPage(),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colores.comenzar),
+        navigationBarTheme: NavigationBarThemeData(backgroundColor: Colores.comenzar),
+        useMaterial3: true,
+        // colorSchemeSeed: Colores.terminar,
+        colorSchemeSeed: Colores.comenzar,
+        // colorSchemeSeed: Colors.red,
+      ),
+      home: const IngresarPage(),
     );
   }
 }

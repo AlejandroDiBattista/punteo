@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../colores.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
 import 'mesas_page.dart';
@@ -10,36 +11,36 @@ class EscuelasPage extends StatefulWidget {
 }
 
 class _EscuelasPageState extends State<EscuelasPage> {
-  @override
-  void initState() {
-    super.initState();
-    Datos.iniciar(() {
-      setState(() {});
-    });
-    print('EscuelasPage.initState');
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Datos.iniciar(() {
+  //     setState(() {});
+  //   });
+  //   print('EscuelasPage.initState');
+  // }
 
   @override
   Widget build(BuildContext context) {
     final datos = Datos.escuelas;
-    return Scaffold(
-        appBar: AppBar(title: Text('Escuelas de Yerba Buena')),
-        body: datos.isEmpty
-            ? Center(child: CircularProgressIndicator())
-            : Center(
-                child: Scrollbar(
-                child: ListView.separated(
-                  itemCount: datos.length,
-                  itemBuilder: (BuildContext context, int index) => crearEscuela(index, datos[index]),
-                  separatorBuilder: (BuildContext context, int index) => Divider(),
-                ),
-              )));
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(title: Text('Escuelas de Yerba Buena')),
+          body: Center(
+              child: Scrollbar(
+            child: ListView.separated(
+              itemCount: datos.length,
+              itemBuilder: (BuildContext context, int index) => crearEscuela(index, datos[index]),
+              separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
+            ),
+          ))),
+    );
   }
 
   Widget crearEscuela(int indice, Escuela escuela) {
     final color = escuela.esCompleta ? Theme.of(context).primaryColor : Colors.black;
     return ListTile(
-      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColorLight.withAlpha(128) : Colors.white,
+      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColorLight : Colors.white,
       title: Row(
         children: [
           Container(

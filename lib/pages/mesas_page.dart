@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../colores.dart';
 import '/pages/votantes_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
@@ -18,13 +19,15 @@ class _MesasPageState extends State<MesasPage> {
   @override
   Widget build(BuildContext context) {
     final mesas = this.widget.escuela.mesas;
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.escuela.escuela, style: TextStyle(fontSize: 20))),
-      body: Scrollbar(
-        child: ListView.separated(
-          itemCount: mesas.length,
-          itemBuilder: crearMesa,
-          separatorBuilder: (BuildContext context, int index) => Divider(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text(widget.escuela.escuela)),
+        body: Scrollbar(
+          child: ListView.separated(
+            itemCount: mesas.length,
+            itemBuilder: crearMesa,
+            separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
+          ),
         ),
       ),
     );
@@ -34,8 +37,7 @@ class _MesasPageState extends State<MesasPage> {
     final mesa = this.widget.escuela.mesas[index];
 
     return ListTile(
-        tileColor:
-            mesa.numero == Datos.usuarioActual.mesa ? Theme.of(context).primaryColorLight.withAlpha(128) : Colors.white,
+        tileColor: mesa.numero == Datos.usuarioActual.mesa ? Theme.of(context).primaryColorLight : Colors.white,
         title: crearDesdeHasta(index, mesa),
         subtitle: crearRangoVotantes(mesa),
         onTap: () => irVotantes(mesa),
@@ -43,7 +45,7 @@ class _MesasPageState extends State<MesasPage> {
   }
 
   Widget crearDesdeHasta(int indice, Mesa mesa) {
-    final color = mesa.cerrada ? Theme.of(context).primaryColor : Colors.black;
+    final color = mesa.cerrada ? Theme.of(context).primaryColorLight : Colors.black;
     return Row(
       children: [
         Container(
@@ -62,8 +64,8 @@ class _MesasPageState extends State<MesasPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(height: 10),
-          crearNombre("de ", mesa.votantes.first.nombre),
-          crearNombre("a  ", mesa.votantes.last.nombre),
+          crearNombre("desde: ", mesa.votantes.first.nombre),
+          crearNombre("hasta: ", mesa.votantes.last.nombre),
         ],
       );
 
@@ -78,7 +80,7 @@ class _MesasPageState extends State<MesasPage> {
 
   Widget crearNombre(String etiqueta, String nombre) => Row(children: [
         SizedBox(width: 20),
-        Container(child: Text(etiqueta, style: TextStyle(fontSize: 12)), width: 20),
+        Container(child: Text(etiqueta, style: TextStyle(fontSize: 12)), width: 40),
         Text(nombre, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))
       ]);
 

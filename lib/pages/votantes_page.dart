@@ -1,8 +1,9 @@
 // import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:punteo_yb/pages/votantes_item.dart';
+import 'package:punteo_yb/widgets/votantes_item.dart';
 
+import '../colores.dart';
 import '/modelos/votante.dart';
 import '../modelos/datos.dart';
 import '../modelos/mesa.dart';
@@ -42,46 +43,48 @@ class _VotantesPageState extends State<VotantesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Mesa ${widget.mesa.numero} ', style: TextStyle(fontSize: 22)),
-          Text('${votantes.length} votantes, ${favoritos.length} favoritos',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100)),
-        ],
-      )),
-      body: Center(
-        child: Scrollbar(
-          child: ListView.separated(
-            itemCount: votantes.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              if (index < votantes.length) {
-                final Votante votante = votantes[index];
-                final color = votante.favorito ? Theme.of(context).primaryColor : Colors.black;
-                return VotanteItem(votante: votante, color: color, index: index, alMarcar: marcarFavorito);
-              } else {
-                return Container(
-                  height: 60,
-                  child: Center(child: crearCerrar(context)),
-                );
-              }
-            },
-            separatorBuilder: (BuildContext context, int index) => divisor(index),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+            title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Mesa ${widget.mesa.numero} '),
+            Text('${votantes.length} votantes, ${favoritos.length} favoritos',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor)),
+          ],
+        )),
+        body: Center(
+          child: Scrollbar(
+            child: ListView.separated(
+              itemCount: votantes.length + 1,
+              itemBuilder: (BuildContext context, int index) {
+                if (index < votantes.length) {
+                  final Votante votante = votantes[index];
+                  final color = votante.favorito ? Theme.of(context).primaryColor : Colors.black;
+                  return VotanteItem(votante: votante, color: color, index: index, alMarcar: marcarFavorito);
+                } else {
+                  return Container(
+                    height: 60,
+                    child: Center(child: crearCerrar(context)),
+                  );
+                }
+              },
+              separatorBuilder: (BuildContext context, int index) => divisor(index),
+            ),
           ),
         ),
+        // floatingActionButton: mesa.cerrada ? null : crearCerrar(context),
       ),
-      // floatingActionButton: mesa.cerrada ? null : crearCerrar(context),
     );
   }
 
   Widget divisor(int index) {
     if (index < votantes.length - 1) {
       final siguiente = votantes[index + 1];
-      if (!siguiente.agrupar) return Divider(thickness: 2);
+      if (!siguiente.agrupar) return Divider(thickness: 1, color: Colores.divisor);
     }
-    return Divider();
+    return Divider(color: Colors.transparent);
   }
 
   FloatingActionButton crearCerrar(BuildContext context) => FloatingActionButton.extended(
