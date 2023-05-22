@@ -67,7 +67,9 @@ class Favorito {
   static List<Favorito> compactar(List<Favorito> favoritos) {
     final Map<(int, int), Favorito> salida = {};
     favoritos.forEach((f) => salida[(f.dni, f.referente)] = f);
-    return salida.values.where((f) => f.favorito).toList();
+    final nuevos = salida.values.where((f) => f.favorito).toList();
+    nuevos.sort((a, b) => a.hora.compareTo(b.hora));
+    return nuevos;
   }
 
   static Map<int, int> contar(List<Favorito> favoritos) {
@@ -117,7 +119,6 @@ class Favorito {
       } else {
         final separacion = f.hora.difference(ultimo!);
         n++;
-        // print("a: $anterior!, u: $ultimo!, dif: $separacion");
         if (separacion.inMinutes > 10) {
           salida += ultimo.difference(anterior!).inMinutes;
           anterior = null;
@@ -130,5 +131,11 @@ class Favorito {
       salida += ultimo!.difference(anterior!).inMinutes;
     }
     return salida;
+  }
+
+  static bool calcularUsuarioActivo(int dni) {
+    final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
+    final ahora = DateTime.now();
+    return lista.any((v) => v.hora.difference(ahora).inMinutes < 10);
   }
 }

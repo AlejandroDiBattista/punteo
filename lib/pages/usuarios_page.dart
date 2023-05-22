@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../colores.dart';
+import '../widgets/progreso_widget.dart';
 import '/modelos/votante.dart';
 import '../modelos/datos.dart';
 import '../modelos/favorito.dart';
@@ -11,19 +12,14 @@ class UsuariosPage extends StatefulWidget {
 }
 
 class _UsuariosPageState extends State<UsuariosPage> {
-  final controlador = TextEditingController();
   var votantes = Datos.votantes;
+  var cargando = false;
 
-  Future<void> marcarFavorito(Votante votante) async {
-    votante.cambiarFavorito();
-    setState(() {});
-    Datos.marcarFavorito(votante);
-  }
-
-  void alBuscar(String texto) {
-    setState(() {
-      votantes = Datos.buscar(texto);
-    });
+  @override
+  void initState() {
+    this.cargando = true;
+    Datos.sincronizarFavoritos().then((value) => setState(() => this.cargando = false));
+    super.initState();
   }
 
   @override
@@ -50,7 +46,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
   Padding mostrarUsuario(Votante usuario) {
     final sesiones = Favorito.calcularSesiones(usuario.dni);
     final tiempo = Favorito.calcularMinutosTrabajado(usuario.dni);
-
+    final activo = Favorito.calcularUsuarioActivo(usuario.dni);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
       child: Column(
@@ -70,7 +66,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text("${sesiones.length} sesiones, $tiempo minutos",
+            child: Text("${sesiones.length} sesiones, $tiempo minutos ${activo ? '(activo)' : ''}",
                 style: TextStyle(fontSize: 16, color: Colors.cyan)),
           ),
         ],

@@ -60,6 +60,8 @@ class Cierre {
   static List<Cierre> compactar(List<Cierre> cierres) {
     final Map<int, Cierre> salida = {};
     cierres.forEach((c) => salida[c.mesa] = c);
-    return salida.values.where((c) => c.cerrada).toList();
+    final nuevos = salida.values.where((c) => c.cerrada).toList();
+    nuevos.sort((a, b) => a.hora.compareTo(b.hora));
+    return nuevos;
   }
 }

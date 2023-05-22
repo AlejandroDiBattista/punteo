@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../colores.dart';
 import '../modelos/datos.dart';
+import '../widgets/progreso_widget.dart';
 import 'pagina_inicial_page.dart';
 
 class IngresarPage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _IngresarPageState extends State<IngresarPage> {
   @override
   void initState() {
     this.cargando = true;
+    print("IngresarPage.initState");
     Datos.cargar().then((_) {
       setState(() => this.cargando = false);
     });
@@ -39,9 +41,10 @@ class _IngresarPageState extends State<IngresarPage> {
               child: Form(
                 key: _formKey,
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  this.cargando
-                      ? LinearProgressIndicator(backgroundColor: Colores.terminar, minHeight: 1)
-                      : SizedBox(height: 2),
+                  // this.cargando
+                  //     ? LinearProgressIndicator(backgroundColor: Colores.terminar, minHeight: 1)
+                  //     : SizedBox(height: 2),
+                  Progreso(this.cargando),
                   Expanded(child: Container()),
                   crearTitulo(context),
                   crearVersion(context),

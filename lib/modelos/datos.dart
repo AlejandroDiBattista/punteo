@@ -14,7 +14,7 @@ class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.1.5";
+  static String version = "1.1.7";
 
   static const admistradores = [18627585, 17041793, 24409480, 37096832];
   // Susana  21327900
@@ -33,23 +33,6 @@ class Datos {
   static List<Votante> get usuarios =>
       favoritos.map((f) => f.referente).toSet().map((dni) => traerUsuario(dni)).toList();
 
-  static Future<void> iniciar(Function alTerminar, {bool forzar = false}) async {
-    if (forzar) Datos.cargado = false;
-
-    // if (!Datos.cargado ) {
-    //   await cargar();
-    // } else {
-    //   while (!Datos.estaCargado) {
-    //     await Future.delayed(Duration(milliseconds: 100));
-    //   }
-    // }
-
-    marcarFavoritos();
-    marcarCierres();
-
-    alTerminar();
-  }
-
   static bool cargando = false;
   static bool cargado = false;
   static bool get estaCargado => cargado;
@@ -60,21 +43,22 @@ class Datos {
 
     print(">> Cargando datos..${DateTime.now().hora}");
 
+    print("1. Cargar Escuelas & Votantes ${DateTime.now().hora}");
     await cargarEscuelas();
     await cargarVotantes();
     print(" - Cargamos ${escuelas.length} escuelas & ${votantes.length} votantes");
-    print("1. ${DateTime.now().hora}");
 
+    print("2. Cargar Favoritos & Cierres ${DateTime.now().hora}");
     await cargarFavoritos();
     await cargarCierres();
     print(" - Cargamos ${favoritos.length} Favoritos & ${cierres.length} Mesas Cerradas ");
-    print("2. ${DateTime.now().hora}");
 
+    print("3. Crear Escuelas y Marcar ${DateTime.now().hora}");
     crearEscuelas();
     marcarFavoritos();
     marcarCierres();
 
-    print("Datos cargados.");
+    print("|| Datos cargados. ${DateTime.now().hora}");
     cargado = true;
     cargando = false;
   }
@@ -93,12 +77,12 @@ class Datos {
 
   static Future<void> cargarFavoritos() async {
     favoritos = await bajarFavoritos();
-    print("Bajamos ${favoritos.length} favoritos");
+    print(" - Bajamos ${favoritos.length} favoritos");
   }
 
   static Future<void> cargarCierres() async {
     cierres = await bajarCierres();
-    print("Bajamos ${cierres.length} cierres");
+    print(" - Bajamos ${cierres.length} cierres");
   }
 
   static Future<List<Favorito>> bajarFavoritos() async {
@@ -114,7 +98,6 @@ class Datos {
   }
 
   static void crearEscuelas() {
-    print("crearEscuelas: Hay ${escuelas.length} escuelas y ${votantes.length} votantes");
     votantes.sort((a, b) => (a.mesa * 1000 + a.orden).compareTo(b.mesa * 1000 + b.orden));
 
     int e = 0, m = 0;
@@ -139,8 +122,6 @@ class Datos {
   }
 
   static marcarFavoritos() {
-    print("Hay ${favoritos.length} favoritos");
-
     final referente = Datos.usuario;
 
     final Map<int, bool> marcas = {};
@@ -152,8 +133,6 @@ class Datos {
   }
 
   static marcarCierres() {
-    print("Hay ${cierres.length} mesas cerradas");
-
     final referente = Datos.usuario;
 
     for (final e in escuelas) {
@@ -229,34 +208,43 @@ class Datos {
 
   static List<Votante> buscar(String texto) => Votante.buscar(Datos.votantes, texto);
 
-  static Future<List<Favorito>> buscarActualizacionFavoritos() async {
-    final nuevos = await bajarFavoritos();
-    final actualizados = nuevos.where((n) => !favoritos.any((f) => f == n));
-    print("Favoritos nuevos: ${actualizados.length}");
-    for (final a in actualizados) {
-      print(' - $a');
+  static List<Favorito> buscarFavoritosPendientes(List<Favorito> actual) {
+    final pendientes = favoritos.where((n) => !actual.any((f) => f == n)).toList();
+    if (pendientes.length > 0) {
+      print("Favoritos pendientes: ${pendientes.length}");
+      for (final a in pendientes) {
+        print(' - $a');
+      }
     }
-    return nuevos;
+    return pendientes;
   }
 
-  static Future<List<Favorito>> buscarFavoritosPendientes() async {
-    final nuevos = await bajarFavoritos();
-    final actualizados = favoritos.where((n) => !nuevos.any((f) => f == n));
-    print("Favoritos pendientes: ${actualizados.length}");
-    for (final a in actualizados) {
-      print(' - $a');
+  static List<Favorito> buscarFavoritosNuevos(List<Favorito> actual) {
+    final nuevos = actual.where((n) => !favoritos.any((f) => f == n)).toList();
+    if (nuevos.length > 0) {
+      print("Favoritos Nuevos: ${nuevos.length}");
+      for (final a in nuevos) {
+        print(' - $a');
+      }
     }
     return nuevos;
   }
 
   static Future<void> sincronizarFavoritos() async {
-    final pendientes = await buscarFavoritosPendientes();
+    final actual = await bajarFavoritos();
+
+    final pendientes = buscarFavoritosPendientes(actual);
+    buscarFavoritosNuevos(actual);
+
     for (final f in pendientes) {
       final v = traerVotante(f.dni);
       v.favorito = f.favorito;
+      actual.add(f);
       await marcarFavorito(v);
     }
-    await cargarFavoritos();
+
+    favoritos = Favorito.compactar(actual);
+
     marcarFavoritos();
   }
 }

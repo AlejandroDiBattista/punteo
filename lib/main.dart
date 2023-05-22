@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'modelos/datos.dart';
 import 'pages/ingresar_page.dart';
 
 import 'colores.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  // await Datos.cargar();
   runApp(const MyApp());
 }
 

@@ -17,6 +17,12 @@ class EstadisticasPage extends StatefulWidget {
 
 class _EstadisticasPageState extends State<EstadisticasPage> {
   @override
+  void initState() {
+    Datos.sincronizarFavoritos().then((value) => setState(() {}));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -179,8 +185,8 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
   }
 
   void probar() async {
-    await Datos.buscarActualizacionFavoritos();
-    await Datos.buscarFavoritosPendientes();
+    // await Datos.buscarActualizacionFavoritos();
+    await Datos.sincronizarFavoritos();
     final sesiones = Favorito.calcularSesiones(Datos.usuario);
     print("SESIONES de ${Datos.usuarioActual.nombre}");
     sesiones.forEach((s) => print(' - $s '));
