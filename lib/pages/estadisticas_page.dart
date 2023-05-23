@@ -26,7 +26,16 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Estadisticas')),
+        appBar: AppBar(
+          title: Text('Estadisticas'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () => cerrarSesion(context),
+            ),
+            IconButton(onPressed: () => probar(), icon: Icon(Icons.person))
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
