@@ -1,3 +1,5 @@
+import 'datos.dart';
+import 'escuela.dart';
 import 'votante.dart';
 
 class Mesa {
@@ -6,9 +8,10 @@ class Mesa {
   int cantidad = 0;
   List<Votante> votantes = [];
   bool cerrada = false;
-  int escuela = 0;
+  int nroEscuela = 0;
 
   Mesa(this.numero);
+  Escuela get escuela => Datos.escuelas[nroEscuela];
 
   List<Votante> get favoritos => votantes.where((v) => v.favorito).toList();
 
@@ -19,3 +22,4 @@ class Mesa {
     Votante.organizar(votantes);
   }
 }
+

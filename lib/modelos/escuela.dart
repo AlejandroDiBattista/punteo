@@ -1,6 +1,7 @@
 import 'dart:convert';
 // import 'votante.dart';
 
+import 'datos.dart';
 import 'mesa.dart';
 import 'package:collection/collection.dart';
 
@@ -16,17 +17,16 @@ class Escuela {
   int hasta;
   List<Mesa> mesas = [];
 
-  Escuela({
-    required this.escuela,
-    required this.direccion,
-    required this.desde,
-    required this.hasta,
-    required this.circuito,
-    required this.departamento,
-    required this.seccion,
-    required this.latitude,
-    required this.longitude,
-  });
+  Escuela(
+      {required this.escuela,
+      required this.direccion,
+      required this.desde,
+      required this.hasta,
+      required this.circuito,
+      required this.departamento,
+      required this.seccion,
+      required this.latitude,
+      required this.longitude});
 
   Escuela copyWith({
     String? escuela,
@@ -38,34 +38,30 @@ class Escuela {
     String? seccion,
     double? latitude,
     double? longitude,
-  }) {
-    return Escuela(
-      escuela: escuela ?? this.escuela,
-      direccion: direccion ?? this.direccion,
-      desde: desde ?? this.desde,
-      hasta: hasta ?? this.hasta,
-      circuito: circuito ?? this.circuito,
-      departamento: departamento ?? this.departamento,
-      seccion: seccion ?? this.seccion,
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
-    );
-  }
+  }) =>
+      Escuela(
+          escuela: escuela ?? this.escuela,
+          direccion: direccion ?? this.direccion,
+          desde: desde ?? this.desde,
+          hasta: hasta ?? this.hasta,
+          circuito: circuito ?? this.circuito,
+          departamento: departamento ?? this.departamento,
+          seccion: seccion ?? this.seccion,
+          latitude: latitude ?? this.latitude,
+          longitude: longitude ?? this.longitude);
 
   factory Escuela.noIdentificada() => Escuela(
-        escuela: "Sin definir",
-        direccion: "sin dirección",
-        desde: 0,
-        hasta: 0,
-        circuito: "",
-        departamento: "",
-        seccion: "",
-        latitude: 0,
-        longitude: 0,
-      );
+      escuela: "Sin definir",
+      direccion: "sin dirección",
+      desde: 0,
+      hasta: 0,
+      circuito: "",
+      departamento: "",
+      seccion: "",
+      latitude: 0,
+      longitude: 0);
 
-  factory Escuela.fromMap(Map<String, dynamic> data) {
-    return Escuela(
+  factory Escuela.fromMap(Map<String, dynamic> data) => Escuela(
       escuela: data['escuela'],
       direccion: data['direccion'],
       desde: data['desde'],
@@ -74,25 +70,21 @@ class Escuela {
       departamento: data['departamento'],
       seccion: data['seccion'],
       latitude: data['latitude'],
-      longitude: data['longitude'],
-    );
-  }
+      longitude: data['longitude']);
 
   factory Escuela.fromJson(String source) => Escuela.fromMap(json.decode(source));
 
-  Map<String, dynamic> toMap() {
-    return {
-      'escuela': escuela,
-      'direccion': direccion,
-      'desde': desde,
-      'hasta': hasta,
-      'circuito': circuito,
-      'departamento': departamento,
-      'seccion': seccion,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'escuela': escuela,
+        'direccion': direccion,
+        'desde': desde,
+        'hasta': hasta,
+        'circuito': circuito,
+        'departamento': departamento,
+        'seccion': seccion,
+        'latitude': latitude,
+        'longitude': longitude
+      };
 
   String toJson() => json.encode(toMap());
 
@@ -112,7 +104,6 @@ class Escuela {
 
   int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
   int get totalVotantesFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;
-  // int get totalVotantesAnalizados => mesas.map((m) => m.cerrada ? m.votantes.length : 0).sum;
   int get totalVotantesAnalizados => mesas.map((m) => m.favoritos.isEmpty ? 0 : m.votantes.length).sum;
 
   get favoritos => mesas.map((mesa) => mesa.favoritos).expand((element) => element).toList();
@@ -124,4 +115,7 @@ class Escuela {
   int get hashCode => escuela.hashCode;
 
   void ordenar() => mesas.forEach((mesa) => mesa.ordenar());
+
+  static Escuela traer(int mesa) =>
+      Datos.escuelas.firstWhere((e) => e.desde <= mesa && mesa <= e.hasta, orElse: () => Escuela.noIdentificada());
 }

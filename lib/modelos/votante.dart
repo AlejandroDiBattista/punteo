@@ -2,6 +2,7 @@ import 'dart:convert';
 import '../utils.dart';
 
 import 'datos.dart';
+import 'escuela.dart';
 import 'favorito.dart';
 
 class Votante {
@@ -20,9 +21,10 @@ class Votante {
 
   bool favorito = false;
   bool agrupar = false;
-  int escuela = 0;
+  int nroEscuela = 0;
 
   int get edad => 2023 - clase.abs();
+  Escuela get escuela => Datos.escuelas[nroEscuela];
 
   String textoCompleto = '';
   List<int> get referentes => Datos.favoritos.where((f) => f.dni == dni).map((f) => f.referente).toList();
@@ -41,28 +43,26 @@ class Votante {
     this.latitude,
     this.longitude,
   ) {
-    textoCompleto = " " + nombre.toLowerCase().sinEspacios.sinAcentos;
+    textoCompleto = ' ${nombre.toLowerCase().sinEspacios.sinAcentos} ';
   }
 
   factory Votante.anonimo([int dni = 0]) =>
       Votante(dni, 'Sin identificar', 'sin domicilio', 'X', 0, 0, 0, 0, 0, 0, 0, 0);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'dni': dni,
-      'nombre': nombre,
-      'domicilio': domicilio,
-      'sexo': sexo,
-      'clase': clase,
-      'mesa': mesa,
-      'orden': orden,
-      'pj': pj,
-      'cyb': cyb,
-      'ucr': ucr,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'dni': dni,
+        'nombre': nombre,
+        'domicilio': domicilio,
+        'sexo': sexo,
+        'clase': clase,
+        'mesa': mesa,
+        'orden': orden,
+        'pj': pj,
+        'cyb': cyb,
+        'ucr': ucr,
+        'latitude': latitude,
+        'longitude': longitude
+      };
 
   Votante copyWith({
     int? dni,
@@ -78,25 +78,22 @@ class Votante {
     double? latitude,
     double? longitude,
     String favorito = ' ',
-  }) {
-    return Votante(
-      dni ?? this.dni,
-      nombre ?? this.nombre,
-      domicilio ?? this.domicilio,
-      sexo ?? this.sexo,
-      clase ?? this.clase,
-      mesa ?? this.mesa,
-      orden ?? this.orden,
-      pj ?? this.pj,
-      cyb ?? this.cyb,
-      ucr ?? this.ucr,
-      latitude ?? this.latitude,
-      longitude ?? this.longitude,
-    );
-  }
+  }) =>
+      Votante(
+          dni ?? this.dni,
+          nombre ?? this.nombre,
+          domicilio ?? this.domicilio,
+          sexo ?? this.sexo,
+          clase ?? this.clase,
+          mesa ?? this.mesa,
+          orden ?? this.orden,
+          pj ?? this.pj,
+          cyb ?? this.cyb,
+          ucr ?? this.ucr,
+          latitude ?? this.latitude,
+          longitude ?? this.longitude);
 
-  factory Votante.fromMap(Map<String, dynamic> map) {
-    return Votante(
+  factory Votante.fromMap(Map<String, dynamic> map) => Votante(
       map['dni'],
       map['nombre'] ?? '',
       map['domicilio'] ?? '',
@@ -108,13 +105,9 @@ class Votante {
       map['cyb'],
       map['ucr'],
       map['latitude'],
-      map['longitude'],
-    );
-  }
+      map['longitude']);
 
-  void cambiarFavorito() {
-    this.favorito = !this.favorito;
-  }
+  void cambiarFavorito() => this.favorito = !this.favorito;
 
   String toJson() => json.encode(toMap());
 
@@ -177,22 +170,6 @@ class Votante {
         } else if (palabra == 'familia') {
           final marcas = contarDomicilio(origen);
           origen = origen.where((v) => (marcas[v.domicilio] ?? 0) >= 2).toList();
-        } else if (palabra == 'solo' || palabra == 'familias' || palabra == 'muchos') {
-          final minimo = palabra == 'solo'
-              ? 1
-              : palabra == 'familia'
-                  ? 2
-                  : 4;
-          final maximo = palabra == 'solo'
-              ? 1
-              : palabra == 'familia'
-                  ? 3
-                  : 100;
-          final marcas = contarDomicilio(origen);
-          origen = origen.where((v) {
-            final cantidad = marcas[v.domicilio] ?? 0;
-            return cantidad >= minimo && cantidad <= maximo;
-          }).toList();
         } else if (RegExp(r'^[0-9]{4}$').hasMatch(palabra)) {
           final mesa = int.parse(palabra);
           origen = origen.where((v) => v.mesa == mesa).toList();
@@ -212,4 +189,6 @@ class Votante {
 
     return origen;
   }
+
+  static Votante traer(int dni) => Datos.votantes.firstWhere((v) => v.dni == dni, orElse: () => Votante.anonimo(dni));
 }

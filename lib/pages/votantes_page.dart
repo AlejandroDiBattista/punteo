@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:punteo_yb/widgets/votantes_item.dart';
 
-import '../colores.dart';
+import '/colores.dart';
+import '/modelos/escuela.dart';
 import '/modelos/votante.dart';
-import '../modelos/datos.dart';
-import '../modelos/mesa.dart';
+import '/modelos/datos.dart';
+import '/modelos/mesa.dart';
 
 class VotantesPage extends StatefulWidget {
   final Mesa mesa;
@@ -36,7 +37,7 @@ class _VotantesPageState extends State<VotantesPage> {
     setState(() {});
   }
 
-  get escuela => Datos.traerEscuela(mesa.numero);
+  get escuela => Escuela.traer(mesa.numero);
   get mesa => widget.mesa;
   get votantes => mesa.votantes;
   get favoritos => mesa.favoritos;

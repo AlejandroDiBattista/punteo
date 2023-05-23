@@ -51,17 +51,17 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
 
   Widget crearNavegacionCupertino(Color color) {
     return CupertinoTabBar(
-      activeColor: Colors.white,
-      inactiveColor: Colors.black,
-      backgroundColor: color,
+      // activeColor: Colors.white,
+      // inactiveColor: Colors.black,
+      // backgroundColor: color,
       iconSize: 24,
       items: [
         BottomNavigationBarItem(
-            icon: Badge.count(count: 10, backgroundColor: Colors.red, child: Icon(CupertinoIcons.checkmark_alt)),
+            icon: Badge.count(count: 10, backgroundColor: Colors.red, child: Icon(Icons.check)),
             // icon: Badge.count(count: Datos.cantidadFavoritos(Datos.usuario), child: Icon(CupertinoIcons.checkmark_alt)),
             label: "Marcar",
             backgroundColor: color),
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.search), label: "Buscar", backgroundColor: color),
+        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Buscar", backgroundColor: color),
         BottomNavigationBarItem(icon: Icon(CupertinoIcons.person), label: "Perfil", backgroundColor: color),
         if (Datos.esAdministrador)
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.graph_square), label: "Ranking", backgroundColor: color),

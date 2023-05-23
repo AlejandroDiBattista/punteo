@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:js_interop';
-
 import 'package:intl/intl.dart';
 
 import 'datos.dart';
@@ -10,6 +8,7 @@ class Favorito {
   int referente;
   bool favorito;
   DateTime hora;
+
   Favorito({
     required this.dni,
     required this.referente,
@@ -48,27 +47,25 @@ class Favorito {
   factory Favorito.fromJson(String source) => Favorito.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'Favorito(dni: $dni, referente: $referente, favorito: $favorito, hora: $hora)';
-  }
+  String toString() => 'Favorito(dni: $dni, referente: $referente, favorito: $favorito, hora: $hora)';
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Favorito && other.dni == dni && other.referente == referente && other.favorito == favorito;
-  }
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Favorito && other.dni == dni && other.referente == referente && other.favorito == favorito;
 
   @override
-  int get hashCode {
-    return dni.hashCode ^ referente.hashCode ^ favorito.hashCode ^ hora.hashCode;
-  }
+  int get hashCode => dni.hashCode ^ referente.hashCode ^ favorito.hashCode ^ hora.hashCode;
 
   static List<Favorito> compactar(List<Favorito> favoritos) {
     final Map<(int, int), Favorito> salida = {};
+    favoritos.sort((a, b) => a.hora.compareTo(b.hora));
+
     favoritos.forEach((f) => salida[(f.dni, f.referente)] = f);
+
     final nuevos = salida.values.where((f) => f.favorito).toList();
     nuevos.sort((a, b) => a.hora.compareTo(b.hora));
+
     return nuevos;
   }
 
@@ -83,18 +80,19 @@ class Favorito {
   static List<(DateTime hora, Duration duracion, int favoritos)> calcularSesiones(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
     lista.sort((a, b) => a.hora.compareTo(b.hora));
+
     DateTime? anterior, ultimo;
     int n = 0;
     List<(DateTime, Duration, int)> salida = [];
+
     for (final f in lista) {
-      if (anterior.isNull) {
+      if (anterior == null) {
         anterior = f.hora;
       } else {
         final separacion = f.hora.difference(ultimo!);
         n++;
-        // print("a: $anterior!, u: $ultimo!, dif: $separacion");
         if (separacion.inMinutes > 10) {
-          salida.add((anterior!, ultimo.difference(anterior), n));
+          salida.add((anterior, ultimo.difference(anterior), n));
           anterior = null;
           n = 0;
         }
@@ -104,23 +102,26 @@ class Favorito {
     if (n > 0) {
       salida.add((anterior!, ultimo!.difference(anterior), n));
     }
+    salida.sort((a, b) => a.$1.compareTo(b.$1));
+
     return salida;
   }
 
   static int calcularMinutosTrabajado(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
     lista.sort((a, b) => a.hora.compareTo(b.hora));
+
     DateTime? anterior, ultimo;
     int n = 0;
     int salida = 0;
     for (final f in lista) {
-      if (anterior.isNull) {
+      if (anterior == null) {
         anterior = f.hora;
       } else {
         final separacion = f.hora.difference(ultimo!);
         n++;
         if (separacion.inMinutes > 10) {
-          salida += ultimo.difference(anterior!).inMinutes;
+          salida += ultimo.difference(anterior).inMinutes;
           anterior = null;
           n = 0;
         }
@@ -130,12 +131,13 @@ class Favorito {
     if (n > 0) {
       salida += ultimo!.difference(anterior!).inMinutes;
     }
+
     return salida;
   }
 
-  static bool calcularUsuarioActivo(int dni) {
+  static bool esUsuarioActivo(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
     final ahora = DateTime.now();
-    return lista.any((v) => v.hora.difference(ahora).inMinutes < 10);
+    return lista.any((v) => ahora.difference(v.hora).inMinutes.abs() < 5);
   }
 }

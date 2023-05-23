@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // import '../modelos/datos.dart';
 import '../modelos/datos.dart';
+import '../modelos/escuela.dart';
 import '../modelos/votante.dart';
 
 class VotanteItem extends StatefulWidget {
@@ -44,7 +45,7 @@ class _VotanteItemState extends State<VotanteItem> {
               Text('Edad: $edad  |  DNI: ${votante.dni}'),
               SizedBox(height: 4),
               Text(
-                  '${Datos.traerEscuela(votante.mesa).escuela} | Mesa: ${votante.mesa} #${votante.orden} ${r > 1 ? 'x $r' : ''}',
+                  '${Escuela.traer(votante.mesa).escuela} | Mesa: ${votante.mesa} #${votante.orden} ${r > 1 ? 'x $r' : ''}',
                   style: TextStyle(fontSize: 12)),
             ],
           ),

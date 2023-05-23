@@ -1,24 +1,27 @@
 import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'cierre.dart';
 
 import '../utils.dart';
 import '../sheets_api.dart';
+import 'cierre.dart';
 import 'escuela.dart';
+import 'votante.dart';
 import 'favorito.dart';
 import 'mesa.dart';
-import 'votante.dart';
 
 class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.1.7";
+  static String version = "1.1.9";
 
-  static const admistradores = [18627585, 17041793, 24409480, 37096832];
-  // Susana  21327900
-  // Marcelo 17041793
+  static List<Escuela> escuelas = [];
+  static List<Votante> votantes = [];
+  static List<Favorito> favoritos = [];
+  static List<Cierre> cierres = [];
+
+  static const admistradores = [18627585, 17041793, 24409480, 37096832]; // Susana  21327900 // Marcelo 17041793
   static List<Votante> get usuariosExtras => [
         Votante(18627585, "Di Battista, Alejandro", "Av. Central 4124", "M", -1967, 3333, 0, 0, 0, 0, -26.805819,
             -65.252722),
@@ -26,10 +29,6 @@ class Datos {
             -65.206791),
       ];
 
-  static List<Escuela> escuelas = [];
-  static List<Votante> votantes = [];
-  static List<Favorito> favoritos = [];
-  static List<Cierre> cierres = [];
   static List<Votante> get usuarios =>
       favoritos.map((f) => f.referente).toSet().map((dni) => traerUsuario(dni)).toList();
 
@@ -111,11 +110,11 @@ class Datos {
       if (votante.mesa != m) {
         m = votante.mesa;
         mesa = Mesa(m);
-        mesa.escuela = e;
+        mesa.nroEscuela = e;
         escuelas[e].agregar(mesa);
       }
       mesa.agregar(votante);
-      votante.escuela = e;
+      votante.nroEscuela = e;
     }
 
     escuelas.forEach((e) => e.ordenar());
@@ -182,15 +181,11 @@ class Datos {
   }
 
   static Votante get usuarioActual => traerUsuario(Datos.usuario);
-  static Escuela get escuelaActual => traerEscuela(usuarioActual.mesa);
+  static Escuela get escuelaActual => Escuela.traer(usuarioActual.mesa);
   static get esAdministrador => admistradores.contains(usuarioActual.dni);
 
   static Votante traerUsuario(int dni) =>
-      usuariosExtras.firstWhere((v) => v.dni == dni, orElse: () => traerVotante(dni));
-  static Votante traerVotante(int dni) => votantes.firstWhere((v) => v.dni == dni, orElse: () => Votante.anonimo(dni));
-  static Escuela traerEscuela(int mesa) =>
-      escuelas.firstWhere((e) => e.desde <= mesa && mesa <= e.hasta, orElse: () => Escuela.noIdentificada());
-
+      usuariosExtras.firstWhere((v) => v.dni == dni, orElse: () => Votante.traer(dni));
   static get cantidadUsuarios => usuarios.length;
 
   static get cantidadVotantes => votantes.length;
@@ -237,7 +232,7 @@ class Datos {
     buscarFavoritosNuevos(actual);
 
     for (final f in pendientes) {
-      final v = traerVotante(f.dni);
+      final v = Votante.traer(f.dni);
       v.favorito = f.favorito;
       actual.add(f);
       await marcarFavorito(v);

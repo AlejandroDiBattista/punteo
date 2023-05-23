@@ -37,7 +37,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
                 mostrarEstadistica(context),
                 mostrarCerrar(context),
                 // mostrarActualizar(context),
-                // if (Datos.usuario == 18627585) mostrarProbar(context)
+                if (Datos.usuario == 18627585) mostrarProbar(context)
               ]),
             ),
           ),
@@ -189,6 +189,6 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     await Datos.sincronizarFavoritos();
     final sesiones = Favorito.calcularSesiones(Datos.usuario);
     print("SESIONES de ${Datos.usuarioActual.nombre}");
-    sesiones.forEach((s) => print(' - $s '));
+    sesiones.forEach((s) => print(' - $s'));
   }
 }

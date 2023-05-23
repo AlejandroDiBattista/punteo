@@ -6,39 +6,18 @@ class Cierre {
   int referente;
   DateTime hora;
   bool cerrada = true;
-  Cierre({
-    required this.mesa,
-    required this.referente,
-    required this.hora,
-  });
 
-  Cierre copyWith({
-    int? mesa,
-    int? referente,
-    DateTime? hora,
-  }) {
-    return Cierre(
-      mesa: mesa ?? this.mesa,
-      referente: referente ?? this.referente,
-      hora: hora ?? this.hora,
-    );
-  }
+  Cierre({required this.mesa, required this.referente, required this.hora});
 
-  Map<String, dynamic> toMap() {
-    return {
-      'mesa': mesa,
-      'referente': referente,
-      'hora': hora,
-    };
-  }
+  Cierre copyWith({int? mesa, int? referente, DateTime? hora}) =>
+      Cierre(mesa: mesa ?? this.mesa, referente: referente ?? this.referente, hora: hora ?? this.hora);
 
-  factory Cierre.fromMap(Map<String, dynamic> map) {
-    return Cierre(
-      mesa: int.parse(map['mesa']),
-      referente: int.parse(map['referente']),
-      hora: DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['hora']),
-    );
-  }
+  Map<String, dynamic> toMap() => {'mesa': mesa, 'referente': referente, 'hora': hora};
+
+  factory Cierre.fromMap(Map<String, dynamic> map) => Cierre(
+        mesa: int.parse(map['mesa']),
+        referente: int.parse(map['referente']),
+        hora: DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['hora']));
 
   String toJson() => json.encode(toMap());
 
@@ -48,11 +27,9 @@ class Cierre {
   String toString() => 'Cierre(mesa: $mesa, referente: $referente, hora: $hora)';
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Cierre && other.mesa == mesa && other.referente == referente && other.hora == hora;
-  }
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Cierre && other.mesa == mesa && other.referente == referente && other.hora == hora;
 
   @override
   int get hashCode => mesa.hashCode ^ referente.hashCode ^ hora.hashCode;
@@ -60,8 +37,10 @@ class Cierre {
   static List<Cierre> compactar(List<Cierre> cierres) {
     final Map<int, Cierre> salida = {};
     cierres.forEach((c) => salida[c.mesa] = c);
+
     final nuevos = salida.values.where((c) => c.cerrada).toList();
     nuevos.sort((a, b) => a.hora.compareTo(b.hora));
+
     return nuevos;
   }
 }
