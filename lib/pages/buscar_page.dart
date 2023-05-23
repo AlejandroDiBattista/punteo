@@ -38,14 +38,7 @@ class _BuscarPageState extends State<BuscarPage> {
   Widget build(BuildContext context) {
     // final votantes = Datos.votantes; //.take(20).toList();
     return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Buscar', style: TextStyle(fontSize: 22)),
-          Text('${votantes.length} votantes', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100)),
-        ],
-      )),
+      appBar: crearTitulo(),
       body: Column(
         children: [
           Container(
@@ -85,6 +78,17 @@ class _BuscarPageState extends State<BuscarPage> {
         ],
       ),
     );
+  }
+
+  AppBar crearTitulo() {
+    return AppBar(
+        title: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text('Buscar', style: TextStyle(fontSize: 22)),
+        Text('${votantes.length} votantes', style: TextStyle(fontSize: 16)),
+      ],
+    ));
   }
 
   Widget divisor(int index) {

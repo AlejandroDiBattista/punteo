@@ -27,17 +27,17 @@ class UsuarioItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('${usuario.nombre}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               Text('${Datos.cantidadFavoritos(usuario.dni)} favoritos',
                   style: TextStyle(fontSize: 14, color: Colores.comenzar)),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: 4),
             child: Text('DNI ${usuario.dni} - ${usuario.domicilio} '),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text("${sesiones.length} sesiones, $tiempo minutos ${activo ? '(activo)' : ''}",
                 style: TextStyle(fontSize: 16, color: Colores.comenzar)),
           ),

@@ -30,7 +30,51 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
     final color = Theme.of(context).primaryColor;
     return Scaffold(
       body: widget.paginas[widget.index],
-      bottomNavigationBar: crearNavegacion(color),
+      // bottomNavigationBar: crearNavegacion(color),
+      bottomNavigationBar: crearBottomNavigations(context),
+    );
+  }
+
+  Widget crearBottomNavigations(BuildContext context) {
+    final activo = Colors.white; //Theme.of(context).primaryColor;
+    final inactivo = Colors.black;
+
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed, //Agregar esta línea
+      currentIndex: widget.index,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedItemColor: activo,
+      unselectedItemColor: inactivo,
+      backgroundColor: Theme.of(context).primaryColor,
+      items: [
+        BottomNavigationBarItem(
+          label: 'Marcar',
+          icon: Icon(Icons.check, color: inactivo, size: 30),
+          activeIcon: Icon(Icons.check, color: activo, size: 30),
+        ),
+        BottomNavigationBarItem(
+          label: 'Buscar',
+          icon: Icon(Icons.search, color: inactivo, size: 30),
+          activeIcon: Icon(Icons.search, color: activo, size: 30),
+        ),
+        BottomNavigationBarItem(
+          label: 'Perfil',
+          icon: Icon(Icons.person, color: inactivo, size: 30),
+          activeIcon: Icon(Icons.person, color: activo, size: 30),
+        ),
+        if (Datos.esAdministrador)
+          BottomNavigationBarItem(
+            label: 'Ranking',
+            icon: Icon(Icons.bar_chart, color: inactivo, size: 30),
+            activeIcon: Icon(Icons.bar_chart, color: activo, size: 30),
+          ),
+      ],
+      onTap: (index) {
+        setState(() {
+          widget.index = index;
+        });
+      },
     );
   }
 

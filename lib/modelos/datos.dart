@@ -14,7 +14,7 @@ class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.1.9";
+  static String version = "1.1.10";
 
   static List<Escuela> escuelas = [];
   static List<Votante> votantes = [];
