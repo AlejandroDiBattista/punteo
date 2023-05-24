@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../modelos/votante.dart';
 
 class VotantesList extends StatefulWidget {
-  final List<Votante> votantes;
+  final Votantes votantes;
 
   VotantesList({required this.votantes});
 

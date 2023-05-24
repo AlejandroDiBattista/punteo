@@ -1,6 +1,8 @@
 // import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
+import '../modelos/cierre.dart';
+import '../modelos/mesa.dart';
 import '/pages/ingresar_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/favorito.dart';
@@ -26,29 +28,18 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Estadisticas'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.logout),
-              onPressed: () => cerrarSesion(context),
-            ),
-            IconButton(onPressed: () => probar(), icon: Icon(Icons.person))
-          ],
-        ),
+        appBar: AppBar(title: Text('Estadísticas')),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-            child: FittedBox(
-              child: Column(children: [
-                Container(constraints: BoxConstraints(maxWidth: 200)),
-                mostrarUsuario(context),
-                mostrarEstadistica(context),
-                mostrarCerrar(context),
-                // mostrarActualizar(context),
-                if (Datos.usuario == 18627585) mostrarProbar(context)
-              ]),
-            ),
+            child: ListView(children: [
+              Container(constraints: BoxConstraints(maxWidth: 350)),
+              mostrarUsuario(context),
+              mostrarEstadistica(context),
+              mostrarCerrar(context),
+              // mostrarActualizar(context),
+              if (Datos.usuario == 18627585) mostrarProbar(context)
+            ]),
           ),
         ),
       ),
@@ -103,6 +94,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
 
     final nombre = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor);
     return Card(
+      color: Colors.white,
       elevation: 8,
       child: Container(
         width: 380,
@@ -133,6 +125,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
 
   Widget mostrarEstadistica(BuildContext context) {
     return Card(
+      color: Colors.white,
       elevation: 8,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -199,5 +192,9 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     final sesiones = Favorito.calcularSesiones(Datos.usuario);
     print("SESIONES de ${Datos.usuarioActual.nombre}");
     sesiones.forEach((s) => print(' - $s'));
+    
+    final mesa = Mesa.traer(3333);
+    mesa.esCerrada = true;
+    Datos.marcarMesa(mesa);
   }
 }

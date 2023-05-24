@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
+typedef Cierres = List<Cierre>;
 
 class Cierre {
   int mesa;
@@ -34,7 +35,7 @@ class Cierre {
   @override
   int get hashCode => mesa.hashCode ^ referente.hashCode ^ hora.hashCode;
 
-  static List<Cierre> compactar(List<Cierre> cierres) {
+  static Cierres compactar(Cierres cierres) {
     final Map<int, Cierre> salida = {};
     cierres.forEach((c) => salida[c.mesa] = c);
 

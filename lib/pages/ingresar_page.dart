@@ -41,18 +41,15 @@ class _IngresarPageState extends State<IngresarPage> {
               child: Form(
                 key: _formKey,
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  // this.cargando
-                  //     ? LinearProgressIndicator(backgroundColor: Colores.terminar, minHeight: 1)
-                  //     : SizedBox(height: 2),
                   Progreso(this.cargando),
-                  Expanded(child: Container()),
+                  Spacer(),
                   crearTitulo(context),
                   crearVersion(context),
                   SizedBox(height: 100.0),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [crearIngresoDNI(), SizedBox(width: 10), crearIngresar()]),
-                  Expanded(child: Container()),
+                  Spacer(),
                 ]),
               ),
             ),
@@ -62,13 +59,13 @@ class _IngresarPageState extends State<IngresarPage> {
     );
   }
 
-  FilledButton crearIngresar() {
+  Widget crearIngresar() {
+    if (cargando) return CircularProgressIndicator();
     return FilledButton.tonal(
       onPressed: ingresar,
       onLongPress: ingresarAlejandro,
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-          // child: Text('Ingresar', style: TextStyle(fontSize: 16))),
           child: Text('Ingresar', style: TextStyle(fontSize: 16))),
     );
   }
@@ -80,10 +77,10 @@ class _IngresarPageState extends State<IngresarPage> {
         end: Alignment.bottomRight,
       ));
 
-  Text crearVersion(BuildContext context) =>
+  Widget crearVersion(BuildContext context) =>
       Text("Versión ${Datos.version}", style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor));
 
-  Text crearTitulo(BuildContext context) => Text("Punteo YB",
+  Widget crearTitulo(BuildContext context) => Text("Punteo YB",
       style: TextStyle(
           fontSize: 50, color: Theme.of(context).primaryColor, fontFamily: "Oxanium", fontWeight: FontWeight.bold));
 
@@ -112,12 +109,10 @@ class _IngresarPageState extends State<IngresarPage> {
       );
 
   void irPaginaInicio() async {
-    setState(() => this.cargando = true);
-    print('antes: irPaginaInicio para ${Datos.usuario}');
+    Datos.marcarFavoritos();
+    Datos.marcarCierres();
 
-    // await Datos.cargar();
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PaginaInicialPage()));
-    // });
   }
 
   void ingresar() async {

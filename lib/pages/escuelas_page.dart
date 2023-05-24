@@ -11,15 +11,6 @@ class EscuelasPage extends StatefulWidget {
 }
 
 class _EscuelasPageState extends State<EscuelasPage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Datos.iniciar(() {
-  //     setState(() {});
-  //   });
-  //   print('EscuelasPage.initState');
-  // }
-
   @override
   Widget build(BuildContext context) {
     final datos = Datos.escuelas;
@@ -38,22 +29,22 @@ class _EscuelasPageState extends State<EscuelasPage> {
   }
 
   Widget crearEscuela(int indice, Escuela escuela) {
-    final color = escuela.esCompleta ? Theme.of(context).primaryColor : Colors.black;
+    final color = escuela.esCompleta ? Colors.green : (escuela.esAnalizada ? Colors.blue : Colors.black);
     return ListTile(
-      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColorLight : Colors.white,
+      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColor.withAlpha(20) : Colors.white,
       title: Row(
         children: [
           Container(
             width: 20,
-            child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w100, color: color)),
+            child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
           ),
           Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-          Expanded(child: Container()),
-          Text(escuela.esCompleta ? "(completa)" : "", style: TextStyle(fontSize: 12)),
-          if (escuela == Datos.escuelaActual)
+          Spacer(),
+          // Text(escuela.esCompleta ? "(completa)" : "", style: TextStyle(fontSize: 12)),
+          if (escuela == Datos.escuelaActual && !escuela.esCompleta)
             Text(
               "Votas acá",
-              style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor),
+              style: TextStyle(fontSize: 12, color: Colors.green),
             )
         ],
       ),
@@ -65,12 +56,13 @@ class _EscuelasPageState extends State<EscuelasPage> {
             children: [
               Text(escuela.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
               Text(
-                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasCerradas} cerradas)  | desde: ${escuela.desde} hasta: ${escuela.hasta} '),
+                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasAnalizadas} en proceso, ${escuela.cantidadMesasCerradas} cerradas) | ${escuela.desde} a ${escuela.hasta} '),
               Text('${escuela.totalVotantes} votantes | ${escuela.totalVotantesFavoritos} favoritos')
             ],
           ),
         ],
       ),
+      trailing: Icon(Icons.check, color: escuela.esCompleta ? Colors.green : Colors.transparent, size: 20),
       onTap: () => irMesa(context, escuela),
     );
   }

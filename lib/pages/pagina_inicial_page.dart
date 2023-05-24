@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../colores.dart';
 import 'escuelas_page.dart';
 import 'buscar_page.dart';
 import 'estadisticas_page.dart';
@@ -13,7 +14,7 @@ class PaginaInicialPage extends StatefulWidget {
   PaginaInicialPage({Key? key}) : super(key: key);
   int index = 0;
 
-  List<Widget> paginas = [
+  final paginas = [
     EscuelasPage(),
     BuscarPage(),
     EstadisticasPage(),
@@ -27,7 +28,7 @@ class PaginaInicialPage extends StatefulWidget {
 class _PaginaInicialPageState extends State<PaginaInicialPage> {
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).primaryColor;
+    // final color = Theme.of(context).primaryColor;
     return Scaffold(
       body: widget.paginas[widget.index],
       // bottomNavigationBar: crearNavegacion(color),
@@ -36,8 +37,8 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
   }
 
   Widget crearBottomNavigations(BuildContext context) {
-    final activo = Colors.white; //Theme.of(context).primaryColor;
-    final inactivo = Colors.black;
+    final activo = Colors.green.shade900; //Theme.of(context).primaryColor;
+    final inactivo = Colors.green.shade500;
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed, //Agregar esta línea
@@ -46,7 +47,7 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
       showUnselectedLabels: true,
       selectedItemColor: activo,
       unselectedItemColor: inactivo,
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Colores.comenzar,
       items: [
         BottomNavigationBarItem(
           label: 'Marcar',
@@ -60,14 +61,14 @@ class _PaginaInicialPageState extends State<PaginaInicialPage> {
         ),
         BottomNavigationBarItem(
           label: 'Perfil',
-          icon: Icon(Icons.person, color: inactivo, size: 30),
-          activeIcon: Icon(Icons.person, color: activo, size: 30),
+          icon: Icon(Icons.star, color: inactivo, size: 30),
+          activeIcon: Icon(Icons.star, color: activo, size: 30),
         ),
         if (Datos.esAdministrador)
           BottomNavigationBarItem(
             label: 'Ranking',
-            icon: Icon(Icons.bar_chart, color: inactivo, size: 30),
-            activeIcon: Icon(Icons.bar_chart, color: activo, size: 30),
+            icon: Icon(Icons.sort, color: inactivo, size: 30),
+            activeIcon: Icon(Icons.sort, color: activo, size: 30),
           ),
       ],
       onTap: (index) {

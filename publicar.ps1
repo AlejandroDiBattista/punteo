@@ -2,7 +2,7 @@
 Write-Host "Construyendo sitio web..."
 
 # flutter clean
-flutter build web #--no-tree-shake-icons 
+flutter build web --no-tree-shake-icons 
 # flutter run -d chrome --web-renderer html
 # flutter build web --web-renderer canvaskit --no-tree-shake-icons 
 # flutter build web --web-renderer html --no-tree-shake-icons 

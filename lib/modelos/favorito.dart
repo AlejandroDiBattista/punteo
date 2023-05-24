@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 
 import 'datos.dart';
 
+typedef Sesion = (DateTime hora, Duration duracion, int favoritos);
+typedef Favoritos = List<Favorito>;
+
 class Favorito {
   int dni;
   int referente;
@@ -57,7 +60,7 @@ class Favorito {
   @override
   int get hashCode => dni.hashCode ^ referente.hashCode ^ favorito.hashCode ^ hora.hashCode;
 
-  static List<Favorito> compactar(List<Favorito> favoritos) {
+  static Favoritos compactar(Favoritos favoritos) {
     final Map<(int, int), Favorito> salida = {};
     favoritos.sort((a, b) => a.hora.compareTo(b.hora));
 
@@ -69,7 +72,7 @@ class Favorito {
     return nuevos;
   }
 
-  static Map<int, int> contar(List<Favorito> favoritos) {
+  static Map<int, int> contar(Favoritos favoritos) {
     final Map<int, int> salida = {};
     for (final votante in favoritos) {
       salida[votante.dni] = (salida[votante.dni] ?? 0) + 1;
@@ -77,13 +80,13 @@ class Favorito {
     return salida;
   }
 
-  static List<(DateTime hora, Duration duracion, int favoritos)> calcularSesiones(int dni) {
+  static List<Sesion> calcularSesiones(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
     lista.sort((a, b) => a.hora.compareTo(b.hora));
 
     DateTime? anterior, ultimo;
     int n = 0;
-    List<(DateTime, Duration, int)> salida = [];
+    List<Sesion> salida = [];
 
     for (final f in lista) {
       if (anterior == null) {
@@ -134,6 +137,8 @@ class Favorito {
 
     return salida;
   }
+
+  static DateTime ultimoAcceso(int dni) => calcularSesiones(dni).last.$1;
 
   static bool esUsuarioActivo(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();

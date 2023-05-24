@@ -14,23 +14,22 @@ class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.1.11";
+  static String version = "1.2.3";
 
-  static List<Escuela> escuelas = [];
-  static List<Votante> votantes = [];
-  static List<Favorito> favoritos = [];
-  static List<Cierre> cierres = [];
+  static Escuelas escuelas = [];
+  static Votantes votantes = [];
+  static Favoritos favoritos = [];
+  static Cierres cierres = [];
 
   static const admistradores = [18627585, 17041793, 24409480, 37096832]; // Susana  21327900 // Marcelo 17041793
-  static List<Votante> get usuariosExtras => [
+  static Votantes get usuariosExtras => [
         Votante(18627585, "Di Battista, Alejandro", "Av. Central 4124", "M", -1967, 3333, 0, 0, 0, 0, -26.805819,
             -65.252722),
         Votante(20559013, "Martin, Andrea Fabina", "San Juan 724 - 6A", "F", 1968, 1001, 126, 0, 0, 0, -26.824868,
             -65.206791),
       ];
 
-  static List<Votante> get usuarios =>
-      favoritos.map((f) => f.referente).toSet().map((dni) => traerUsuario(dni)).toList();
+  static Votantes get usuarios => favoritos.map((f) => f.referente).toSet().map((dni) => traerUsuario(dni)).toList();
 
   static bool cargando = false;
   static bool cargado = false;
@@ -84,13 +83,13 @@ class Datos {
     print(" - Bajamos ${cierres.length} cierres");
   }
 
-  static Future<List<Favorito>> bajarFavoritos() async {
+  static Future<Favoritos> bajarFavoritos() async {
     final datos = await SheetsApi.traerFavoritos();
     final nuevos = datos.map((dato) => Favorito.fromMap(dato)).toList();
     return Favorito.compactar(nuevos);
   }
 
-  static Future<List<Cierre>> bajarCierres() async {
+  static Future<Cierres> bajarCierres() async {
     final datos = await SheetsApi.traerCierres();
     final nuevos = datos.map((dato) => Cierre.fromMap(dato)).toList();
     return Cierre.compactar(nuevos);
@@ -136,7 +135,7 @@ class Datos {
 
     for (final e in escuelas) {
       for (final m in e.mesas) {
-        m.cerrada = cierres.any((c) => c.referente == referente && c.mesa == m.numero && c.cerrada);
+        m.esCerrada = cierres.any((c) => c.referente == referente && c.mesa == m.numero && c.cerrada);
       }
     }
   }
@@ -161,7 +160,7 @@ class Datos {
     final datos = [
       mesa.numero,
       usuario,
-      mesa.cerrada ? "cerrar" : "abrir",
+      mesa.esCerrada ? "cerrar" : "abrir",
       DateTime.now().fechaHora,
     ];
 
@@ -201,9 +200,9 @@ class Datos {
 
   static cantidadFavoritos(int referente) => favoritos.where((f) => f.referente == referente).length;
 
-  static List<Votante> buscar(String texto) => Votante.buscar(Datos.votantes, texto);
+  static Votantes buscar(String texto) => Votante.buscar(Datos.votantes, texto);
 
-  static List<Favorito> buscarFavoritosPendientes(List<Favorito> actual) {
+  static Favoritos buscarFavoritosPendientes(Favoritos actual) {
     final pendientes = favoritos.where((n) => !actual.any((f) => f == n)).toList();
     if (pendientes.length > 0) {
       print("Favoritos pendientes: ${pendientes.length}");
@@ -214,7 +213,7 @@ class Datos {
     return pendientes;
   }
 
-  static List<Favorito> buscarFavoritosNuevos(List<Favorito> actual) {
+  static Favoritos buscarFavoritosNuevos(Favoritos actual) {
     final nuevos = actual.where((n) => !favoritos.any((f) => f == n)).toList();
     if (nuevos.length > 0) {
       print("Favoritos Nuevos: ${nuevos.length}");

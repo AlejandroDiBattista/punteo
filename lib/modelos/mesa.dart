@@ -2,18 +2,21 @@ import 'datos.dart';
 import 'escuela.dart';
 import 'votante.dart';
 
+typedef Mesas = List<Mesa>;
+
 class Mesa {
   int numero;
   int inicial = 0;
   int cantidad = 0;
-  List<Votante> votantes = [];
-  bool cerrada = false;
+  bool esCerrada = false;
   int nroEscuela = 0;
+  Votantes votantes = [];
 
   Mesa(this.numero);
   Escuela get escuela => Datos.escuelas[nroEscuela];
 
-  List<Votante> get favoritos => votantes.where((v) => v.favorito).toList();
+  bool get esAnalizada => !esCerrada && favoritos.length > 0;
+  Votantes get favoritos => votantes.where((v) => v.favorito).toList();
 
   void agregar(Votante votante) => votantes.add(votante);
 
@@ -21,5 +24,15 @@ class Mesa {
     votantes.sort((a, b) => a.nombre.compareTo(b.nombre));
     Votante.organizar(votantes);
   }
-}
 
+  static Mesa traer(int nro) {
+    for (final e in Datos.escuelas) {
+      for (final m in e.mesas) {
+        if (m.numero == nro) {
+          return m;
+        }
+      }
+    }
+    return Mesa(nro);
+  }
+}

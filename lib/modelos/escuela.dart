@@ -5,6 +5,8 @@ import 'datos.dart';
 import 'mesa.dart';
 import 'package:collection/collection.dart';
 
+typedef Escuelas = List<Escuela>;
+
 class Escuela {
   String escuela;
   String direccion;
@@ -15,7 +17,7 @@ class Escuela {
   double longitude;
   int desde;
   int hasta;
-  List<Mesa> mesas = [];
+  Mesas mesas = [];
 
   Escuela(
       {required this.escuela,
@@ -99,8 +101,8 @@ class Escuela {
   bool get esAnalizada => cantidadMesasAnalizadas > 0;
 
   int get cantidadMesas => mesas.length;
-  int get cantidadMesasAnalizadas => mesas.where((mesa) => mesa.favoritos.isNotEmpty).length;
-  int get cantidadMesasCerradas => mesas.where((mesa) => mesa.cerrada).length;
+  int get cantidadMesasAnalizadas => mesas.where((mesa) => mesa.esAnalizada).length;
+  int get cantidadMesasCerradas => mesas.where((mesa) => mesa.esCerrada).length;
 
   int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
   int get totalVotantesFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;

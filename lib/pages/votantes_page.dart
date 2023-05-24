@@ -31,9 +31,9 @@ class _VotantesPageState extends State<VotantesPage> {
   }
 
   void cerrarMesa() {
-    mesa.cerrada = true;
+    mesa.esCerrada = true;
     Datos.marcarMesa(mesa);
-    print('Cerrando mesa ${mesa.numero} > cerrada: ${mesa.cerrada ? 'SI' : 'NO'}');
+    print('Cerrando mesa ${mesa.numero} > cerrada: ${mesa.esCerrada ? 'SI' : 'NO'}');
     setState(() {});
   }
 
@@ -47,14 +47,16 @@ class _VotantesPageState extends State<VotantesPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Mesa ${widget.mesa.numero} '),
-            Text('${votantes.length} votantes, ${favoritos.length} favoritos',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor)),
-          ],
-        )),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Mesa ${widget.mesa.numero} '),
+              Text('${votantes.length} votantes, ${favoritos.length} favoritos',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor)),
+            ],
+          ),
+          actions: [if (!mesa.esCerrada) IconButton(onPressed: () => cerrarMesa(), icon: Icon(Icons.check))],
+        ),
         body: Center(
           child: Scrollbar(
             child: ListView.separated(
@@ -71,7 +73,8 @@ class _VotantesPageState extends State<VotantesPage> {
                   );
                 }
               },
-              separatorBuilder: (BuildContext context, int index) => divisor(index),
+              // separatorBuilder: (BuildContext context, int index) => divisor(index),
+              separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
             ),
           ),
         ),

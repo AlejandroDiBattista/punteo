@@ -25,12 +25,13 @@ class _IndicadorState extends State<Indicador> {
       child: AspectRatio(
         aspectRatio: 1,
         child: Card(
+          color: Colors.white,
           elevation: 10,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(texto, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+                Text(texto, style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                 Text(widget.etiqueta, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
               ]),
         ),

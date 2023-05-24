@@ -5,6 +5,8 @@ import 'datos.dart';
 import 'escuela.dart';
 import 'favorito.dart';
 
+typedef Votantes = List<Votante>;
+
 class Votante {
   int dni;
   String nombre;
@@ -122,7 +124,7 @@ class Votante {
   @override
   int get hashCode => dni.hashCode;
 
-  static void organizar(List<Votante> votantes) {
+  static void organizar(Votantes votantes) {
     var apellido = '';
 
     for (final v in votantes) {
@@ -139,13 +141,13 @@ class Votante {
     }
   }
 
-  static List<Votante> ordenarVotantes(List<Votante> votantes) {
+  static Votantes ordenarVotantes(Votantes votantes) {
     votantes.sort((a, b) => a.nombre.compareTo(b.nombre));
     Votante.organizar(votantes);
     return votantes;
   }
 
-  static Map<String, int> contarDomicilio(List<Votante> votantes) {
+  static Map<String, int> contarDomicilio(Votantes votantes) {
     final mapa = <String, int>{};
     for (final v in Datos.votantes) {
       mapa[v.domicilio] = (mapa[v.domicilio] ?? 0) + 1;
@@ -153,9 +155,9 @@ class Votante {
     return mapa;
   }
 
-  static List<Votante> buscar(List<Votante> votantes, String texto) {
-    List<Votante> origen = votantes;
+  static Votantes buscar(Votantes votantes, String texto) {
     final palabras = texto.toLowerCase().palabras;
+    var origen = votantes;
 
     medir('Buscado "$texto"', () {
       for (final palabra in palabras) {
@@ -175,7 +177,7 @@ class Votante {
           origen = origen.where((v) => v.mesa == mesa).toList();
         } else if ((RegExp(r'^[+-][0-9]{2}$').hasMatch(palabra))) {
           final edad = int.parse(palabra);
-          origen = origen.where((v) => edad < 0 ? v.edad < edad.abs() : v.edad > edad).toList();
+          origen = origen.where((v) => edad < 0 ? v.edad <= edad.abs() : v.edad >= edad).toList();
         } else if ((RegExp(r'^-[a-zñ]+$').hasMatch(palabra))) {
           final aux = ' ' + palabra.substring(1);
           origen = origen.where((v) => !v.textoCompleto.contains(aux)).toList();
@@ -187,6 +189,7 @@ class Votante {
       print('Hay ${origen.length} votantes');
     });
 
+    Votante.organizar(origen);
     return origen;
   }
 

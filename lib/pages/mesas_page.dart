@@ -35,22 +35,24 @@ class _MesasPageState extends State<MesasPage> {
 
   Widget crearMesa(BuildContext context, int index) {
     final mesa = this.widget.escuela.mesas[index];
-
+    final colorActual =
+        mesa.numero == Datos.usuarioActual.mesa ? Theme.of(context).primaryColor.withAlpha(20) : Colors.white;
+    final colorEstado = mesa.esCerrada ? Colors.green : (mesa.esAnalizada ? Colors.blue : Colors.transparent);
     return ListTile(
-        tileColor: mesa.numero == Datos.usuarioActual.mesa ? Theme.of(context).primaryColorLight : Colors.white,
-        title: crearDesdeHasta(index, mesa),
+        tileColor: colorActual,
+        title: crearDesdeHasta(mesa, index),
         subtitle: crearRangoVotantes(mesa),
         onTap: () => irVotantes(mesa),
-        trailing: Icon(Icons.check, color: mesa.cerrada ? Colors.amber : Colors.grey));
+        trailing: Icon(Icons.check, color: colorEstado));
   }
 
-  Widget crearDesdeHasta(int indice, Mesa mesa) {
-    final color = mesa.cerrada ? Theme.of(context).primaryColorLight : Colors.black;
+  Widget crearDesdeHasta(Mesa mesa, int indice) {
+    final color = mesa.esCerrada ? Colors.green : (mesa.esAnalizada ? Colors.blue : Colors.black);
     return Row(
       children: [
         Container(
           width: 20,
-          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w100, color: color)),
+          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
         ),
         Text('Mesa ${mesa.numero}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
         Expanded(child: Container()),

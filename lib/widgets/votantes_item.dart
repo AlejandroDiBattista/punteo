@@ -1,10 +1,8 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// import '../modelos/datos.dart';
-import '../modelos/datos.dart';
-import '../modelos/escuela.dart';
-import '../modelos/votante.dart';
+import '/modelos/escuela.dart';
+import '/modelos/votante.dart';
 
 class VotanteItem extends StatefulWidget {
   final Votante votante;
@@ -31,6 +29,7 @@ class _VotanteItemState extends State<VotanteItem> {
     final edad = (votante.clase < 0 ? "~" : "") + '${2023 - votante.clase.abs()}';
     final r = votante.referentes.length;
     return ListTile(
+      tileColor: Colors.white,
       dense: false,
       title: crearNombre(votante, widget.color, widget.index),
       subtitle: Row(
@@ -71,7 +70,7 @@ class _VotanteItemState extends State<VotanteItem> {
       children: [
         Container(
           width: 20,
-          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w100, color: color)),
+          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
         ),
         Text(apellido,
             style: TextStyle(

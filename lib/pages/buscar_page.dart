@@ -24,8 +24,8 @@ class _BuscarPageState extends State<BuscarPage> {
 
   Future<void> marcarFavorito(Votante votante) async {
     votante.cambiarFavorito();
-    setState(() {});
     Datos.marcarFavorito(votante);
+    setState(() {});
   }
 
   void alBuscar(String texto) {
@@ -72,7 +72,8 @@ class _BuscarPageState extends State<BuscarPage> {
                 final color = votante.favorito ? Theme.of(context).primaryColor : Colors.black;
                 return VotanteItem(votante: votante, color: color, index: index, alMarcar: marcarFavorito);
               },
-              separatorBuilder: (BuildContext context, int index) => divisor(index),
+              // separatorBuilder: (BuildContext context, int index) => divisor(index),
+              separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
             ),
           ),
         ],
