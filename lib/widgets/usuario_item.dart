@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:punteo_yb/utils.dart';
 
 import '/colores.dart';
 import '/modelos/datos.dart';
@@ -31,8 +29,19 @@ class UsuarioItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              Text('${Datos.cantidadFavoritos(usuario.dni)} favoritos',
-                  style: TextStyle(fontSize: 14, color: Colores.terminar)),
+              FittedBox(
+                child: Row(
+                  children: [
+                    Text('${Datos.cantidadFavoritos(usuario.dni)}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colores.terminar,
+                        )),
+                    Icon(Icons.star, color: Colors.yellow, size: 20),
+                  ],
+                ),
+              ),
             ],
           ),
           Padding(
@@ -46,11 +55,24 @@ class UsuarioItem extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(activo ? "En línea" : "Último acceso ${ultimoAcceso.fechaHora}",
+            child: Text(
+                activo
+                    ? 'En línea ahora'
+                    : 'Último acceso hace ${calculateDateDifference(ultimoAcceso, DateTime.now())} ',
+                // Text(activo ? "En línea" : "Último acceso ${ultimoAcceso.fechaHora}",
                 style: TextStyle(fontSize: 16, color: activo ? Colors.red : Colors.black)),
           ),
         ],
       ),
     );
   }
+}
+
+String calculateDateDifference(DateTime startDate, DateTime endDate) {
+  Duration difference = endDate.difference(startDate);
+
+  int days = difference.inDays;
+  int hours = difference.inHours % 24;
+
+  return '$days días y $hours horas';
 }

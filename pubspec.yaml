@@ -36,6 +36,7 @@ dependencies:
     googleapis: ^8.1.0
     gsheets: ^0.4.2
     google_nav_bar: ^5.0.6
+    get: ^4.6.5
     # url_launcher: ^6.1.11
 
 flutter_launcher_name:
@@ -50,6 +51,7 @@ flutter:
     assets:
         - datos/escuelas.json
         - datos/votantes.json
+        - datos/fondo.png
  
     fonts:
         - family: Oxanium

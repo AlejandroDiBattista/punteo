@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'modelos/datos.dart';
 import 'pages/ingresar_page.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Punteo YB ${Datos.version}',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

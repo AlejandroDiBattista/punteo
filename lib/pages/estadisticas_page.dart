@@ -1,8 +1,9 @@
 // import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
-import '../modelos/cierre.dart';
+// import '../modelos/cierre.dart';
 import '../modelos/mesa.dart';
+import '../widgets/usuario_card.dart';
 import '/pages/ingresar_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/favorito.dart';
@@ -34,7 +35,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
           child: Center(
             child: ListView(children: [
               Container(constraints: BoxConstraints(maxWidth: 350)),
-              mostrarUsuario(context),
+              UsuarioCard(),
               mostrarEstadistica(context),
               mostrarCerrar(context),
               // mostrarActualizar(context),
@@ -83,41 +84,6 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Text('Actualizar', style: TextStyle(fontSize: 20)),
-        ),
-      ),
-    );
-  }
-
-  Widget mostrarUsuario(BuildContext context) {
-    final usuario = Datos.usuarioActual;
-    final escuela = Datos.escuelaActual;
-
-    final nombre = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor);
-    return Card(
-      color: Colors.white,
-      elevation: 8,
-      child: Container(
-        width: 380,
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(usuario.nombre, style: nombre),
-            Text('DNI: ${usuario.dni}', style: TextStyle(fontSize: 20)),
-            Divider(),
-            Text(usuario.domicilio, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Clase : ${usuario.clase < 0 ? "~" : ""}${usuario.clase.abs()}'),
-              Text('Sexo : ${usuario.sexo == "M" ? "Masculino" : "Femenino"}'),
-            ]),
-            Divider(),
-            Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(escuela.direccion, style: TextStyle(fontSize: 16)),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Mesa : ${usuario.mesa}', style: TextStyle(fontSize: 18)),
-              Text('Orden: ${usuario.orden}', style: TextStyle(fontSize: 18))
-            ]),
-          ],
         ),
       ),
     );
@@ -192,7 +158,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     final sesiones = Favorito.calcularSesiones(Datos.usuario);
     print("SESIONES de ${Datos.usuarioActual.nombre}");
     sesiones.forEach((s) => print(' - $s'));
-    
+
     final mesa = Mesa.traer(3333);
     mesa.esCerrada = true;
     Datos.marcarMesa(mesa);

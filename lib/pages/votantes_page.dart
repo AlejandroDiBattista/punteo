@@ -1,9 +1,10 @@
 // import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:punteo_yb/widgets/votantes_item.dart';
+import 'package:get/get.dart';
 
 import '/colores.dart';
+import '/widgets/votantes_item.dart';
 import '/modelos/escuela.dart';
 import '/modelos/votante.dart';
 import '/modelos/datos.dart';
@@ -30,32 +31,38 @@ class _VotantesPageState extends State<VotantesPage> {
     setState(() {});
   }
 
-  void cerrarMesa() {
-    mesa.esCerrada = true;
+  void cambiarEstadoMesa() {
+    mesa.esCerrada = !mesa.esCerrada;
     Datos.marcarMesa(mesa);
-    print('Cerrando mesa ${mesa.numero} > cerrada: ${mesa.esCerrada ? 'SI' : 'NO'}');
     setState(() {});
   }
 
   get escuela => Escuela.traer(mesa.numero);
   get mesa => widget.mesa;
-  get votantes => mesa.votantes;
+  get votantes => mesa.esCerrada ? mesa.favoritos : mesa.votantes;
   get favoritos => mesa.favoritos;
 
   @override
   Widget build(BuildContext context) {
+    final estilo = TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Mesa ${widget.mesa.numero} '),
-              Text('${votantes.length} votantes, ${favoritos.length} favoritos',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor)),
+              Text('Mesa ${mesa.numero} '),
+              Column(
+                children: [
+                  Text('${mesa.votantes.length} votantes', style: estilo),
+                  Text('${favoritos.length} favoritos', style: estilo.copyWith(fontSize: 20)),
+                ],
+              )
             ],
           ),
-          actions: [if (!mesa.esCerrada) IconButton(onPressed: () => cerrarMesa(), icon: Icon(Icons.check))],
+          actions: [
+            IconButton(onPressed: () => cambiarEstadoMesa(), icon: Icon(mesa.esCerrada ? Icons.edit : Icons.check))
+          ],
         ),
         body: Center(
           child: Scrollbar(
@@ -83,20 +90,15 @@ class _VotantesPageState extends State<VotantesPage> {
     );
   }
 
-  Widget divisor(int index) {
-    if (index < votantes.length - 1) {
-      final siguiente = votantes[index + 1];
-      if (!siguiente.agrupar) return Divider(thickness: 1, color: Colores.divisor);
-    }
-    return Divider(color: Colors.transparent);
-  }
-
-  FloatingActionButton crearCerrar(BuildContext context) => FloatingActionButton.extended(
-        icon: Icon(CupertinoIcons.check_mark),
-        label: Text('Marcar mesa como completa'),
-        onPressed: () {
-          cerrarMesa();
-          Navigator.pop(context);
-        },
-      );
+  Widget crearCerrar(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10),
+    child: FloatingActionButton.extended(
+      icon: Icon((mesa.esCerrada ? Icons.edit : Icons.check)),
+      label: Text(mesa.esCerrada ? 'Abrir mesa' : 'Cerrar mesa'),
+      onPressed: () {
+        cambiarEstadoMesa();
+        if (mesa.esCerrada) Get.back();
+      },
+    ),
+  );
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../utils.dart';
@@ -14,7 +15,7 @@ class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
 
-  static String version = "1.2.3";
+  static String version = "1.3.5";
 
   static Escuelas escuelas = [];
   static Votantes votantes = [];
@@ -158,11 +159,13 @@ class Datos {
 
   static void marcarMesa(Mesa mesa) async {
     final datos = [
-      mesa.numero,
+      mesa.numero.toString(),
       usuario,
       mesa.esCerrada ? "cerrar" : "abrir",
       DateTime.now().fechaHora,
     ];
+
+    debugPrint("marcarMesa: ${datos.join(", ")}");
 
     cierres.add(Cierre(mesa: mesa.numero, referente: usuario, hora: DateTime.now()));
     cierres = Cierre.compactar(cierres);

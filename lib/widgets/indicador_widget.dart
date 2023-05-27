@@ -31,8 +31,8 @@ class _IndicadorState extends State<Indicador> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(texto, style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-                Text(widget.etiqueta, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300)),
+                Text(texto, style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+                Text(widget.etiqueta, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w200)),
               ]),
         ),
       ),

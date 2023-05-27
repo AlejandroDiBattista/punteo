@@ -32,6 +32,7 @@ class _VotanteItemState extends State<VotanteItem> {
       tileColor: Colors.white,
       dense: false,
       title: crearNombre(votante, widget.color, widget.index),
+      // title: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: widget.color)),
       subtitle: Row(
         children: [
           SizedBox(width: 20),
@@ -56,15 +57,6 @@ class _VotanteItemState extends State<VotanteItem> {
   }
 
   Widget crearNombre(Votante votante, Color color, int indice) {
-    var apellido = votante.nombre;
-    var nombre = '';
-
-    if (apellido.contains(',')) {
-      var partes = apellido.split(', ');
-      apellido = partes[0];
-      nombre = partes[1];
-    }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -72,16 +64,8 @@ class _VotanteItemState extends State<VotanteItem> {
           width: 20,
           child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
         ),
-        Text(apellido,
-            style: TextStyle(
-                fontSize: 20, fontWeight: votante.agrupar ? FontWeight.normal : FontWeight.bold, color: color)),
-        if (nombre.isNotEmpty)
-          Text(', $nombre',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: votante.agrupar ? FontStyle.italic : FontStyle.normal,
-                  color: color)),
+        FittedBox(
+            child: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color))),
       ],
     );
   }

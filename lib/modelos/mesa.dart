@@ -10,13 +10,14 @@ class Mesa {
   int cantidad = 0;
   bool esCerrada = false;
   int nroEscuela = 0;
+
   Votantes votantes = [];
+  Votantes get favoritos => votantes.where((v) => v.favorito).toList();
 
   Mesa(this.numero);
   Escuela get escuela => Datos.escuelas[nroEscuela];
 
   bool get esAnalizada => !esCerrada && favoritos.length > 0;
-  Votantes get favoritos => votantes.where((v) => v.favorito).toList();
 
   void agregar(Votante votante) => votantes.add(votante);
 

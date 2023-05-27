@@ -56,7 +56,7 @@ class _EscuelasPageState extends State<EscuelasPage> {
             children: [
               Text(escuela.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
               Text(
-                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasAnalizadas} en proceso, ${escuela.cantidadMesasCerradas} cerradas) | ${escuela.desde} a ${escuela.hasta} '),
+                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasAnalizadas} + ${escuela.cantidadMesasCerradas}) | ${escuela.desde} a ${escuela.hasta} '),
               Text('${escuela.totalVotantes} votantes | ${escuela.totalVotantesFavoritos} favoritos')
             ],
           ),
