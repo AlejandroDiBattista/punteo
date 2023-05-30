@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../colores.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
+import '../utils.dart';
 import 'mesas_page.dart';
 
 class EscuelasPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _EscuelasPageState extends State<EscuelasPage> {
     final datos = Datos.escuelas;
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(title: Text('Escuelas de Yerba Buena')),
+          appBar: crearTitulo(Text('Escuelas de Yerba Buena')),
           body: Center(
               child: Scrollbar(
             child: ListView.separated(

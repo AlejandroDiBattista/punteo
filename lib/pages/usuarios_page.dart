@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:punteo_yb/utils.dart';
 import 'package:punteo_yb/widgets/usuario_item.dart';
 
 import '../colores.dart';
 import '../modelos/datos.dart';
+import 'ingresar_page.dart';
 
 class UsuariosPage extends StatefulWidget {
   @override
@@ -24,7 +27,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
   @override
   Widget build(BuildContext context) => SafeArea(
           child: Scaffold(
-        appBar: AppBar(title: Text('Ranking de Usuarios', style: TextStyle(fontSize: 22)), actions: [
+        appBar: crearTitulo(Text('Ranking de Usuarios'), actions: [
           IconButton(
             onPressed: () => setState(() => this.ordenadoIngreso = !this.ordenadoIngreso),
             icon: Icon(Icons.sort),
@@ -39,10 +42,17 @@ class _UsuariosPageState extends State<UsuariosPage> {
     usuarios.sort((a, b) => Datos.cantidadFavoritos(b.dni).compareTo(Datos.cantidadFavoritos(a.dni)));
 
     return ListView.separated(
-      itemBuilder: (_, i) => UsuarioItem(usuario: usuarios[i]),
+      itemBuilder: (_, i) => InkWell(
+        child: UsuarioItem(usuario: usuarios[i], index: i),
+        onLongPress: () => irUsuario(usuarios[i].dni),
+      ),
       itemCount: usuarios.length,
       separatorBuilder: (BuildContext context, int index) => Divider(color: Colores.divisor, height: 1),
     );
   }
-}
 
+  void irUsuario(int dni) {
+    Datos.usuario = dni;
+    Get.offAll(IngresarPage());
+  }
+}

@@ -12,6 +12,7 @@ class UsuarioCard extends StatelessWidget {
     final escuela = Datos.escuelaActual;
 
     final nombre = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor);
+    final destacar = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
     return Card(
       color: Colors.white,
       elevation: 8,
@@ -33,10 +34,13 @@ class UsuarioCard extends StatelessWidget {
             ],
             Divider(),
             Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text(escuela.direccion, style: TextStyle(fontSize: 16)),
+            Row(children: [
+              Text(escuela.direccion, style: TextStyle(fontSize: 16)),
+              Icon(Icons.location_on, color: Colors.red, size: 14)
+            ]),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Mesa : ${usuario.mesa}', style: TextStyle(fontSize: 18)),
-              Text('Orden: ${usuario.orden}', style: TextStyle(fontSize: 18))
+              Text('Mesa : ${usuario.mesa}', style: destacar),
+              Text('Orden: ${usuario.orden}', style: destacar)
             ]),
           ],
         ),

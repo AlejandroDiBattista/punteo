@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:punteo_yb/pages/encuesta_page.dart';
+import 'package:punteo_yb/pages/votantes_page.dart';
 // import 'estadisticas_page.dart';
 import '../widgets/usuario_card.dart';
 import 'usuarios_page.dart';
@@ -35,7 +39,12 @@ class _IngresarPageState extends State<IngresarPage> {
   void initState() {
     this.estado = Estados.cargando;
     Datos.cargar().then((_) {
-      setState(() => this.estado = Estados.ingresando);
+      setState(() {
+        this.estado = Estados.ingresando;
+        if (Datos.usuario != 0) {
+          irPaginaInicio();
+        }
+      });
     });
     super.initState();
   }
@@ -50,22 +59,16 @@ class _IngresarPageState extends State<IngresarPage> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Center(child: crearTitulo(context)),
-            // Text("Versión ${Datos.version}", style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor)),
+            leading: estado == Estados.ingresado && Datos.usuario == 18627585
+                ? IconButton(onPressed: refrescarDatos, icon: Icon(Icons.sync))
+                : SizedBox(width: 24),
             actions: [
-              if (estado == Estados.ingresado && Datos.esAdministrador)
-                IconButton(
-                    onPressed: () => setState(() => Datos.sincronizarFavoritos().then((value) => setState(
-                          () {},
-                        ))),
-                    icon: Icon(Icons.sync)),
-              if (estado == Estados.ingresado)
-                IconButton(
-                  onPressed: () => setState(() {
-                    Datos.usuario = 0;
-                    this.estado = Estados.ingresando;
-                  }),
-                  icon: Icon(Icons.logout),
-                ),
+              estado == Estados.ingresado
+                  ? IconButton(
+                      onPressed: cerrarSesion,
+                      icon: Icon(Icons.logout),
+                    )
+                  : SizedBox(width: 24),
             ],
           ),
           body: Container(
@@ -76,10 +79,8 @@ class _IngresarPageState extends State<IngresarPage> {
               child: Form(
                 key: _formKey,
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  // SizedBox(height: 0),
                   FondoConcejal(),
                   Progreso(estado == Estados.cargando),
-
                   Spacer(),
                   if (estado == Estados.ingresando) crearIngreso(),
                   Spacer(flex: 2),
@@ -89,14 +90,27 @@ class _IngresarPageState extends State<IngresarPage> {
                     EstadisticaUsuario(),
                     Spacer(),
                     crearNavegar(),
-                    crearVersion(context),
                   ],
+                  crearVersion(context),
                 ]),
               ),
             ),
           ),
         ),
       );
+
+  void cerrarSesion() => setState(() {
+        Datos.usuario = 0;
+        this.estado = Estados.ingresando;
+        controlador.text = "";
+      });
+
+  void refrescarDatos() {
+    Get.to(EncuestaPage());
+    // setState(() => Datos.sincronizarFavoritos().then((value) => setState(
+    //     () {},
+    //   )));
+  }
 
   Widget crearIngreso() =>
       Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -109,6 +123,11 @@ class _IngresarPageState extends State<IngresarPage> {
           onLongPress: ingresarAlejandro,
         ),
       ]);
+
+  void irMarcarPorMesa() async {
+    await Get.to(VotantesPage(mesa: Datos.elegirMesa()));
+    actualizar();
+  }
 
   void irMarcarPorEscuelas() async {
     await Get.to(EscuelasPage());
@@ -127,7 +146,8 @@ class _IngresarPageState extends State<IngresarPage> {
 
   Widget crearNavegar() => Column(
         children: [
-          Boton(icon: Icons.school, label: 'Marcar por escuelas.', onPressed: irMarcarPorEscuelas),
+          Boton(icon: Icons.school, label: 'Marcar por escuelas', onPressed: irMarcarPorEscuelas),
+          Boton(icon: Icons.mail, label: 'Marcar Mesa sugerida', onPressed: irMarcarPorMesa),
           Boton(icon: Icons.search, label: 'Marcar por votantes', onPressed: irMarcarVotante),
           if (Datos.esAdministrador)
             Boton(icon: Icons.sort, label: 'Ver Ranking de usuarios', onPressed: irMostrarRanking),
@@ -143,7 +163,7 @@ class _IngresarPageState extends State<IngresarPage> {
 
   Widget crearTitulo(BuildContext context) => Text("Punteo YB",
       style: TextStyle(
-          fontSize: 50, color: Theme.of(context).primaryColor, fontFamily: "Oxanium", fontWeight: FontWeight.bold));
+          fontSize: 46, color: Theme.of(context).primaryColor, fontFamily: "Oxanium", fontWeight: FontWeight.bold));
 
   Widget crearVersion(BuildContext context) =>
       Text("Versión ${Datos.version}", style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor));
@@ -176,7 +196,6 @@ class _IngresarPageState extends State<IngresarPage> {
     Datos.marcarFavoritos();
     Datos.marcarCierres();
     setState(() => estado = Estados.ingresado);
-    // Get.to(PaginaInicialPage());
   }
 
   void ingresar() async {
@@ -210,14 +229,14 @@ class EstadisticaUsuario extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(bottom: 0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Indicador(etiqueta: "Analizados", valor: Datos.cantidadVotantesAnalizados),
+            Indicador(etiqueta: "Analizados", valor: Datos.cantidadVotantesCerrados),
             Indicador(etiqueta: "Marcados", valor: Datos.cantidadVotantesMarcados),
             Indicador(
                 etiqueta: "Efectividad",
-                valor: Datos.cantidadVotantesMarcados > 0
-                    ? 1.0 * (Datos.cantidadVotantesMarcados / Datos.cantidadVotantesAnalizados)
+                valor: Datos.cantidadVotantesCerrados > 0
+                    ? 1.0 * (Datos.cantidadVotantesMarcados / Datos.cantidadVotantesCerrados)
                     : 0),
           ],
         ),
@@ -262,13 +281,15 @@ class Boton extends StatelessWidget {
 class FondoConcejal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FittedBox(
-        child: Container(
-          padding: EdgeInsets.only(top: 50),
-          child: Image.asset(
-            'datos/fondo.png', // Ruta relativa de la imagen
-            fit: BoxFit.contain, // Ajuste de la imagen dentro del contenedor
-            height: 150,
-            // Alto del contenedor
+        child: FittedBox(
+          child: Container(
+            padding: EdgeInsets.only(top: 50),
+            child: Image.asset(
+              'datos/fondo.png', // Ruta relativa de la imagen
+              fit: BoxFit.contain, // Ajuste de la imagen dentro del contenedor
+              height: 250,
+              // Alto del contenedor
+            ),
           ),
         ),
       );

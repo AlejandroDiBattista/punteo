@@ -1,8 +1,9 @@
 // import 'dart:async';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils.dart';
 import '/colores.dart';
 import '/widgets/votantes_item.dart';
 import '/modelos/escuela.dart';
@@ -47,8 +48,8 @@ class _VotantesPageState extends State<VotantesPage> {
     final estilo = TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor);
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Row(
+        appBar: crearTitulo(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Mesa ${mesa.numero} '),
@@ -91,14 +92,14 @@ class _VotantesPageState extends State<VotantesPage> {
   }
 
   Widget crearCerrar(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10),
-    child: FloatingActionButton.extended(
-      icon: Icon((mesa.esCerrada ? Icons.edit : Icons.check)),
-      label: Text(mesa.esCerrada ? 'Abrir mesa' : 'Cerrar mesa'),
-      onPressed: () {
-        cambiarEstadoMesa();
-        if (mesa.esCerrada) Get.back();
-      },
-    ),
-  );
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: FloatingActionButton.extended(
+          icon: Icon((mesa.esCerrada ? Icons.edit : Icons.check)),
+          label: Text(mesa.esCerrada ? 'Abrir mesa' : 'Cerrar mesa'),
+          onPressed: () {
+            cambiarEstadoMesa();
+            if (mesa.esCerrada) Get.back();
+          },
+        ),
+      );
 }

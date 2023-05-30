@@ -27,6 +27,7 @@ class Votante {
 
   int get edad => 2023 - clase.abs();
   Escuela get escuela => Datos.escuelas[nroEscuela];
+  bool get conUbicacion => this.latitude != 0 && this.longitude != 0;
 
   String textoCompleto = '';
   List<int> get referentes => Datos.favoritos.where((f) => f.dni == dni).map((f) => f.referente).toList();
@@ -169,6 +170,22 @@ class Votante {
         } else if (palabra == 'todos') {
           final marcas = Favorito.contar(Datos.favoritos);
           origen = origen.where((v) => (marcas[v.dni] ?? 0) >= 1).toList();
+        } else if (palabra == 'localizacion') {
+          origen = origen.where((v) => v.latitude != 0).toList();
+        } else if (palabra == 'cerca') {
+          final usuario = Datos.usuarioActual;
+          if (usuario.conUbicacion) {
+            origen = origen.where((v) => v.conUbicacion && (Votante.distancia(v, usuario) < 300)).toList();
+          }
+        } else if ((RegExp(r'^<[0-9]{3,}$').hasMatch(palabra))) {
+          final usuario = Datos.usuarioActual;
+          if (usuario.conUbicacion) {
+            final distancia = int.parse(palabra.substring(1));
+            origen = origen.where((v) => v.conUbicacion && (Votante.distancia(v, usuario) <= distancia)).toList();
+          }
+        } else if (["m", "hombre", "f", "mujer"].contains(palabra)) {
+          final sexo = palabra == "hombre" || palabra == "M" ? "M" : "F";
+          origen = origen.where((v) => v.sexo == sexo).toList();
         } else if (palabra == 'familia') {
           final marcas = contarDomicilio(origen);
           origen = origen.where((v) => (marcas[v.domicilio] ?? 0) >= 2).toList();
@@ -191,6 +208,11 @@ class Votante {
 
     Votante.organizar(origen);
     return origen;
+  }
+
+  static double distancia(Votante a, Votante b) {
+    if (a.latitude == 0 || b.latitude == 0) return double.infinity;
+    return distanciaEnMetros(a.latitude, a.longitude, b.latitude, b.longitude);
   }
 
   static Votante traer(int dni) => Datos.votantes.firstWhere((v) => v.dni == dni, orElse: () => Votante.anonimo(dni));

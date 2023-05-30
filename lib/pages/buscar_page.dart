@@ -1,10 +1,53 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../colores.dart';
+import '/colores.dart';
+import '/utils.dart';
+import '/widgets/votantes_item.dart';
+import '/modelos/datos.dart';
 import '/modelos/votante.dart';
-import '../modelos/datos.dart';
-import '../widgets/votantes_item.dart';
+
+enum Sexo {
+  todos(""),
+  hombre("hombre"),
+  mujer("mujer");
+
+  final String clave;
+  const Sexo(this.clave);
+
+  get activo => this != todos;
+  Sexo siguiente() => switch (this) { todos => hombre, hombre => mujer, mujer => todos };
+
+  Icon getIcon() => Icon(switch (this) { todos => Icons.people, hombre => Icons.man, mujer => Icons.woman },
+      color: this.activo ? (this == hombre ? Colors.blue : Colors.pink) : Colors.grey);
+
+  @override
+  String toString() => this.clave;
+}
+
+enum Ubicacion {
+  todos(""),
+  localizados("localizacion"),
+  cerca("cerca");
+
+  final String clave;
+  const Ubicacion(this.clave);
+
+  get activo => this != todos;
+
+  Ubicacion siguiente() => switch (this) { todos => cerca, cerca => localizados, localizados => todos };
+  Icon getIcon() => Icon(
+      switch (this) {
+        todos => Icons.location_on,
+        cerca => Icons.location_on,
+        localizados => Icons.location_on_outlined
+      },
+      color: this.activo ? Colors.red : Colors.grey);
+
+  @override
+  String toString() => this.clave;
+}
 
 class BuscarPage extends StatefulWidget {
   @override
@@ -13,6 +56,9 @@ class BuscarPage extends StatefulWidget {
 
 class _BuscarPageState extends State<BuscarPage> {
   final controlador = TextEditingController();
+  Ubicacion ubicacion = Ubicacion.todos;
+  Sexo sexo = Sexo.todos;
+
   var votantes = Datos.votantes;
 
   Timer? _debounceTimer;
@@ -30,15 +76,56 @@ class _BuscarPageState extends State<BuscarPage> {
 
   void alBuscar(String texto) {
     debouncing(() {
-      votantes = Datos.buscar(texto);
+      votantes = Datos.buscar('$texto $ubicacion $sexo');
     });
+  }
+
+  void filtrarUbicacion() {
+    this.ubicacion = this.ubicacion.siguiente();
+    if (this.ubicacion.activo)
+      Get.snackbar(
+        "Filtro por ubicación",
+        this.ubicacion == Ubicacion.localizados
+            ? "Muestra los votantes geolocalizados"
+            : "Muestra los votantes cercanos al usuario",
+        icon: this.ubicacion.getIcon(),
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
+        dismissDirection: DismissDirection.horizontal,
+      );
+    alBuscar(controlador.text);
+  }
+
+  void filtrarSexo() {
+    this.sexo = this.sexo.siguiente();
+    if (this.sexo.activo)
+      Get.snackbar(
+        "Filtrar por sexo",
+        this.sexo == Sexo.hombre ? "Muestra solo los hombres" : "Muestra solo las mujeres",
+        icon: this.sexo.getIcon(),
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: 2),
+        dismissDirection: DismissDirection.horizontal,
+      );
+    alBuscar(controlador.text);
   }
 
   @override
   Widget build(BuildContext context) {
     // final votantes = Datos.votantes; //.take(20).toList();
     return Scaffold(
-      appBar: crearTitulo(),
+      appBar: crearTitulo(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Buscar'),
+              Text('${votantes.length} votantes', style: TextStyle(fontSize: 16)),
+            ],
+          ),
+          actions: [
+            IconButton(onPressed: filtrarSexo, icon: this.sexo.getIcon()),
+            IconButton(onPressed: filtrarUbicacion, icon: this.ubicacion.getIcon()),
+          ]),
       body: Column(
         children: [
           Container(
@@ -79,17 +166,6 @@ class _BuscarPageState extends State<BuscarPage> {
         ],
       ),
     );
-  }
-
-  AppBar crearTitulo() {
-    return AppBar(
-        title: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text('Buscar', style: TextStyle(fontSize: 22)),
-        Text('${votantes.length} votantes', style: TextStyle(fontSize: 16)),
-      ],
-    ));
   }
 
   Widget divisor(int index) {

@@ -20,17 +20,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Punteo YB ${Datos.version}',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colores.comenzar),
-        navigationBarTheme: NavigationBarThemeData(backgroundColor: Colores.comenzar),
-        useMaterial3: true,
-        // colorSchemeSeed: Colores.terminar,
-        colorSchemeSeed: Colores.comenzar,
-        // colorSchemeSeed: Colors.red,
-      ),
-      home: const IngresarPage(),
-    );
+        title: 'Punteo YB ${Datos.version}',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(color: Colores.comenzar),
+          navigationBarTheme: NavigationBarThemeData(backgroundColor: Colores.comenzar),
+          useMaterial3: true,
+          // colorSchemeSeed: Colores.terminar,
+          colorSchemeSeed: Colores.comenzar,
+          // colorSchemeSeed: Colors.red,
+        ),
+        home: const IngresarPage());
   }
 }

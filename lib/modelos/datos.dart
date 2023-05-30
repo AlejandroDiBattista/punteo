@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -14,8 +15,9 @@ import 'mesa.dart';
 class Datos {
   static int usuario = 0;
   // static int usuario = 18627585;
+  // static int usuario = 17041793;
 
-  static String version = "1.3.6";
+  static String version = "1.6.3";
 
   static Escuelas escuelas = [];
   static Votantes votantes = [];
@@ -191,6 +193,7 @@ class Datos {
   static get cantidadUsuarios => usuarios.length;
 
   static get cantidadVotantes => votantes.length;
+  static get cantidadVotantesCerrados => escuelas.map((e) => e.totalVotantesCerrados).sum;
   static get cantidadVotantesAnalizados => escuelas.map((e) => e.totalVotantesAnalizados).sum;
   static get cantidadVotantesMarcados => escuelas.map((e) => e.totalVotantesFavoritos).sum;
 
@@ -243,5 +246,13 @@ class Datos {
     favoritos = Favorito.compactar(actual);
 
     marcarFavoritos();
+  }
+
+  static Mesa elegirMesa() {
+    final escuelas = Datos.escuelas.where((e) => !e.esAnalizada).toList();
+    final escuela = escuelas[Random().nextInt(escuelas.length)];
+    final mesas = escuela.mesas.where((m) => !m.esAnalizada && !m.esCerrada).toList();
+    final mesa = mesas[Random().nextInt(mesas.length)];
+    return mesa;
   }
 }

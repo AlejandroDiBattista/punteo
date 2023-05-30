@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../colores.dart';
+import '../utils.dart';
 import '/pages/votantes_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
@@ -21,7 +22,7 @@ class _MesasPageState extends State<MesasPage> {
     final mesas = this.widget.escuela.mesas;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text(widget.escuela.escuela)),
+        appBar: crearTitulo(Text(widget.escuela.escuela)),
         body: Scrollbar(
           child: ListView.separated(
             itemCount: mesas.length,

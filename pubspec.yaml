@@ -35,7 +35,7 @@ dependencies:
     location: ^4.4.0
     googleapis: ^8.1.0
     gsheets: ^0.4.2
-    google_nav_bar: ^5.0.6
+    # google_nav_bar: ^5.0.6
     get: ^4.6.5
     # url_launcher: ^6.1.11
 

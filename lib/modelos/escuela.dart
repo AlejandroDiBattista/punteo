@@ -106,7 +106,8 @@ class Escuela {
 
   int get totalVotantes => mesas.map((mesa) => mesa.votantes.length).sum;
   int get totalVotantesFavoritos => mesas.map((mesa) => mesa.favoritos.length).sum;
-  int get totalVotantesAnalizados => mesas.map((m) => m.favoritos.isEmpty ? 0 : m.votantes.length).sum;
+  int get totalVotantesAnalizados => mesas.map((m) => m.esAnalizada ? m.votantes.length : 0).sum;
+  int get totalVotantesCerrados => mesas.map((m) => m.esCerrada ? m.votantes.length : 0).sum;
 
   get favoritos => mesas.map((mesa) => mesa.favoritos).expand((element) => element).toList();
 

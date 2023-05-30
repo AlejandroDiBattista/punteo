@@ -40,7 +40,12 @@ class _VotanteItemState extends State<VotanteItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 4),
-              Text(votante.domicilio, style: TextStyle(fontSize: 16, color: Colors.black, overflow: TextOverflow.clip)),
+              Row(
+                children: [
+                  Text(votante.domicilio, style: TextStyle(fontSize: 16)),
+                  if (votante.longitude != 0) Icon(Icons.location_on, color: Colors.red, size: 14),
+                ],
+              ),
               SizedBox(height: 4),
               Text('Edad: $edad  |  DNI: ${votante.dni}'),
               SizedBox(height: 4),
