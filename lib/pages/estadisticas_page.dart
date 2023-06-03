@@ -39,7 +39,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
               mostrarEstadistica(context),
               mostrarCerrar(context),
               // mostrarActualizar(context),
-              if (Datos.usuario == 18627585) mostrarProbar(context)
+              if (Datos.esSuperUsuario) mostrarProbar(context)
             ]),
           ),
         ),

@@ -1,19 +1,18 @@
-import 'dart:math';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:punteo_yb/pages/encuesta_page.dart';
-import 'package:punteo_yb/pages/votantes_page.dart';
-// import 'estadisticas_page.dart';
-import '../widgets/usuario_card.dart';
-import 'usuarios_page.dart';
 
-import '../colores.dart';
 import '../modelos/datos.dart';
+import '../utils.dart';
+import '../widgets/usuario_card.dart';
 import '../widgets/indicador_widget.dart';
 import '../widgets/progreso_widget.dart';
-import 'buscar_page.dart';
 import 'escuelas_page.dart';
+import 'votantes_page.dart';
+import 'buscar_page.dart';
+import 'usuarios_page.dart';
+import 'encuesta_page.dart';
 // import 'pagina_inicial_page.dart';
 
 class IngresarPage extends StatefulWidget {
@@ -58,42 +57,38 @@ class _IngresarPageState extends State<IngresarPage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Center(child: crearTitulo(context)),
-            leading: estado == Estados.ingresado && Datos.usuario == 18627585
-                ? IconButton(onPressed: refrescarDatos, icon: Icon(Icons.sync))
+            leading: estado == Estados.ingresado
+                ? IconButton(onPressed: cerrarSesion, icon: Icon(Icons.logout))
                 : SizedBox(width: 24),
-            actions: [
-              estado == Estados.ingresado
-                  ? IconButton(
-                      onPressed: cerrarSesion,
-                      icon: Icon(Icons.logout),
-                    )
-                  : SizedBox(width: 24),
-            ],
           ),
           body: Container(
             decoration: crearFondo(),
             alignment: Alignment.center,
-            child: Container(
-              width: 350,
-              child: Form(
-                key: _formKey,
-                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  FondoConcejal(),
-                  Progreso(estado == Estados.cargando),
-                  Spacer(),
-                  if (estado == Estados.ingresando) crearIngreso(),
-                  Spacer(flex: 2),
-                  if (estado == Estados.ingresado) ...[
-                    UsuarioCard(compacto: true),
-                    Spacer(),
-                    EstadisticaUsuario(),
-                    Spacer(),
-                    crearNavegar(),
-                  ],
-                  crearVersion(context),
-                ]),
-              ),
+            child: Column(
+              children: [
+                FondoConcejal(),
+                Expanded(
+                  child: Container(
+                    width: 350,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Progreso(estado == Estados.cargando),
+                        Spacer(),
+                        if (estado == Estados.ingresando) ...[crearIngreso(), Spacer(flex: 3)],
+                        if (estado == Estados.ingresado) ...[
+                          UsuarioCard(compacto: true),
+                          // Spacer(),
+                          EstadisticaUsuario(),
+                          Spacer(),
+                          crearNavegar(),
+                        ],
+                        crearVersion(context),
+                      ]),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -104,13 +99,6 @@ class _IngresarPageState extends State<IngresarPage> {
         this.estado = Estados.ingresando;
         controlador.text = "";
       });
-
-  void refrescarDatos() {
-    Get.to(EncuestaPage());
-    // setState(() => Datos.sincronizarFavoritos().then((value) => setState(
-    //     () {},
-    //   )));
-  }
 
   Widget crearIngreso() =>
       Row(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -124,13 +112,16 @@ class _IngresarPageState extends State<IngresarPage> {
         ),
       ]);
 
-  void irMarcarPorMesa() async {
-    await Get.to(VotantesPage(mesa: Datos.elegirMesa()));
+  void irMarcarPorEscuelas() async {
+    await Get.to(EscuelasPage());
     actualizar();
   }
 
-  void irMarcarPorEscuelas() async {
-    await Get.to(EscuelasPage());
+  void irMarcarPorMesa() async {
+    await Datos.sincronizarPrioridad();
+    final mesa = Datos.prioridad.getRandomElement();
+    await Get.to(VotantesPage(mesa: mesa));
+    Datos.marcarPrioridad();
     actualizar();
   }
 
@@ -144,26 +135,29 @@ class _IngresarPageState extends State<IngresarPage> {
     actualizar();
   }
 
+  void irEncuesta() async {
+    await Get.to(EncuestaPage());
+  }
+
   Widget crearNavegar() => Column(
         children: [
-          Boton(icon: Icons.school, label: 'Marcar por escuelas', onPressed: irMarcarPorEscuelas),
-          Boton(icon: Icons.mail, label: 'Marcar Mesa sugerida', onPressed: irMarcarPorMesa),
-          Boton(icon: Icons.search, label: 'Marcar por votantes', onPressed: irMarcarVotante),
+          Boton(
+              icon: Icons.table_restaurant,
+              label: 'Marcar Mesa prioritarias (Faltan ${Datos.prioridad.length})',
+              onPressed: irMarcarPorMesa,
+              destacar: true),
+          Boton(icon: Icons.search, label: 'Marcar Conocidos', onPressed: irMarcarVotante),
+          Boton(icon: Icons.holiday_village, label: 'Marcar Escuelas', onPressed: irMarcarPorEscuelas),
           if (Datos.esAdministrador)
-            Boton(icon: Icons.sort, label: 'Ver Ranking de usuarios', onPressed: irMostrarRanking),
+            Row(children: [
+              Expanded(child: Boton(icon: Icons.sort, label: 'Ver Ranking ', onPressed: irMostrarRanking)),
+              if (Datos.esSuperUsuario) ...[
+                SizedBox(width: 10),
+                Expanded(child: Boton(icon: Icons.sort, label: 'Ver Encuesta', onPressed: irEncuesta))
+              ],
+            ])
         ],
       );
-
-  BoxDecoration crearFondo() => BoxDecoration(
-          gradient: LinearGradient(
-        colors: [Colores.comenzar, Colores.terminar],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ));
-
-  Widget crearTitulo(BuildContext context) => Text("Punteo YB",
-      style: TextStyle(
-          fontSize: 46, color: Theme.of(context).primaryColor, fontFamily: "Oxanium", fontWeight: FontWeight.bold));
 
   Widget crearVersion(BuildContext context) =>
       Text("Versión ${Datos.version}", style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor));
@@ -173,7 +167,6 @@ class _IngresarPageState extends State<IngresarPage> {
         child: TextFormField(
           keyboardType: TextInputType.number,
           controller: controlador,
-          // textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20),
           decoration: InputDecoration(
             hintText: "Ingrese DNI",
@@ -186,15 +179,17 @@ class _IngresarPageState extends State<IngresarPage> {
             ),
           ),
           validator: validarDNI,
-          onSaved: (value) {
-            // Datos.usuario = int.parse(value!);
-          },
+          // onSaved: (value) {
+          //   // Datos.usuario = int.parse(value!);
+          // },
         ),
       );
 
   void irPaginaInicio() async {
     Datos.marcarFavoritos();
     Datos.marcarCierres();
+    Datos.marcarPrioridad();
+
     setState(() => estado = Estados.ingresado);
   }
 
@@ -207,6 +202,7 @@ class _IngresarPageState extends State<IngresarPage> {
   void ingresarAlejandro() {
     Datos.usuario = 18627585;
     irPaginaInicio();
+    actualizar();
   }
 
   String? validarDNI(String? value) {
@@ -248,49 +244,43 @@ class Boton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
   final VoidCallback? onLongPress;
+  final destacar;
 
   const Boton({
     this.icon = Icons.login,
     this.label = 'Ingresar',
     required this.onPressed,
     this.onLongPress,
+    this.destacar = false,
   });
 
   factory Boton.navegar(IconData icon, String label, dynamic go) =>
       Boton(icon: icon, label: label, onPressed: () => Get.to(go()));
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 12.0),
-        child: ElevatedButton(
-            onPressed: onPressed,
-            onLongPress: onLongPress,
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(icon, size: 24),
-                    SizedBox(width: 12),
-                    Text(label, style: TextStyle(fontSize: 16)),
-                  ],
-                ))),
-      );
+  Widget build(BuildContext context) {
+    final color = destacar ? Colors.red : Colors.green;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: ElevatedButton(
+          onPressed: onPressed,
+          onLongPress: onLongPress,
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, size: 24, color: color),
+                  SizedBox(width: 12),
+                  Text(label, style: TextStyle(fontSize: 16, color: color)),
+                ],
+              ))),
+    );
+  }
 }
 
 class FondoConcejal extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => FittedBox(
-        child: FittedBox(
-          child: Container(
-            padding: EdgeInsets.only(top: 50),
-            child: Image.asset(
-              'datos/fondo.png', // Ruta relativa de la imagen
-              fit: BoxFit.contain, // Ajuste de la imagen dentro del contenedor
-              height: 250,
-              // Alto del contenedor
-            ),
-          ),
-        ),
-      );
+  Widget build(BuildContext context) =>
+      FittedBox(child: Container(child: Image.asset('datos/fondo.jpg', fit: BoxFit.contain)));
 }

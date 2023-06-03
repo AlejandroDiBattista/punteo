@@ -1,5 +1,6 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:punteo_yb/utils.dart';
 
 import '/modelos/escuela.dart';
 import '/modelos/votante.dart';
@@ -47,10 +48,11 @@ class _VotanteItemState extends State<VotanteItem> {
                 ],
               ),
               SizedBox(height: 4),
-              Text('Edad: $edad  |  DNI: ${votante.dni}'),
+              Text('Edad: $edad | DNI: ${votante.dni}'),
+              // intencionVoto(votante, ancho: 200),
               SizedBox(height: 4),
               Text(
-                  '${Escuela.traer(votante.mesa).escuela} | Mesa: ${votante.mesa} #${votante.orden} ${r > 1 ? 'x $r' : ''}',
+                  '${Escuela.traer(votante.mesa).escuela} | Mesa: ${votante.mesa} #${votante.orden} ${r > 1 ? ' x $r' : ''}',
                   style: TextStyle(fontSize: 12)),
             ],
           ),
@@ -62,15 +64,12 @@ class _VotanteItemState extends State<VotanteItem> {
   }
 
   Widget crearNombre(Votante votante, Color color, int indice) {
+    final estilo = TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          width: 20,
-          child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
-        ),
-        FittedBox(
-            child: Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color))),
+        SizedBox(width: 20, child: Text('${indice + 1}', style: estilo)),
+        Text(votante.nombre, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
       ],
     );
   }

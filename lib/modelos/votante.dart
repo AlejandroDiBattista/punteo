@@ -4,6 +4,7 @@ import '../utils.dart';
 import 'datos.dart';
 import 'escuela.dart';
 import 'favorito.dart';
+import 'mesa.dart';
 
 typedef Votantes = List<Votante>;
 
@@ -22,7 +23,8 @@ class Votante {
   double longitude;
 
   bool favorito = false;
-  bool agrupar = false;
+  bool busqueda = false;
+  // bool agrupar = false;
   int nroEscuela = 0;
 
   int get edad => 2023 - clase.abs();
@@ -31,6 +33,7 @@ class Votante {
 
   String textoCompleto = '';
   List<int> get referentes => Datos.favoritos.where((f) => f.dni == dni).map((f) => f.referente).toList();
+  Favoritos get favoritos => Datos.favoritos.where((f) => f.referente == dni && f.favorito).toList();
 
   Votante(
     this.dni,
@@ -80,7 +83,6 @@ class Votante {
     double? ucr,
     double? latitude,
     double? longitude,
-    String favorito = ' ',
   }) =>
       Votante(
           dni ?? this.dni,
@@ -111,6 +113,7 @@ class Votante {
       map['longitude']);
 
   void cambiarFavorito() => this.favorito = !this.favorito;
+  void marcarBuscar() => this.busqueda = true;
 
   String toJson() => json.encode(toMap());
 
@@ -125,26 +128,9 @@ class Votante {
   @override
   int get hashCode => dni.hashCode;
 
-  static void organizar(Votantes votantes) {
-    var apellido = '';
-
-    for (final v in votantes) {
-      if (v.nombre.contains(',')) {
-        final nuevo = v.nombre.split(',').first;
-        v.agrupar = nuevo == apellido;
-        if (nuevo != apellido) {
-          apellido = nuevo;
-        }
-      } else {
-        apellido = '';
-        v.agrupar = false;
-      }
-    }
-  }
-
   static Votantes ordenarVotantes(Votantes votantes) {
     votantes.sort((a, b) => a.nombre.compareTo(b.nombre));
-    Votante.organizar(votantes);
+    // Votante.organizar(votantes);
     return votantes;
   }
 
@@ -162,16 +148,20 @@ class Votante {
 
     medir('Buscado "$texto"', () {
       for (final palabra in palabras) {
-        if (palabra == 'mios') {
+        if (palabra == 'mios' || palabra == 'mis') {
           origen = origen.where((v) => v.favorito).toList();
         } else if (palabra == 'repetidos') {
           final marcas = Favorito.contar(Datos.favoritos);
           origen = origen.where((v) => (marcas[v.dni] ?? 0) >= 2).toList();
-        } else if (palabra == 'todos') {
+        } else if (palabra == 'favoritos') {
           final marcas = Favorito.contar(Datos.favoritos);
           origen = origen.where((v) => (marcas[v.dni] ?? 0) >= 1).toList();
-        } else if (palabra == 'localizacion') {
-          origen = origen.where((v) => v.latitude != 0).toList();
+        } else if (palabra == 'localizados') {
+          origen = origen.where((v) => v.conUbicacion).toList();
+        } else if (palabra == 'prioridad') {
+          origen = origen
+              .where((v) => v.conUbicacion && v.escuela.esPrioridad && !v.favorito && !Mesa.traer(v.mesa).esCerrada)
+              .toList();
         } else if (palabra == 'cerca') {
           final usuario = Datos.usuarioActual;
           if (usuario.conUbicacion) {
@@ -183,13 +173,13 @@ class Votante {
             final distancia = int.parse(palabra.substring(1));
             origen = origen.where((v) => v.conUbicacion && (Votante.distancia(v, usuario) <= distancia)).toList();
           }
-        } else if (["m", "hombre", "f", "mujer"].contains(palabra)) {
-          final sexo = palabra == "hombre" || palabra == "M" ? "M" : "F";
+        } else if (['m', 'hombre', 'f', 'mujer'].contains(palabra)) {
+          final sexo = palabra == 'hombre' || palabra == 'M' ? 'M' : 'F';
           origen = origen.where((v) => v.sexo == sexo).toList();
         } else if (palabra == 'familia') {
           final marcas = contarDomicilio(origen);
           origen = origen.where((v) => (marcas[v.domicilio] ?? 0) >= 2).toList();
-        } else if (RegExp(r'^[0-9]{4}$').hasMatch(palabra)) {
+        } else if (RegExp(r'^3[0-9]{3}$').hasMatch(palabra)) {
           final mesa = int.parse(palabra);
           origen = origen.where((v) => v.mesa == mesa).toList();
         } else if ((RegExp(r'^[+-][0-9]{2}$').hasMatch(palabra))) {
@@ -206,7 +196,7 @@ class Votante {
       print('Hay ${origen.length} votantes');
     });
 
-    Votante.organizar(origen);
+    // Votante.organizar(origen);
     return origen;
   }
 

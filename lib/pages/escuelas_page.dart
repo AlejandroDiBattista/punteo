@@ -14,6 +14,7 @@ class EscuelasPage extends StatefulWidget {
 class _EscuelasPageState extends State<EscuelasPage> {
   @override
   Widget build(BuildContext context) {
+    Datos.escuelas.sort();
     final datos = Datos.escuelas;
     return SafeArea(
       child: Scaffold(
@@ -29,22 +30,32 @@ class _EscuelasPageState extends State<EscuelasPage> {
     );
   }
 
-  Widget crearEscuela(int indice, Escuela escuela) {
-    final color = escuela.esCompleta ? Colors.green : (escuela.esAnalizada ? Colors.blue : Colors.black);
+  static String calcularEstado(Escuela escuela) {
+    final completa = escuela.estado == EstadoEscuela.completa;
+    final analizadas = escuela.cantidadMesasAnalizadas;
+    final cerradas = escuela.cantidadMesasCerradas;
+    final estado = (completa ? 'Todas cerradas' : '${cerradas.info('cerrada')} ${analizadas.info('pendiente')}').trim();
+    return estado.length > 0 ? '| ($estado) ' : '';
+  }
+
+  Widget crearEscuela(int indice, Escuela e) {
+    final color = e.estado.color;
+    final estado = calcularEstado(e);
+    final favoritos = e.totalVotantesFavoritos;
+
     return ListTile(
-      tileColor: escuela == Datos.escuelaActual ? Theme.of(context).primaryColor.withAlpha(20) : Colors.white,
+      tileColor: e == Datos.escuelaActual ? Theme.of(context).primaryColor.withAlpha(20) : Colors.white,
       title: Row(
         children: [
           Container(
             width: 20,
             child: Text('${indice + 1}', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w200, color: color)),
           ),
-          Text(escuela.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
+          Text(e.escuela, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           Spacer(),
-          // Text(escuela.esCompleta ? "(completa)" : "", style: TextStyle(fontSize: 12)),
-          if (escuela == Datos.escuelaActual && !escuela.esCompleta)
+          if (e == Datos.escuelaActual && e.estado != EstadoEscuela.completa)
             Text(
-              "Votas acá",
+              'Votas acá',
               style: TextStyle(fontSize: 12, color: Colors.green),
             )
         ],
@@ -55,16 +66,16 @@ class _EscuelasPageState extends State<EscuelasPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(escuela.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
-              Text(
-                  '${escuela.mesas.length} mesas (${escuela.cantidadMesasAnalizadas} + ${escuela.cantidadMesasCerradas}) | ${escuela.desde} a ${escuela.hasta} '),
-              Text('${escuela.totalVotantes} votantes | ${escuela.totalVotantesFavoritos} favoritos')
+              Text(e.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
+              Text('${e.mesas.length} mesas $estado | ${e.desde} a ${e.hasta} | ${e.prioridad}'),
+              Text('${e.totalVotantes} votantes ${favoritos > 0 ? ' | ${favoritos.info('favorito')}' : ''}')
             ],
           ),
         ],
       ),
-      trailing: Icon(Icons.check, color: escuela.esCompleta ? Colors.green : Colors.transparent, size: 20),
-      onTap: () => irMesa(context, escuela),
+      trailing:
+          Icon(Icons.check, color: e.estado == EstadoEscuela.completa ? Colors.green : Colors.transparent, size: 20),
+      onTap: () => irMesa(context, e),
     );
   }
 

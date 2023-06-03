@@ -51,7 +51,8 @@ flutter:
     assets:
         - datos/escuelas.json
         - datos/votantes.json
-        - datos/fondo.png
+        # - datos/fondo.png
+        - datos/fondo.jpg
  
     fonts:
         - family: Oxanium

@@ -23,7 +23,7 @@ class _IndicadorState extends State<Indicador> {
     return Container(
       width: 100,
       child: AspectRatio(
-        aspectRatio: 1,
+        aspectRatio: 1.3,
         child: Card(
           color: Colors.white,
           elevation: 10,

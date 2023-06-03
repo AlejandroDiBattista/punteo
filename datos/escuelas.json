@@ -7,6 +7,7 @@
     "circuito": "214",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 19,
     "latitude": -26.8041732,
     "longitude": -65.27027
   },
@@ -18,6 +19,7 @@
     "circuito": "214",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 18,
     "latitude": -26.7960717,
     "longitude": -65.25858
   },
@@ -29,6 +31,7 @@
     "circuito": "214",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 17,
     "latitude": -26.7954141,
     "longitude": -65.26322
   },
@@ -40,6 +43,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 2,
     "latitude": -26.8147478,
     "longitude": -65.26462
   },
@@ -51,6 +55,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 1,
     "latitude": -26.8163389,
     "longitude": -65.2745
   },
@@ -62,6 +67,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 8,
     "latitude": -26.8077472,
     "longitude": -65.29877
   },
@@ -73,6 +79,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 10,
     "latitude": -26.8036574,
     "longitude": -65.29497
   },
@@ -84,6 +91,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 7,
     "latitude": -26.806174,
     "longitude": -65.29319
   },
@@ -95,6 +103,7 @@
     "circuito": "215",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 16,
     "latitude": -26.8015293,
     "longitude": -65.30717
   },
@@ -106,17 +115,19 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 15,
     "latitude": -26.826456,
     "longitude": -65.27578
   },
   {
-    "escuela": "Colegio Boisdron",
+    "escuela": "Colegio Boisdrón",
     "direccion": "Lamadrid 1048",
     "desde": 3403,
     "hasta": 3411,
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 5,
     "latitude": -26.8216766,
     "longitude": -65.28642
   },
@@ -128,6 +139,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 3,
     "latitude": -26.8215702,
     "longitude": -65.28395
   },
@@ -139,6 +151,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 4,
     "latitude": -26.8275118,
     "longitude": -65.29295
   },
@@ -150,6 +163,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 12,
     "latitude": -26.8101272,
     "longitude": -65.30872
   },
@@ -161,6 +175,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 6,
     "latitude": -26.8135009,
     "longitude": -65.29357
   },
@@ -172,6 +187,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 11,
     "latitude": -26.8155667,
     "longitude": -65.29406
   },
@@ -183,6 +199,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 9,
     "latitude": -26.811475,
     "longitude": -65.30503
   },
@@ -194,6 +211,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 13,
     "latitude": -26.8199069,
     "longitude": -65.31575
   },
@@ -205,6 +223,7 @@
     "circuito": "216",
     "departamento": "Yerba Buena",
     "seccion": "Oeste",
+    "prioridad": 14,
     "latitude": -26.8193867,
     "longitude": -65.32045
   }
