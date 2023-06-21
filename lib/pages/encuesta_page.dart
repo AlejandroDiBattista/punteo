@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../modelos/datos.dart';
 import '../modelos/pregunta.dart';
 import '../utils.dart';
@@ -16,9 +17,10 @@ class _EncuestaPageState extends State<EncuestaPage> {
   List<int> respuestas = [];
 
   List<Pregunta> preguntas = Datos.preguntas;
+
   @override
-  @override
-  void initState() {
+  void initState() async {
+    await Datos.cargarPreguntas();
     preguntas.forEach((element) => respuestas.add(0));
     super.initState();
   }
@@ -73,7 +75,7 @@ class _EncuestaPageState extends State<EncuestaPage> {
             buildDescripcion(pregunta),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: respuestas.asMap().entries.map((item) => buildRespuesta(item.value, item.key)).toList(),
+              children: respuestas.asMap().entries.map((item) => creardRespuesta(item.value, item.key)).toList(),
             ),
             buildNavegacion(),
           ],
@@ -84,7 +86,8 @@ class _EncuestaPageState extends State<EncuestaPage> {
 
   Widget buildNavegacion() {
     final esUltimaPregunta = actual == preguntas.length - 1;
-    final conRespuesta = respuestas[actual] > 0;
+    final conRespuesta = respuestas[actual] > 0 || preguntas[actual].respuestas.isEmpty;
+    print("$respuestas");
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
@@ -129,19 +132,29 @@ class _EncuestaPageState extends State<EncuestaPage> {
     );
   }
 
-  Widget buildRespuesta(String respuesta, int i) {
+  Widget creardRespuesta(String respuesta, int i) {
     final bool seleccionado = (actual < respuestas.length) && (respuestas[actual] == i + 1);
+    final par = respuesta.split("|").first.split(":");
+
+    final texto = par[0].trim();
+    final info = par.length > 1 ? par[1].trim() : "";
+    print('[$texto] - [$info] $seleccionado');
+
+    final color = (seleccionado ? Colors.red : Colors.green);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () => seleccionarRespuesta(i + 1),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              respuesta.split("|").first,
-              style: TextStyle(fontSize: 18, color: (seleccionado ? Colors.red : null)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: Get.width - 20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(texto, style: TextStyle(fontSize: 20, color: color)),
+                if (info.isNotEmpty) Text(info, style: TextStyle(fontSize: 16, color: color)),
+              ],
             ),
           ),
         ),

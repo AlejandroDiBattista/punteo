@@ -1,11 +1,10 @@
 import 'dart:convert';
-// import 'votante.dart';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'datos.dart';
 import 'mesa.dart';
-import 'package:collection/collection.dart';
 
 typedef Escuelas = List<Escuela>;
 
@@ -127,7 +126,7 @@ class Escuela implements Comparable<Escuela> {
 
   EstadoEscuela get estado {
     if (cantidadMesasCerradas == cantidadMesas) return EstadoEscuela.completa;
-    if (cantidadMesasAnalizadas > 0 || cantidadMesasCerradas > 0) return EstadoEscuela.pendiente;
+    if (cantidadMesasCerradas > 0) return EstadoEscuela.pendiente;
     return EstadoEscuela.vacia;
   }
 
@@ -146,6 +145,10 @@ class Escuela implements Comparable<Escuela> {
   int get totalVotantesAnalizados => mesas.map((m) => m.esAnalizada ? m.votantes.length : 0).sum;
   int get totalVotantesCerrados => mesas.map((m) => m.esCerrada ? m.votantes.length : 0).sum;
 
+  int get votaron => mesas.map((mesa) => mesa.votaron).sum;
+  int get votos => mesas.map((mesa) => mesa.votos).sum;
+  int get entregas => mesas.map((mesa) => mesa.entregas).sum;
+
   get favoritos => mesas.map((mesa) => mesa.favoritos).expand((element) => element).toList();
 
   @override
@@ -160,5 +163,9 @@ class Escuela implements Comparable<Escuela> {
       Datos.escuelas.firstWhere((e) => e.desde <= mesa && mesa <= e.hasta, orElse: () => Escuela.noIdentificada());
 
   @override
-  int compareTo(Escuela other) => this.estado.compareTo(other.estado);
+  int compareTo(Escuela other) {
+    if (this.esPrioridad && !other.esPrioridad) return -1;
+    if (!this.esPrioridad && other.esPrioridad) return 1;
+    return this.estado.compareTo(other.estado);
+  }
 }

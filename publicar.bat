@@ -18,9 +18,9 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo Copiando datos al repositorio...
-xcopy "build\web\*.*" "C:\Users\administrator\Documents\GitHub\contactos" /E /I /Y
+xcopy "build\web\*.*" "C:\tmp\timbreo-flutter" /E /I /Y
 
-cd "C:\Users\administrator\Documents\GitHub\contactos"
+cd "C:\tmp\timbreo-flutter"
 
 echo Publicando sitio...
 git add .

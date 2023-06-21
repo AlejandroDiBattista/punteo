@@ -1,9 +1,12 @@
 import 'dart:convert';
+
 import 'package:intl/intl.dart';
 
 import 'datos.dart';
 
+typedef Sesiones = List<Sesion>;
 typedef Sesion = (DateTime hora, Duration duracion, int favoritos);
+
 typedef Favoritos = List<Favorito>;
 
 class Favorito {
@@ -42,6 +45,9 @@ class Favorito {
       busqueda: (map['busqueda'] ?? "N") == "S",
       hora: DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['hora']));
 
+  factory Favorito.minimo(int dni, int referente) =>
+      Favorito(dni: dni, referente: referente, favorito: true, hora: DateTime.now());
+
   String toJson() => json.encode(toMap());
   factory Favorito.fromJson(String source) => Favorito.fromMap(json.decode(source));
 
@@ -75,13 +81,13 @@ class Favorito {
     return salida;
   }
 
-  static List<Sesion> calcularSesiones(int dni) {
+  static Sesiones calcularSesiones(int dni) {
     final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
     lista.sort((a, b) => a.hora.compareTo(b.hora));
 
     DateTime? anterior, ultimo;
     int n = 0;
-    List<Sesion> salida = [];
+    Sesiones salida = [];
 
     for (final f in lista) {
       if (anterior == null) {
@@ -105,8 +111,8 @@ class Favorito {
     return salida;
   }
 
-  static int calcularMinutosTrabajado(int dni) {
-    final lista = Datos.favoritos.where((f) => f.referente == dni).toList();
+  static int calcularMinutosTrabajado(int referente) {
+    final lista = Datos.favoritos.where((f) => f.referente == referente).toList();
     lista.sort((a, b) => a.hora.compareTo(b.hora));
 
     DateTime? anterior, ultimo;

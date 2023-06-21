@@ -68,7 +68,8 @@ class _EscuelasPageState extends State<EscuelasPage> {
             children: [
               Text(e.direccion, style: TextStyle(fontSize: 16, color: Colors.black)),
               Text('${e.mesas.length} mesas $estado | ${e.desde} a ${e.hasta} | ${e.prioridad}'),
-              Text('${e.totalVotantes} votantes ${favoritos > 0 ? ' | ${favoritos.info('favorito')}' : ''}')
+              Text('${e.totalVotantes} votantes ${favoritos > 0 ? ' | ${favoritos.info('favorito')}' : ''}'),
+              crearResultados(e)
             ],
           ),
         ],
@@ -78,6 +79,15 @@ class _EscuelasPageState extends State<EscuelasPage> {
       onTap: () => irMesa(context, e),
     );
   }
+
+  Widget crearResultados(Escuela escuela) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          resultado("votos", escuela.votos),
+          resultado("entregado", escuela.entregas),
+          resultado("votaron", escuela.votaron),
+        ],
+      );
 
   Future<void> irMesa(BuildContext context, Escuela escuela) async {
     print('irMesa: ${escuela.escuela}');

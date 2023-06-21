@@ -24,11 +24,27 @@ class SheetsApi {
   static Worksheet? favoritos;
   static Worksheet? mesas;
   static Worksheet? preguntas;
+  static Worksheet? entregas;
   static Worksheet? respuestas;
+
+  static Future _init() async {
+    libro ??= await gsheets.spreadsheet(_sheetsId,
+        render: ValueRenderOption.formattedValue, input: ValueInputOption.userEntered);
+    mesas ??= libro!.worksheetByTitle('mesas');
+    favoritos ??= libro!.worksheetByTitle('favoritos');
+    entregas ??= libro!.worksheetByTitle('entregas');
+    preguntas ??= libro!.worksheetByTitle('preguntas');
+    respuestas ??= libro!.worksheetByTitle('respuestas');
+  }
 
   static Future<List<Map<String, dynamic>>> traerFavoritos() async {
     await _init();
     return await _traer(favoritos!);
+  }
+
+  static Future<List<Map<String, dynamic>>> traerEntregas() async {
+    await _init();
+    return await _traer(entregas!);
   }
 
   static Future<List<Map<String, dynamic>>> traerCierres() async {
@@ -46,6 +62,11 @@ class SheetsApi {
     await favoritos!.values.appendRow(datos);
   }
 
+  static Future<void> registrarEntrega(List<dynamic> datos) async {
+    await _init();
+    await entregas!.values.appendRow(datos);
+  }
+
   static Future<void> registrarCierre(List<dynamic> datos) async {
     await _init();
     mesas!.values.appendRow(datos);
@@ -54,15 +75,6 @@ class SheetsApi {
   static Future<void> registrarRespuestas(List<int> datos) async {
     await _init();
     await _enviar(respuestas!, datos);
-  }
-
-  static Future _init() async {
-    libro ??= await gsheets.spreadsheet(_sheetsId,
-        render: ValueRenderOption.formattedValue, input: ValueInputOption.userEntered);
-    mesas ??= libro!.worksheetByTitle('mesas');
-    favoritos ??= libro!.worksheetByTitle('favoritos');
-    preguntas ??= libro!.worksheetByTitle('preguntas');
-    respuestas ??= libro!.worksheetByTitle('respuestas');
   }
 
   static Future<void> _enviar(Worksheet destino, List<int> datos) async {

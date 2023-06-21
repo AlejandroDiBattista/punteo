@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../colores.dart';
-import '../utils.dart';
+
 import '/pages/votantes_page.dart';
+import '../colores.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
 import '../modelos/mesa.dart';
+import '../utils.dart';
 // import '../modelos/votante.dart';
 
 class MesasPage extends StatefulWidget {
@@ -71,6 +72,10 @@ class _MesasPageState extends State<MesasPage> {
           SizedBox(height: 5),
           crearNombre("desde: ", mesa.votantes.first.nombre),
           crearNombre("hasta: ", mesa.votantes.last.nombre),
+          SizedBox(
+            height: 4,
+          ),
+          crearResultados(mesa)
         ],
       );
 
@@ -89,11 +94,12 @@ class _MesasPageState extends State<MesasPage> {
       ]);
 
   void irVotantes(Mesa mesa) async {
-    print('irVotantes: ${mesa.numero}');
-    // Datos.marcarMesa(mesa, "entrar");
-    await Navigator.push(context, MaterialPageRoute(builder: (context) => VotantesPage(mesa: mesa)));
-    // Datos.marcarMesa(mesa, "salir");
-    setState(() {});
+    return;
+    // print('irVotantes: ${mesa.numero}');
+    // // Datos.marcarMesa(mesa, "entrar");
+    // await Navigator.push(context, MaterialPageRoute(builder: (context) => VotantesPage(mesa: mesa)));
+    // // Datos.marcarMesa(mesa, "salir");
+    // setState(() {});
   }
 
   void cambiarEstadoMesa(Mesa mesa) async {
@@ -101,4 +107,19 @@ class _MesasPageState extends State<MesasPage> {
     Datos.marcarMesa(mesa);
     setState(() {});
   }
+
+  Widget crearResultados(Mesa mesa) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            resultado("votos", mesa.votos),
+            resultado("entregado", mesa.entregas),
+            resultado("votaron", mesa.votaron),
+            resultado("%", mesa.participacion.truncate(), true)
+          ],
+        ),
+      );
+
+
 }

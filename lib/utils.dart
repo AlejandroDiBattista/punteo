@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'dart:math';
 
 import 'colores.dart';
 import 'modelos/votante.dart';
@@ -9,10 +10,12 @@ extension DateTimeUtils on DateTime {
   String get fecha => DateFormat('dd/MM/yyyy').format(this);
   String get hora => DateFormat('HH:mm:ss').format(this);
   String get fechaHora => DateFormat('dd/MM/yyyy HH:mm:ss').format(this);
+  int get segundosTranscurridos => this.difference(DateTime.now()).inSeconds.abs();
 }
 
 extension UtilesString on String {
-  String get sinEspacios => this.trim().replaceAll(RegExp('\\s+'), ' ');
+  String get sinEspacios => this.trim().replaceAll(RegExp(' +'), ' ');
+  String get simplificar => sinAcentos.toLowerCase().replaceAll(RegExp('[^a-zñ0-9_]+'), ' ').sinEspacios;
   String get sinAcentos => this
       .replaceAll('á', 'a')
       .replaceAll('é', 'e')
@@ -27,11 +30,32 @@ extension UtilesString on String {
 
   List<String> get palabras => this.sinEspacios.split(' ').map((p) => p.sinAcentos).toList();
   bool contienePalabras(List<String> palabras) => palabras.every((palabra) => this.contains(palabra));
+  bool get esNombre => RegExp(r'[A-ZÑÁÉÍÓÏÜ]', caseSensitive: true).hasMatch(this);
+  bool get esNumero => RegExp(r'^[+-]?[[0-9]+$').hasMatch(this);
+  bool get soloLetras => RegExp(r'^[a-zñáéíóïü]+$', caseSensitive: false).hasMatch(this);
+  String pad([int n = 20]) => this.padRight(n).substring(0, n);
+  String get invertirNombre {
+    if (!this.contains(",")) return this;
+    final partes = this.split(",").map((e) => e.trim()).toList();
+    return '${partes[1]} ${partes[0]}';
+  }
 }
 
 extension UtilesInt on int {
-  String info([String singular = '', String? plural, String? vacio]) =>
-      switch (this) { 0 => vacio ?? '', 1 => '$this $singular', _ => '$this ${plural ?? singular + 's'}' };
+  String info([String singular = '', String? plural, String? vacio]) {
+    if (plural == null) {
+      plural = singular.endsWith('ión') ? singular.replaceAll('ión', 'iones') : singular + 's';
+    }
+    if (!singular.contains('#')) singular = '# $singular';
+    if (!plural.contains('#')) plural = '# $plural';
+
+    final formato = switch (this) { 0 => vacio ?? '', 1 => singular, _ => plural };
+    return formato.replaceAll('#', '$this');
+  }
+
+  String pad([int n = 3]) {
+    return this.toString().padLeft(n);
+  }
 }
 
 extension UtilesBool on bool {
@@ -50,17 +74,45 @@ extension ListRandomExtension<E> on List<E> {
   }
 }
 
+DateTime? inicio;
+DateTime? etapa;
+int contarEtapas = 0;
+
+void comenzar(String titulo) {
+  inicio = DateTime.now();
+  etapa = inicio;
+  contarEtapas = 0;
+  print("> $titulo");
+}
+
+void avanzar(String mensaje) {
+  if (inicio == null || etapa == null) return;
+  final ahora = DateTime.now();
+  final tiempo = '${ahora.difference(etapa!).inMilliseconds}';
+  contarEtapas++;
+  mensaje = mensaje.replaceAll("#", contarEtapas.toString());
+  print("${mensaje.padRight(40)} ${tiempo.padLeft(5)} ms");
+  etapa = ahora;
+}
+
+void terminar() {
+  if (inicio == null || etapa == null) return;
+  final ahora = DateTime.now();
+  print("| ${(ahora.difference(inicio!).inMilliseconds)} ms");
+  print("");
+}
+
 void medir(String mensaje, Function ejecutar) {
   final reloj = Stopwatch()..start();
-  print('> $mensaje');
+  print('> $mensaje.');
   ejecutar();
   reloj.stop();
-  print('- (${reloj.elapsedMilliseconds}ms)');
+  print('| [ ${reloj.elapsedMilliseconds}ms ]');
 }
 
 AppBar crearTitulo(Widget titulo, {List<Widget>? actions}) => AppBar(
     title: titulo,
-    centerTitle: true,
+    centerTitle: false,
     flexibleSpace: Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -94,6 +146,17 @@ Widget intencionVoto(Votante votante, {double ancho = 100}) {
       sector(ajuste * votante.ucr, Colors.red),
       sector(ajuste * votante.cyb, Colors.amber)
     ],
+  );
+}
+
+Widget resultado(String titulo, int valor, [bool invertido = false]) {
+  var etiqueta = Text("$titulo: ", style: TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.w200));
+  var resultado = Text("$valor", style: TextStyle(color: Colors.blue, fontSize: 14, fontWeight: FontWeight.bold));
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 4),
+    child: Row(
+      children: invertido ? [resultado, etiqueta] : [etiqueta, resultado],
+    ),
   );
 }
 

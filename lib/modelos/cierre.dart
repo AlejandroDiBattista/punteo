@@ -9,16 +9,21 @@ class Cierre {
   DateTime hora;
   bool cerrada = true;
 
-  Cierre({required this.mesa, required this.referente, required this.hora});
+  Cierre({required this.mesa, required this.referente, required this.hora, this.cerrada = true});
 
   Cierre copyWith({int? mesa, int? referente, DateTime? hora}) =>
       Cierre(mesa: mesa ?? this.mesa, referente: referente ?? this.referente, hora: hora ?? this.hora);
 
-  Map<String, dynamic> toMap() => {'mesa': mesa, 'referente': referente, 'hora': hora};
+  Map<String, dynamic> toMap() => {'mesa': mesa, 'referente': referente, 'hora': hora, 'cerrada': cerrada};
+
   factory Cierre.fromMap(Map<String, dynamic> map) => Cierre(
       mesa: int.parse(map['mesa']),
       referente: int.parse(map['referente']),
-      hora: DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['hora']));
+      hora: DateFormat('dd/MM/yyyy HH:mm:ss').parse(map['hora']),
+      cerrada: true);
+
+  factory Cierre.minimo(int mesa, int referente, bool cerrada) =>
+      Cierre(mesa: mesa, referente: referente, hora: DateTime.now(), cerrada: cerrada);
 
   String toJson() => json.encode(toMap());
   factory Cierre.fromJson(String source) => Cierre.fromMap(json.decode(source));

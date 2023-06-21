@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import '/utils.dart';
+import 'package:get/get.dart';
 
-// import '/modelos/datos.dart';
-import '/modelos/favorito.dart';
-import '/modelos/votante.dart';
+import '/modelos/usuario.dart';
+import '/utils.dart';
 
 class UsuarioItem extends StatelessWidget {
   const UsuarioItem({super.key, required this.usuario, required this.index});
 
-  final Votante usuario;
+  final Usuario usuario;
   final int index;
 
   @override
@@ -25,6 +24,8 @@ class UsuarioItem extends StatelessWidget {
                 domicilio(),
                 sesiones(),
                 acceso(),
+                extras(),
+                mesasPrioritarias(),
               ])
             ]),
             favorito()
@@ -33,34 +34,38 @@ class UsuarioItem extends StatelessWidget {
   }
 
   Widget acceso() {
-    final activo = Favorito.esUsuarioActivo(usuario.dni);
-    final ultimoAcceso = Favorito.ultimoAcceso(usuario.dni);
-    final estilo = TextStyle(fontSize: 16, color: activo ? Colors.red : Colors.black);
+    final estilo = TextStyle(fontSize: 16, color: usuario.activo ? Colors.red : Colors.black);
 
-    return Text(activo ? 'En línea ahora' : 'Hace ${fecha(ultimoAcceso)}', style: estilo);
+    return Text(usuario.activo ? 'En línea ahora' : 'Hace ${fecha(usuario.ultimoAcceso)}', style: estilo);
   }
 
-  Widget sesiones() {
-    final cantidad = Favorito.calcularSesiones(usuario.dni).length;
-    final tiempo = Favorito.calcularMinutosTrabajado(usuario.dni);
+  Widget sesiones() => Text("${usuario.cantidadSesiones.info('sesión')} | ${minutos(usuario.tiempoTrabajado)}",
+      style: TextStyle(fontSize: 16, color: Colors.blue));
 
-    return Text("${cantidad.info('sesión', 'sesiones')} | ${minutos(tiempo)}",
-        style: TextStyle(fontSize: 16, color: Colors.blue));
-  }
+  Widget extras() => Text("Analizados: ${usuario.cantidadAnalizados} | Cerradas: ${usuario.mesasCerradas}",
+      style: TextStyle(fontSize: 14, color: Colors.blue));
 
-  Widget domicilio() => Row(children: [
+  Widget mesasPrioritarias() =>
+      Text(usuario.mesasPendientes.info("Falta # mesa", "Faltan # mesas", "Mesas prioritarias completas 👏🏼👏🏼"),
+          style: TextStyle(fontSize: 16, color: usuario.mesasPendientes > 0 ? Colors.red : Colors.green));
+
+  Widget domicilio() => SizedBox(
+      width: Get.width - 120,
+      child: Row(children: [
         Text('DNI ${usuario.dni} | '),
         Text(usuario.domicilio, style: TextStyle(fontSize: 12)),
         Icon(Icons.location_on, color: usuario.conUbicacion ? Colors.red : Colors.grey, size: 12)
-      ]);
+      ]));
 
   Widget nombre() => SizedBox(
-      width: 280, child: Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
+      width: Get.width - 120,
+      child: Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
 
   Widget podio(int posicion) => switch (posicion) {
-        0 => Icon(Icons.military_tech, color: Colors.yellow[600]),
+        < 0 => Icon(Icons.workspace_premium, color: Colors.yellow[700]),
+        0 => Icon(Icons.military_tech, color: Colors.yellow[700]),
         1 => Icon(Icons.military_tech, color: Colors.grey),
-        2 => Icon(Icons.military_tech, color: Colors.orange),
+        2 => Icon(Icons.military_tech, color: Colors.orange[800]),
         _ => SizedBox(width: 24, child: Text("${posicion + 1}", textAlign: TextAlign.center))
       };
 
@@ -85,6 +90,7 @@ String fecha(DateTime startDate) {
 
   int days = difference.inDays;
   int hours = difference.inHours % 24;
-
+  int minutes = difference.inMinutes % 60;
+  if (difference.inMinutes < 60) return minutes.info('minuto');
   return '${days.info('día')} ${hours.info('hora')}'.trim();
 }

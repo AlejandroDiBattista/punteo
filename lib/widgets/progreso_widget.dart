@@ -1,4 +1,3 @@
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Progreso extends StatelessWidget {
@@ -7,5 +6,5 @@ class Progreso extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      this.cargando ? LinearProgressIndicator(backgroundColor: Colors.transparent, minHeight: 1) : SizedBox(height: 1);
+      this.cargando ? LinearProgressIndicator(backgroundColor: Colors.transparent, minHeight: 5) : SizedBox(height: 5);
 }

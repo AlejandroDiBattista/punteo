@@ -1,13 +1,13 @@
 // import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
-// import '../modelos/cierre.dart';
-import '../modelos/mesa.dart';
-import '../widgets/usuario_card.dart';
-import '/pages/ingresar_page.dart';
 import '../modelos/datos.dart';
 import '../modelos/favorito.dart';
+// import '../modelos/cierre.dart';
+import '../modelos/mesa.dart';
 import '../widgets/indicador_widget.dart';
+import '../widgets/usuario_card.dart';
+import 'menu_page.dart';
 // import '../modelos/escuela.dart';
 // import '../modelos/votante.dart';
 
@@ -35,7 +35,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
           child: Center(
             child: ListView(children: [
               Container(constraints: BoxConstraints(maxWidth: 350)),
-              UsuarioCard(),
+              UsuarioCard(Datos.usuarioActual),
               mostrarEstadistica(context),
               mostrarCerrar(context),
               // mostrarActualizar(context),
@@ -148,7 +148,7 @@ class _EstadisticasPageState extends State<EstadisticasPage> {
     Datos.usuario = 0;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => IngresarPage()),
+      MaterialPageRoute(builder: (context) => MenuPage()),
     );
   }
 

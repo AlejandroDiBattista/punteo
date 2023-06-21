@@ -1,0 +1,29 @@
+ASIGNACION DE CALLES
+    Calle                V   D
+ 1. Anzorena            26   9
+   -> Santiago
+ 2. Bascary             21   5
+   -> Santiago
+ 3. Catamarca           50  15
+   -> Santiago
+ 4. Diego de Villarroe  32  17
+   -> Marcelo
+ 5. Frias Silva         36  19
+   ???
+ 6. Lamadrid            28   7
+   -> Santiago
+ 7. Las Rosas            7   5
+   ???
+ 8. Los Ceibos          40  25
+   -> Santiago
+ 9. Peru                18  11
+   ??? 
+10. Pringles            30  12
+   -> Santiago
+11. Salas y Valdez      16  12
+   -> Santiago
+12. Santo Domingo       43  28 
+   -> Hernan
+13. Venezuela           24  12
+   -> Marcelo 
+    TOTAL              371 177

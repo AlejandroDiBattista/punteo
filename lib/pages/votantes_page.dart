@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/utils.dart';
-
 import '/colores.dart';
-import '/widgets/votantes_item.dart';
-import '/modelos/escuela.dart';
-import '/modelos/votante.dart';
 import '/modelos/datos.dart';
+import '/modelos/escuela.dart';
 import '/modelos/mesa.dart';
+import '/utils.dart';
+import '/widgets/votantes_item.dart';
+import '../modelos/votante.dart';
 
 class VotantesPage extends StatefulWidget {
   final Mesa mesa;

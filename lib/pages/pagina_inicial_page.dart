@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../colores.dart';
-import 'escuelas_page.dart';
+import '../modelos/datos.dart';
 import 'buscar_page.dart';
+import 'escuelas_page.dart';
 import 'estadisticas_page.dart';
 import 'usuarios_page.dart';
-
-import '../modelos/datos.dart';
 
 // ignore: must_be_immutable
 class PaginaInicialPage extends StatefulWidget {

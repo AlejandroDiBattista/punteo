@@ -1,0 +1,46 @@
+*por susanda | @susana*
+    - todos los referidos por susana
+*repetidos*
+    - todos los referidos por mas de una persona
+*mios | mis*
+    - Solos los referidos por el usuario actual
+*favoritos | todos | referidos*
+    - Todos los referidos 
+*localizandos | ubicados*
+    - todos los georeferenciados
+*prioridad*
+    - los que pertenece a las escuelas criticas, georefenciados que no han sigo marcados
+*cerca*
+    - los que estan a menos de 300 metros del domicilio del usuario
+*barrio*
+    - todos los votantes que viven en un barrio
+*country*
+    - todos los referidos que viven en un country
+*ubicables*
+    - los referidos que tienen domicilio ubicable
+*noubicables*
+    - referidos que viven en un barrio o country que no tienen domicilio ubicable
+*<200*
+    - los que viven a menos de 200 metros del domicilio del usuario
+*>500*
+    - los que viven a mas de 500 metros del domicilio del usuario
+*hombre | m*
+    - todos los votantes que son hombres
+*mujer | f*
+    - todos los votantes que son mujeres
+*pendientes*
+    - todos los referidos que a lo que todavia no le entregamos los votos
+*entregado*
+    - los referidos a los que le entregamos un voto
+*-nombre*
+    - escluye a "nombre" de la busqueda
+*+nombre | Nombre*
+    - busca que el nombre este completo
+*3300*
+    - Busca los que votan en la mesa 3300
+*+20*
+    - Muestra los votante que tengan mas de 20 años (incluye 20)
+*-30*
+    - Muestra los votantes que tengan menos de 30 años (incluye 30)
+:aconquija
+    - Muestra los votantes que estan en la calle aconquija 

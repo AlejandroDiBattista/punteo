@@ -1,0 +1,330 @@
+id,nombre,dni,domicilio,latitude,longitude,referente
+1779,Cossio Maria Jose,14226045,Acasusso 173,-26.8124496,-65.2856675,Santiago
+2579,Garcia Pinto Facundo,33884172,Acasusso 55,-26.81361105,-65.28579916,Santiago
+2729,Melian Duarte Luana,43502249,Alfredo Guzman 770,-26.792284,-65.261026,Santiago
+433,Pereyra Sims Evaristo Martin,38116191,Andres Villa 290,-26.8202283,-65.2734763,Santiago
+434,Pereyra Sims Maria Florencia,32413475,Andres Villa 290,-26.8202283,-65.2734763,Santiago
+435,Pereyra Sims Victor Tomas,34326897,Andres Villa 290,-26.8202283,-65.2734763,Santiago
+2588,Paez De La Torre Santiago,16158844,Anzorena 300,-26.8166899,-65.2897437,Santiago
+2584,Paez De La Torre Juan Martin,37309760,Anzorena 380,-26.8177104,-65.2898509,Santiago
+2585,Paez De La Torre Geronimo,34603571,Anzorena 380,-26.8177104,-65.2898509,Santiago
+2589,Paez De La Torre Santiago,34132947,Anzorena 380,-26.8177104,-65.2898509,Santiago
+459,Schuttemberger Ignacio,39574520,Anzorena 418,-26.8182688,-65.2900456,Santiago
+460,Schuttemberger Santiago,39574519,Anzorena 418,-26.8182688,-65.2900456,Santiago
+461,Schuttemberger Eduardo Daniel,16784562,Anzorena 418,-26.8182688,-65.2900456,Santiago
+573,Renta Fernando Maximo,17614013,Av Aconquija 1629,-26.813174,-65.2928319,Santiago
+574,Renta Maximo Jose,38741673,Av Aconquija 1629,-26.813174,-65.2928319,Santiago
+1658,Renta Fernando Jose,37309789,Av Aconquija 1629,-26.813174,-65.2928319,Santiago
+1093,Rotella Luis Maria,36420595,Av Aconquija 1942,-26.8127586,-65.2977473,Santiago
+1682,Bruchmann Gaston Jose,35523661,Av Aconquija 688,-26.8166486,-65.2756244,Santiago
+2580,Gomez Lassalle Benjamin,34327675,Av Peron 1200,-26.8044481,-65.29027473,Santiago
+2581,Gomez Lassalle Luis Eugenio,11476164,Av Peron 1200,-26.8026122,-65.2881281,Santiago
+576,Zavaleta Lucas,34357054,Av Peron 1300,-26.8026122,-65.2881281,Santiago
+577,Zavaleta Facundo Jose Maria,34873480,Av Peron 1300,-26.8026122,-65.2881281,Santiago
+1190,Luquin Mariela,23930295,Av Peron 1800,-26.81578332,-65.28597108,Santiago
+1791,Sancho Miñano Nicolas,29532810,Av Peron 2500,-26.833246,-65.3,Santiago
+1669,Zerda Isolina,37497793,Av Peron ESQ Bascary,-26.8133598,-65.2878211,Santiago
+1672,Mateos Mercedes,32575505,Bascary 2000,-26.8092147,-65.2972098,Santiago
+775,Magni Carolina,27960809,Bascary 222,-26.8114571,-65.2873228,Santiago
+1310,Lopez Alurralde Fernando Jose,32413121,Bascary 291,-26.8110174,-65.2870296,Santiago
+1311,Lopez Alurralde Lucia,41763340,Bascary 291,-26.8110174,-65.2870296,Santiago
+1312,Lopez Alurralde Maria Pia,33815030,Bascary 291,-26.8110174,-65.2870296,Santiago
+1313,Lopez Alurralde Hipolito Oscar,13474850,Bascary 291,-26.8110174,-65.2870296,Santiago
+1192,Maldonado Yubrin Augusto Javier,40087934,Bascary 850,-26.8053602,-65.2855703,Santiago
+1193,Maldonado Yubrin Franco Jesus,43706025,Bascary 850,-26.8053602,-65.2855703,Santiago
+1194,Maldonado Yubrin Lucas Exequiel,37497250,Bascary 850,-26.8053602,-65.2855703,Santiago
+1195,Maldonado Yubrin Patricio Benjamin,42008680,Bascary 850,-26.8053602,-65.2855703,Santiago
+1300,Rico Luis Maria,43706130,Bascary 850,-26.80559707,-65.28554994,Santiago
+1301,Rico Maria De La Paz,42269931,Bascary 850,-26.8053602,-65.2855703,Santiago
+1516,Rico Sebastian,45729184,Bascary 850,-26.80559707,-65.28554994,Santiago
+1517,Rico Luciana Maria,39077561,Bascary 850,-26.8053602,-65.2855703,Santiago
+1954,Majul Martina,41446223,Bascary 851,-26.80521955,-65.28609482,Santiago
+1089,Remis Luisa,37497911,Belgrano 97,-26.81398023,-65.29499579,Santiago
+1097,Servitje Patricio,37725286,Boulevard 9 de Julio 1650,-26.8185917,-65.2943171,Santiago
+1098,Servitje Sofia,39355911,Boulevard 9 de Julio 1650,-26.8185917,-65.2943171,Santiago
+760,Urpi Facundo Javier,38745569,Boulevard 9 de Julio 770,-26.8206202,-65.2823385,Santiago
+763,Urpi Javier Ernesto,20171072,Boulevard 9 de Julio 770,-26.8206202,-65.2823385,Santiago
+765,Urpi Jimena,42939881,Boulevard 9 de Julio 770,-26.8206202,-65.2823385,Santiago
+1683,Rojas Maria Pia,34185677,Boulevard 9 de Julio 950,-26.8208058,-65.2818139,Santiago
+1657,Perez Jimenez Facundo,29877805,Brasil 1049,-26.8083043,-65.2839554,Santiago
+1654,Perez Jimenez Juan Manuel,35920511,Brasil 1149,-26.8083043,-65.2839554,Santiago
+1655,Perez Jimenez Pilar,35185385,Brasil 1149,-26.8083043,-65.2839554,Santiago
+1656,Perez Jimenez Salvador Luis Francisco,8082344,Brasil 1149,-26.8083043,-65.2839554,Santiago
+1667,Valdivieso Susana Maria,36998185,Brasil 1179,-26.8083043,-65.2839554,Santiago
+1668,Valdivieso Sofia Maria,34286750,Brasil 1179,-26.8083043,-65.2839554,Santiago
+1676,Valdivieso Javier Jose,41375526,Brasil 1179,-26.8083043,-65.2839554,Santiago
+1677,Valdivieso Diego Jose,37656114,Brasil 1179,-26.8083043,-65.2839554,Santiago
+1263,Montero Juan Luis,5535744,Brasil 1408,-26.8083043,-65.2839554,Santiago
+1264,Montero Juan Luis,37097177,Brasil 1408,-26.8083043,-65.2839554,Santiago
+2555,Rosales Soro Juan Maria,36866801,Brasil 655,-26.8083043,-65.2839554,Santiago
+3,Meloni Osvaldo,14023762,Calle Este 135,-26.8149011,-65.2742289,Santiago
+1678,Meloni Tomas,37656225,Calle Este 135,-26.8149011,-65.2742289,Santiago
+2513,Fiad Paz Elias,39975824,Calle Este 7,-26.81568803,-65.27464833,Santiago
+2514,Fiad Elias,16540769,Calle Este 7,-26.81568803,-65.27464833,Santiago
+2515,Fiad Maria Del Pilar,43162370,Calle Este 7,-26.81568803,-65.27464833,Santiago
+1085,Zarba Facundo,33139650,Cariola 1060,-26.8178967,-65.2829195,Santiago
+1086,Zarba Lucia,31644233,Cariola 1060,-26.8178967,-65.2829195,Santiago
+2582,Padilla Alvaro Jose,38023245,Cariola 1230,-26.8171137,-65.2876349,Santiago
+2583,Padilla Alvaro Jose,16132598,Cariola 1230,-26.8171137,-65.2876349,Santiago
+2549,Falivene Carlos Jose,23116739,Cariola 1278,-26.8188218,-65.2778693,Santiago
+2550,Falivene Carlos Jose,43562762,Cariola 1278,-26.8188218,-65.2778693,Santiago
+2551,Falivene Dolores,41238878,Cariola 1278,-26.8188218,-65.2778693,Santiago
+2552,Falivene Ines,45335904,Cariola 1278,-26.8188218,-65.2778693,Santiago
+475,Sturgeon De La Serna Tomas Percival Juan,32371830,Cariola 1284,-26.816853,-65.2892137,Santiago
+747,Triviño Herrera Ana Clara,45440378,Cariola 210,-26.8204928,-65.2692468,Santiago
+748,Triviño Herrera Felipe,44191289,Cariola 210,-26.8204928,-65.2692468,Santiago
+749,Triviño Herrera Santiago Jose,41345192,Cariola 210,-26.8204928,-65.2692468,Santiago
+750,Triviño Herrera Simon,42813399,Cariola 210,-26.8204928,-65.2692468,Santiago
+751,Triviño Alvaro Marcelo,20219555,Cariola 210,-26.8204928,-65.2692468,Santiago
+776,Valle Carolina,34910868,Cariola 481,-26.8196197,-65.2726794,Santiago
+2896,Mariotti Carlos Adolfo,18185344,Catamarca 1150,-26.81304833,-65.28761075,Santiago
+572,Morales Costa Santiago Nicolas,37497637,Catamarca 1600,-26.8229864,-65.2952012,Santiago
+1090,Rodriguez Martin Arturo A,14352309,Catamarca 1600,-26.82286343,-65.29484774,Santiago
+1091,Rodriguez Martin Arturo Pablo,33971787,Catamarca 1600,-26.8229864,-65.2952012,Santiago
+1092,Rodriguez Martin Maximiliano,36659386,Catamarca 1600,-26.82286343,-65.29484774,Santiago
+1096,Schujman Ana Lucia,33050128,Catamarca 1600,-26.82286343,-65.29484774,Santiago
+1787,Cossio Matias Jose,36420243,Catamarca 1600,-26.8229864,-65.2952012,Santiago
+1789,Cossio Patricia Maria Jose,16685707,Catamarca 1600,-26.8229864,-65.2952012,Santiago
+465,Seoane Fabio Enrique,17615088,Catamarca 579,-26.8258966,-65.2746408,Santiago
+1229,Fernandez Bravo Marcos,39357257,Chacho Peñaloza 174,-26.8193218,-65.284891,Santiago
+1230,Fernandez Bravo Mariana,42444881,Chacho Peñaloza 174,-26.8193218,-65.284891,Santiago
+1231,Fernandez Bravo Sebastian,43650505,Chacho Peñaloza 174,-26.8193218,-65.284891,Santiago
+457,Schilman Barbara,38742003,Chacho Peñaloza 371,-26.8193218,-65.284891,Santiago
+458,Schilman Leandro,36049988,Chacho Peñaloza 371,-26.8193218,-65.284891,Santiago
+479,Wilde Eduardo,32460917,Chubut 2400,-26.8200562,-65.3129706,Santiago
+1660,Bunader Gonzalo,37191762,Clotilde Doñate 670,-26.8290844,-65.2714678,Santiago
+1661,Bunader Juan Martin,40238164,Clotilde Doñate 670,-26.8290844,-65.2714678,Santiago
+1662,Bunader Valperga Sergio Daniel,16216214,Clotilde Doñate 670,-26.8290844,-65.2714678,Santiago
+1968,Pindar Maria Mercedes,36866637,Colombia 1050,-26.8072754,-65.2790948,Santiago
+1969,Pindar Carlos Alberto,10233319,Colombia 1050,-26.8072754,-65.2790948,Santiago
+1679,Huici Estrebou Joaquin,37096319,Colombia 680,-26.8087365,-65.2794216,Santiago
+1136,Ale Reuter Francisco Nazareno,40437931,Constancio Vigil 2410,-26.8130981,-65.3067649,Santiago
+1137,Ale Reuter Bautista Jose,45860388,Constancio Vigil 2410,-26.8130981,-65.3067649,Santiago
+1138,Ale Reuter Ignacio Gabriel,43563451,Constancio Vigil 2410,-26.8130981,-65.3067649,Santiago
+1139,Ale Reuter Juan Lucas,42270194,Constancio Vigil 2410,-26.8130981,-65.3067649,Santiago
+1140,Ale Reuter Pedro Julio,41649276,Constancio Vigil 2410,-26.8130981,-65.3067649,Santiago
+2895,Mariotti Agustina,38744515,Darwin 825,-26.8186497,-65.2972027,Santiago
+2897,Mariotti Marco,43498649,Darwin 825,-26.8186497,-65.2972027,Santiago
+2909,Mariotti Franco,41425977,Darwin 825,-26.8186497,-65.2972027,Santiago
+1265,Sirombra Joaquin,36584194,Ecuador 477,-26.8108454,-65.278596,Santiago
+1266,Sirombra Martin Gonzalo,20051394,Ecuador 477,-26.8108454,-65.278596,Santiago
+1267,Sirombra Facundo Martin,43431221,Ecuador 477,-26.8108454,-65.278596,Santiago
+1268,Sirombra Maria Victoria,39360007,Ecuador 477,-26.8108454,-65.278596,Santiago
+1200,Cossio Marcos,36998395,Federico Rossi 20,-26.8167731,-65.2758841,Santiago
+2586,Paez De La Torre Lucia,20219858,Federico Rossi 490,-26.8251493,-65.2778178,Santiago
+2587,Paez De La Torre Nuria,26638453,Federico Rossi 490,-26.8251493,-65.2778178,Santiago
+1315,Lopez Alurralde Maria Cristina,11238178,Frias Silva 1136,-26.8079428,-65.2824473,Santiago
+480,Wilde Maria Virginia,17613830,Galvez Cota 47,-26.8116438,-65.3075091,Santiago
+2591,Gutierrez Benasayag Maia,44920433,Heller 910,-26.8266143,-65.2760706,Santiago
+513,Daziano Ruben Alberto,13919471,Honduras 702,-26.8094668,-65.2739211,Santiago
+514,Daziano Maria Alejandra,31152830,Honduras 702,-26.8094668,-65.2739211,Santiago
+1449,Daziano Maria Victoria,39301936,Honduras 702,-26.8094668,-65.2739211,Santiago
+1450,Favot Maria Cristina,13919428,Honduras 702,-26.8094668,-65.2739211,Santiago
+1452,Correa Medina Pablo Jose Martin,29060461,Honduras 702,-26.8094668,-65.2739211,Santiago
+1322,Iglesias Santiago,37656715,Islas Malvinas 245,-26.8085689,-65.303684,Santiago
+755,Tumburus Octavio Walter,12734383,Ituizango 486,-26.8214789,-65.2732756,Santiago
+758,Urpi Jose Agustin,44478496,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+759,Urpi Maria Del Pilar,45440377,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+761,Urpi Francisco Jose,43364173,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+766,Urpi Jose Eudaldo,13378406,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+767,Urpi Jose Joaquin,33019826,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+768,Urpi Jose Maria,35185576,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+769,Urpi Jose Nicolas Esteban,38741758,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+771,Urpi Maria Paula,37504219,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+773,Urpi Santiago Jose,40436737,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+774,Urpi Sergio Jose,35920666,Ituzaingo 1320,-26.8182169,-65.2903606,Santiago
+484,Romano Norri Benjamin,33538893,Ituzaingo 1695,-26.8171357,-65.2945936,Santiago
+762,Urpi Jaime Eduardo,16691919,Ituzaingo 350,-26.8220292,-65.2706438,Santiago
+764,Urpi Jeronimo,38745578,Ituzaingo 350,-26.8220292,-65.2706438,Santiago
+770,Urpi Maria Emilia,41375844,Ituzaingo 350,-26.8220292,-65.2706438,Santiago
+772,Urpi Maximo,42350859,Ituzaingo 350,-26.8220292,-65.2706438,Santiago
+752,Tumburus Maria De Lourdes,32775116,Ituzaingo 486,-26.8214789,-65.2732756,Santiago
+753,Tumburus Octavio,33703876,Ituzaingo 486,-26.8214789,-65.2732756,Santiago
+754,Tumburus Benjamin,31842010,Ituzaingo 486,-26.8214789,-65.2732756,Santiago
+756,Tumburus Tomas,37656732,Ituzaingo 486,-26.8214789,-65.2732756,Santiago
+741,Toll Stordeur Denise,36420534,Ituzaingo 650,-26.8196978,-65.2864956,Santiago
+777,Vechetti Ignacio,44703185,Ituzaingo 942,-26.8202643,-65.2798112,Santiago
+778,Vechetti Franco,42269976,Ituzaingo 942,-26.8202643,-65.2798112,Santiago
+779,Vechetti Maria Victoria,37658698,Ituzaingo 942,-26.8202643,-65.2798112,Santiago
+780,Vechetti Luciana Maria,39355749,Ituzaingo 942,-26.8202643,-65.2798112,Santiago
+781,Vechetti Guillermo Fabian,17864858,Ituzaingo 942,-26.8202643,-65.2798112,Santiago
+1664,Mejail Eugenio Jose,14481598,Jose Marti 1126,-26.8169698,-65.2846702,Santiago
+1666,Mejail Maria Pia,39573113,Jose Marti 1126,-26.8169698,-65.2846702,Santiago
+1959,Mirande Jose Lucas,27211285,Juan B Teran 20,-26.8124369,-65.29022562,Santiago
+1095,Schujman Marta Maria,35549547,Lamadrid 1950,-26.81809003,-65.29726747,Santiago
+2590,Palma Mateo,38745791,Lamadrid 850,-26.8228231,-65.2797048,Santiago
+757,Uriburu Mariana,21745036,Lamadrid 900,-26.8225814,-65.2806798,Santiago
+2529,Gomez Omil Facundo,36865351,Lamadrid 900,-26.8225814,-65.2806798,Santiago
+2530,Gomez Omil Fernando Enrique,32460019,Lamadrid 900,-26.8225814,-65.2806798,Santiago
+2531,Gomez Omil Gonzalo,39575584,Lamadrid 900,-26.8225814,-65.2806798,Santiago
+2539,Lebron Martin,36049084,Lamadrid 900,-26.8225814,-65.2806798,Santiago
+473,Soler Diego,41950436,Lamadrid 901,-26.8225071,-65.2812552,Santiago
+450,Saa Santiago,39145364,Lamadrid 948,-26.8223165,-65.2822789,Santiago
+2553,Falu Maria Celeste,40531557,Lamadrid 950,-26.822309,-65.2823227,Santiago
+1962,Moises Maria Sol,36867197,Las Acacias 179,-26.8146443,-65.2727925,Santiago
+1963,Moises Matias Miguel,34186657,Las Acacias 179,-26.8146443,-65.2727925,Santiago
+1964,Moises Miguel Sergio,17268243,Las Acacias 179,-26.8146443,-65.2727925,Santiago
+1955,Medina Facundo Esteban,37311241,Las Acacias 575,-26.8106735,-65.2725483,Santiago
+430,Pera Julieta,38741670,Las Lantanas 495,-26.820127,-65.2805067,Santiago
+1960,Mirande Daniel Adolfo,20284995,Las Rosas 295,-26.8119715,-65.276899,Santiago
+1961,Mirande Maria,17990506,Las Rosas 295,-26.8119715,-65.276899,Santiago
+1538,Caruso Graziana,34603963,Las Rosas 300,-26.8119445,-65.2770878,Santiago
+575,Renta Rocio,32775440,Lola Mora 601,-26.8147975,-65.2848333,Santiago
+1451,Aguilar Bugeau Dora Sofia,13950352,Lola Mora 700,-26.8074534,-65.2838554,Santiago
+1970,Poviña Alejandro Ramon,14225850,Los Ceibos 1077,-26.8113669,-65.2846677,Santiago
+1971,Poviña Consuelo,36867076,Los Ceibos 1077,-26.8113669,-65.2846677,Santiago
+1284,Padros Benjamin,37504317,Los Ceibos 1155,-26.8110318,-65.2859512,Santiago
+1285,Padros Juan Martin,30759235,Los Ceibos 1155,-26.8110318,-65.2859512,Santiago
+1286,Padros Javier,31809265,Los Ceibos 1155,-26.8110318,-65.2859512,Santiago
+2557,Rouges Alvaro,35920496,Los Ceibos 1278,-26.8110672,-65.2867963,Santiago
+2558,Rouges Julia Maria,31429896,Los Ceibos 1278,-26.8110672,-65.2867963,Santiago
+2559,Rouges Nicolas,32144049,Los Ceibos 1278,-26.8110672,-65.2867963,Santiago
+1319,Gonella Pablo Agustin,36866519,Los Ceibos 1895,-26.809358,-65.2959825,Santiago
+1320,Gonella Nicolas,38115992,Los Ceibos 1895,-26.809358,-65.2959825,Santiago
+1321,Gonella Pablo Esteban,16691795,Los Ceibos 1895,-26.809358,-65.2959825,Santiago
+2560,Rouges Susana,12622818,Los Ceibos 687,-26.8130874,-65.2744512,Santiago
+2516,Foguet Santiago,20692575,Los Ceibos 818,-26.8124326,-65.2776155,Santiago
+1203,Critto Benjamin Enrique,37497577,Maladrid 900,-26.82290438,-65.28068653,Santiago
+1226,Feler Federica,40275966,Martin de Guemes 600,-26.8189695,-65.2914274,Santiago
+1227,Feler David,39141204,Martin de Guemes 600,-26.8189695,-65.2914274,Santiago
+1228,Feler Alejandro,11910248,Martin de Guemes 600,-26.8189695,-65.2914274,Santiago
+742,Toll Stordeur Angeles,39698819,Martin Fierro 475,-26.8196978,-65.2864956,Santiago
+743,Toll Stordeur Max,39077150,Martin Fierro 475,-26.8196978,-65.2864956,Santiago
+744,Toll Stordeur Solana,37312255,Martin Fierro 475,-26.8196978,-65.2864956,Santiago
+2919,Remis Gonzalo Luis,36049885,Nicolas Avellaneda 50,-26.7944494,-65.2699212,Santiago
+2920,Remis Tirso Luis,34185842,Nicolas Avellaneda 50,-26.7944494,-65.2699212,Santiago
+48,Wilde Maria Eugenia,4888973,Paraguay 1267,-26.811202,-65.2758106,Santiago
+1670,Mateos Jose Leopoldo,12148575,Paraguay 1338,-26.811202,-65.2758106,Santiago
+1671,Mateos Valentina,35978760,Paraguay 1338,-26.811202,-65.2758106,Santiago
+1673,Mateos Josefina,38116613,Paraguay 1338,-26.811202,-65.2758106,Santiago
+1674,Mateos Pilar,40918652,Paraguay 1338,-26.811202,-65.2758106,Santiago
+1680,Vargas Esteban Mario Alejandro,17652096,Paraguay 837,-26.8165777,-65.2708913,Santiago
+1681,Vargas Salustiano Esteban,44373384,Paraguay 837,-26.8165777,-65.2708913,Santiago
+2517,Fort Nicolas,34605874,Paraguay 839,-26.8076711,-65.294335,Santiago
+2518,Fort Constanza,29060986,Paraguay 839,-26.8076711,-65.294335,Santiago
+2519,Fort Raul Ignacio,31812987,Paraguay 839,-26.8076711,-65.294335,Santiago
+47,Wilde Agustina Maria,29541059,Pedro de Villalba 1102,-26.8112089,-65.282791,Santiago
+49,Wilde Mercedes Maria,38115805,Pedro de Villalba 1102,-26.8112089,-65.282791,Santiago
+50,Wilde Santiago Guillermo,8292077,Pedro de Villalba 1102,-26.8112089,-65.282791,Santiago
+54,Lozano Ana Lia Rosa,11649929,Pedro de Villalba 1102,-26.8112089,-65.282791,Santiago
+1314,Lopez Alurralde Nicolas Jose,34185861,Pedro de Villalba 1287,-26.8110174,-65.2870296,Santiago
+1316,Lopez Alurralde Maria Sofia,37455994,Pedro de Villalba 1287,-26.8110174,-65.2870296,Santiago
+1317,Lopez Alurralde Sonia,41763339,Pedro de Villalba 1287,-26.8110174,-65.2870296,Santiago
+1972,Prado Diego,38115420,Pedro de Villalba 738,-26.8124466,-65.275156,Santiago
+1973,Prado Diego Alejandro,16541928,Pedro de Villalba 738,-26.8124466,-65.275156,Santiago
+1974,Prado Guadalupe,45517191,Pedro de Villalba 738,-26.812564,-65.27555816,Santiago
+1975,Prado Santiago,40238394,Pedro de Villalba 738,-26.8124466,-65.275156,Santiago
+51,Wilde Solana Maria,29541058,Peru 1020,-26.8096052,-65.2812055,Santiago
+1277,Yanotti Agustina Maria,38741756,Peru 871,-26.8098973,-65.2785864,Santiago
+1279,Yanotti Maria Pilar,32376170,Peru 871,-26.8098973,-65.2785864,Santiago
+1280,Yanotti Maria Laura,34563420,Peru 871,-26.8098973,-65.2785864,Santiago
+1281,Yanotti Luis Alberto,12399323,Peru 871,-26.8098973,-65.2785864,Santiago
+1282,Yanotti Juan Luis,41373693,Peru 871,-26.8098973,-65.2785864,Santiago
+1308,Fornaciari Bruno,33703217,Pje Berho 111,-26.8118207,-65.2884546,Santiago
+1309,Fornaciari Victoria,38249220,Pje Berho 111,-26.8118207,-65.2884546,Santiago
+1318,Tula Molina Pablo,25844966,Pje Centenario 1587,-26.8187264,-65.2972903,Santiago
+1104,Stenvers Rosario,40699873,Pje Centenario 1599,-26.8187264,-65.2972903,Santiago
+1105,Stenvers Maximo Ramon,21328012,Pje Centenario 1599,-26.8187264,-65.2972903,Santiago
+1106,Stenvers Clementina,39480146,Pje Centenario 1599,-26.8187264,-65.2972903,Santiago
+1107,Stenvers Teresita De Jesus,43850189,Pje Centenario 1599,-26.8187264,-65.2972903,Santiago
+1108,Stenvers Tiburcio Maximo Iv,47774388,Pje Centenario 1599,-26.8187264,-65.2972903,Santiago
+1082,Wilde Susana Patricia,11065610,Pje Clotilde Doñate 158,-26.81990753,-65.26800596,Santiago
+1659,Bunader Ignacio,38487402,Pje Clotilde Doñate 670,-26.82555193,-65.26979977,Santiago
+1663,Mejail Maria Paula,37311863,Pje Jose Marti 1126,-26.8169698,-65.2846702,Santiago
+1665,Mejail Maria Sofia,36583934,Pje Jose Marti 1126,-26.8169698,-65.2846702,Santiago
+2527,Gilabert Conrado Jesus,37658329,Pje Jose Marti 1151,-26.8167734,-65.2849777,Santiago
+2528,Gilabert Antonio Francisco,32775958,Pje Jose Marti 1151,-26.8167734,-65.2849777,Santiago
+1269,Almeida Felipe Jose,39355619,Pje Lima 2029,-26.8101814,-65.2988007,Santiago
+1270,Almeida Ezequiel Jose,37658663,Pje Lima 2029,-26.8101814,-65.2988007,Santiago
+1271,Almeida Alberto Jose,37191875,Pje Lima 2029,-26.8101814,-65.2988007,Santiago
+1272,Almeida Federico Jose,42717907,Pje Lima 2029,-26.8101814,-65.2988007,Santiago
+1273,Almeida Oliveira Sergio Marcelo,13212099,Pje Lima 2029,-26.8101814,-65.2988007,Santiago
+1520,Arredondo Maria Michele,43026517,Pje Martin Berho 145,-26.8118207,-65.2884546,Santiago
+1521,Arredondo Facundo,39729718,Pje Martin Berho 145,-26.8118207,-65.2884546,Santiago
+1523,Arredondo Jorge Gustavo,17040786,Pje Martin Berho 145,-26.8118207,-65.2884546,Santiago
+1524,Arredondo Maximo,47774351,Pje Martin Berho 145,-26.8118207,-65.2884546,Santiago
+1307,Fornaciari Eduardo Lucas,13339829,Pje Roberto Berho 111,-26.8118207,-65.2884546,Santiago
+2524,Gallo Ernesto Antonio,10708959,Pje San Francisco de Asis 119,-26.8160727,-65.2672494,Santiago
+472,Singh Fernando Jose,22050175,Pje Santiago del Estero 357,-26.8259292,-65.2722845,Santiago
+1206,Cuezzo Luciana,37500712,Pringles 1021,-26.8163038,-65.2837205,Santiago
+1207,Cuezzo Carolina,39975377,Pringles 1021,-26.8163038,-65.2837205,Santiago
+1208,Cuezzo Mariana,34953863,Pringles 1021,-26.8163038,-65.2837205,Santiago
+1209,Cuezzo Sanchez Juan Jose,14410235,Pringles 1021,-26.8163038,-65.2837205,Santiago
+469,Silvetti Justina,44478406,Pringles 1226,-26.8161109,-65.2858735,Santiago
+470,Silvetti Alejandro Francisco,42717915,Pringles 1226,-26.8161109,-65.2858735,Santiago
+471,Silvetti Alejandro Francisco,20285605,Pringles 1226,-26.8161109,-65.2858735,Santiago
+2464,Nougues Santiago,20706864,Pringles 1226,-26.8161109,-65.2858735,Santiago
+2465,Nougues Santiago Jose,39951618,Pringles 1226,-26.8161109,-65.2858735,Santiago
+1217,Dian Daniel Claudio,12149379,Pringles 359,-26.8187218,-65.2706055,Santiago
+1218,Dian Maximo,36585515,Pringles 359,-26.8187218,-65.2706055,Santiago
+1080,Wilde Mario Jose Ernesto,33884590,Pringles 690,-26.8179141,-65.2758254,Santiago
+1081,Wilde Magdalena Maria Rosa,11879853,Pringles 690,-26.8179141,-65.2758254,Santiago
+1976,Quian Agustin,41458904,Rio Parana 113,-26.8129798,-65.2808049,Santiago
+1522,Arredondo Javier Agustin,37657819,Roberto Berho 145,-26.8118207,-65.2884546,Santiago
+745,Topa Lucia Del Milagro,40089720,Ruben Dario 140,-26.8173492,-65.2804103,Santiago
+746,Topa Raul Roque,10645612,Ruben Dario 140,-26.8173492,-65.2804103,Santiago
+454,Sassi Marcelo Santiago,32459828,Ruben Dario 391,-26.8199072,-65.2810998,Santiago
+455,Sassi Maria Alejandra,33884536,Ruben Dario 391,-26.8199072,-65.2810998,Santiago
+456,Sassi Maria Soledad,31323218,Ruben Dario 391,-26.8199072,-65.2810998,Santiago
+1725,Sassi Marcelo Eduardo,13278990,Ruben Dario 391,-26.8199072,-65.2810998,Santiago
+431,Perea Agustina Maria,37504232,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+432,Perea Jorge Nicolas,35523855,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+1232,Fort Martin,43502262,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+2532,Gomez Alonso Maria Guadalupe,39097355,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+2533,Gomez Alonso Juan Benjamin,41195578,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+2540,Lebron Solana,34132162,Ruben Dario ESQ Lamadrid,-26.8225814,-65.2806798,Santiago
+2546,Diaz Lozano Sofia,38744862,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+2547,Diaz Lozano Santiago,40727120,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Santiago
+2548,Diaz Lozano Maria Pilar,42499726,Ruben Dario ESQ Lamadrid,-26.8225814,-65.2806798,Santiago
+1275,Caram Di Santo Pedro Fernando,27579864,Sabin 2890,-26.8179551,-65.2971351,Santiago
+1957,Merlo Benjamin,38116152,Salas y Valdes 598,-26.814179,-65.273513,Santiago
+1518,Rico Maria Emilia,38184591,Salas y Valdez 1751,-26.8105292,-65.2935352,Santiago
+1956,Merlo Federico,34185027,Salas y Valdez 598,-26.814179,-65.273513,Santiago
+1958,Merlo Pedro Esteban,12352029,Salas y Valdez 598,-26.814179,-65.273513,Santiago
+53,Lozano Perez Leonor Cristina,12734412,Salas y Valdez 689,-26.8139041,-65.2746075,Santiago
+1740,Scida Patricio,43652018,Salta 108,-26.8120126,-65.2902168,Santiago
+1741,Alvarez Rosa Vicenta,16347118,Salta 108,-26.8120126,-65.2902168,Santiago
+1288,Padros Agustin,36865463,Salta 186,-26.8116839,-65.2900399,Santiago
+1289,Padros Esteban Nicolas,35094064,Salta 186,-26.8116839,-65.2900399,Santiago
+1290,Padros Ignacio,38063083,Salta 186,-26.8116839,-65.2900399,Santiago
+1291,Padros Francisco,39144297,Salta 186,-26.8116839,-65.2900399,Santiago
+2522,Gallo Emilio,36839367,San Francisco de Asis 119,-26.8160727,-65.2672494,Santiago
+2523,Gallo Ignacio,34159838,San Francisco de Asis 119,-26.8160727,-65.2672494,Santiago
+1100,Stagnetto Agustin,37504343,San Lorenzo 138,-26.8146434,-65.2939259,Santiago
+1101,Stagnetto Pablo,12414743,San Lorenzo 138,-26.8146434,-65.2939259,Santiago
+1102,Stagnetto Pablo,32460378,San Lorenzo 138,-26.8146434,-65.2939259,Santiago
+1103,Stagnetto Sonia,36224062,San Lorenzo 138,-26.8146434,-65.2939259,Santiago
+52,Lozano Maria Ines,11879910,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+485,Romano Norri Jorge Lucas,28884380,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+486,Romano Norri Julio Cesar,11476257,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+487,Romano Norri Julio Cesar Argentino,26028728,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+488,Romano Norri Maria Ines,29788326,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+489,Romano Norri Milagros Maria,34880507,San Lorenzo 377,-26.8171357,-65.2945936,Santiago
+1135,Young Jose Maria,34186074,San Lorenzo 489,-26.8182698,-65.2949511,Santiago
+1199,Cossio Julieta,39146031,San Martin 1100,-26.8262253,-65.2939735,Santiago
+2537,Lamarca Francisco Jose,34873232,San Martin 1100,-26.8262253,-65.2939735,Santiago
+1099,Sosa Lopez Mariano Benjamin,35548879,San Martin ESQ San Luis,-26.8171981,-65.2864669,Santiago
+1197,Corbella Nicolas,36420565,Sarmiento 1141,-26.818495,-65.2839536,Santiago
+1202,Cossio Maria Virginia,28884882,Sarmiento 1150,-26.8167731,-65.2758841,Santiago
+1296,Aguilar Rico Isabel Maria,37504314,Sarmiento 1420,-26.8172879,-65.2912688,Santiago
+1297,Aguilar Rico Gustavo,39144165,Sarmiento 1420,-26.8172879,-65.2912688,Santiago
+1298,Aguilar Rico Joaquin Jose,45122058,Sarmiento 1420,-26.8172879,-65.2912688,Santiago
+1299,Aguilar Rico Santiago Jose,41143734,Sarmiento 1420,-26.8172879,-65.2912688,Santiago
+1519,Rico Velaz Maria Isabel,17269793,Sarmiento 1420,-26.8172879,-65.2912688,Santiago
+1094,Samson Gabriel Alejandro,28681143,Sarmiento 2081,-26.815013,-65.30188,Santiago
+1675,Mateos Rosario,31452988,Sarmiento 3000,-26.81353746,-65.31379414,Santiago
+2467,Novillo German,33163352,Sarmiento 405,-26.8206891,-65.2716506,Santiago
+2468,Novillo Martin,36420497,Sarmiento 405,-26.8206891,-65.2716506,Santiago
+476,Teran Bautista,40829746,Sarmiento 593,-26.8201861,-65.2746172,Santiago
+448,Rubino Jose Augusto,36420481,Sarmiento 647,-26.8200888,-65.2752311,Santiago
+1653,Rubino Jose Osvaldo,12869502,Sarmiento 647,-26.8200888,-65.2752311,Santiago
+1083,Zarba Eduardo,12413900,Sarmiento 968,-26.8188739,-65.2824848,Santiago
+1084,Zarba Lourdes,40086771,Sarmiento 968,-26.8188739,-65.2824848,Santiago
+1087,Zarba Maria,36224797,Sarmiento 968,-26.8188739,-65.2824848,Santiago
+1088,Zarba Pilar,38741717,Sarmiento 968,-26.8188739,-65.2824848,Santiago
+1212,Delpero Torres Justina,39571504,Zavalia 481,-26.8222156,-65.2718493,Santiago
+1214,Delpero Torres Martina,33978467,Zavalia 481,-26.8222156,-65.2718493,Santiago
+1215,Delpero Torres Tomas,40696624,Zavalia 481,-26.8222156,-65.2718493,Santiago
+1216,Delpero Alfredo Andres,14966265,Zavalia 481,-26.8222156,-65.2718493,Santiago
+1792,Sancho Miñano Rocio,41649278,Zavalia 53,-26.8237716,-65.2720474,Santiago
+436,Predovic Ivan,37097266,Zavalia 97,-26.8185176,-65.2713272,Santiago

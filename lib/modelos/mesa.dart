@@ -1,3 +1,5 @@
+import 'package:punteo_yb/modelos/entrega.dart';
+
 import 'datos.dart';
 import 'escuela.dart';
 import 'votante.dart';
@@ -23,6 +25,14 @@ class Mesa implements Comparable<Mesa> {
   int cantidad = 0;
   int nroEscuela = 0;
 
+  // Resultados
+  int votaron = 0;
+  int votos = 0;
+  double participacion = 0;
+  int get entregas => this.votantes.where((v) => v.entrega == EstadoEntrega.entregado).length;
+
+  bool get conResultados => votaron > 0 && participacion > 0;
+
   bool esCerrada = false;
   Votantes votantes = [];
 
@@ -40,6 +50,8 @@ class Mesa implements Comparable<Mesa> {
   }
 
   bool get esPrioridad => escuela.esPrioridad;
+  bool get esPendiente => esPrioridad && !esCerrada;
+
   void ordenar() => votantes.sort((a, b) => a.nombre.compareTo(b.nombre));
 
   static Mesa traer(int nro) => Datos.mesas.firstWhere((m) => m.numero == nro, orElse: () => Mesa(nro));
