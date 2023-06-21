@@ -1,0 +1,403 @@
+id,nombre,dni,domicilio,latitude,longitude,referente
+1840,Battig Jose Andres,26782691,Acassusso 495,-26.8094389,-65.28523736,Hernan
+1937,Calderari Medardi Mariela Alejandra,29942944,Acasusso 713,-26.8071713,-65.2849342,Hernan
+1796,Cossio Francisco Jose,25543342,Anzorena 100,-26.8151049,-65.2893964,Hernan
+2265,Rovaletti Alfredo,20347635,Anzorena 621,-26.8212033,-65.2906635,Hernan
+2266,Rovaletti Felicitas,43431353,Anzorena 621,-26.8212033,-65.2906635,Hernan
+2267,Rovaletti Gaston,40434308,Anzorena 621,-26.8212033,-65.2906635,Hernan
+2268,Rovaletti Nicolas,37657542,Anzorena 621,-26.8212965,-65.2906961,Hernan
+2254,Llapur Conrado Juan,21531014,Anzorena 650,-26.8209311,-65.2906468,Hernan
+2255,Llapur Tineo Emilia,44686353,Anzorena 650,-26.82039329,-65.29064486,Hernan
+1807,Gallardo Santiago,24553727,Av Aconquija 1244,-26.8145513,-65.2872873,Hernan
+928,Arana Carlos Ernesto,10556873,Av Aconquija 1900,-26.8129325,-65.2970563,Hernan
+1768,Medina Julia Beatriz,14660711,Av Aconquija 2036,-26.812373,-65.2997756,Hernan
+1769,Medina Maria Genibora,5992693,Av Aconquija 2050,-26.8104504,-65.3086769,Hernan
+1045,Pera Maria Laura,14387474,Av Aconquija 2051,-26.8120168,-65.2997598,Hernan
+1918,Santana Sanchez Gustavo Guillermo,14225305,Av Aconquija 2491,-26.8106549,-65.306893,Hernan
+1198,Albertus Francisco,42796788,Av Aconquija 2501,-26.8106307,-65.3073385,Hernan
+2236,Poliche Galvez Eduardo Ramon,17074270,Av Aconquija 418,-26.8175191,-65.2713537,Hernan
+2237,Poliche Galvez Silvia Raquel,20605711,Av Aconquija 418,-26.8073124,-65.3036549,Hernan
+1929,Kristal Andrea,20219293,Av Aconquija 882,-26.816028,-65.279866,Hernan
+1926,Caram Pedro Oscar,11707390,Av Aconquija km 13,-26.8183209,-65.2656518,Hernan
+298,Miroli Sucar Maria De Lourdes,45729461,Av Peron 1000,-26.8056246,-65.2831295,Hernan
+1889,Lopez Staneff Ezequiel,44478442,Av Peron 1000,-26.8056246,-65.2831295,Hernan
+1046,Perez Farhat Agustin,45197847,Av Peron 1500,-26.8066862,-65.28193878,Hernan
+1047,Perez Farhat Walter Cristian,23238046,Av Peron 1500,-26.8066862,-65.28193878,Hernan
+951,Martinez Folquer Geronimo,44373089,Av Peron 1600,-26.8005713,-65.2894248,Hernan
+1040,Palazzo Luciana Maria,27594555,Av Peron ESQ Las Rosas,-26.8026873,-65.2857103,Hernan
+1059,Figueredo Luis Oscar,23019792,Av Peron ESQ Pedro Maderuelo,-26.8109316,-65.2922696,Hernan
+1877,Salsench Caparros Pedro,20433574,Av Solano Vera 1202,-26.8323121,-65.3064609,Hernan
+931,Del Negro Luis Roberto,8101462,Av Solano Vera 1300,-26.83399912,-65.30401076,Hernan
+1876,Palacios Hector Maria Clemente,17990786,Av Solano Vera 32,-26.8126302,-65.3013793,Hernan
+304,Odstrcil Andres,31812809,Bartolome Hernandez 362,-26.81334,-65.2948019,Hernan
+305,Odstrcil Eric,35523728,Bartolomé Hernandez 362,-26.8172241,-65.2711185,Hernan
+1044,Pata Nadef Julieta Maria,27365503,Bascary 1200,-26.81398493,-65.2873378,Hernan
+1685,Coll Areco Ignacio,28433823,Bascary 146,-26.812213,-65.2875674,Hernan
+947,Maldonado Yubrin Augusto Javier,40087934,Bascary 850,-26.8053602,-65.2855703,Hernan
+948,Maldonado Yubrin Franco Jesus,43706025,Bascary 850,-26.8053602,-65.2855703,Hernan
+1035,Nuñez Corai Luz Maria,42500360,Bascary 850,-26.8053602,-65.2855703,Hernan
+1051,Nuñez Corai Maria Emilia,37725183,Bascary 850,-26.80559707,-65.28554994,Hernan
+1837,Nuñez Alberto Emilio,14984185,Bascary 850,-26.8053602,-65.2855703,Hernan
+881,Bonifaci Jorge Enrique,20439122,Batalla de Salta 1465,-26.7955119,-65.2618821,Hernan
+1903,Tejeda Ramona Rosario,23310654,Batalla de Salta 1508,-26.7943284,-65.2618251,Hernan
+1883,Luna Segundo Leocadio,16539561,Batalla de Tucuman 1335,-26.7926797,-65.2623616,Hernan
+1328,Coletti Fernando,29541043,Beethoven 1650,-26.8038156,-65.2933051,Hernan
+1885,Francisco Mario Jesus,27364668,Beethoven 1690,-26.8038156,-65.2933051,Hernan
+1894,Payrola Ignacio Francisco,43850252,Belgica 3170,-26.8123971,-65.3162493,Hernan
+1886,Retali Mario Alberto,17074448,Belgica 3198,-26.8123971,-65.3162493,Hernan
+1887,Retali Mario Leandro,38183917,Belgica 3198,-26.8123971,-65.3162493,Hernan
+1867,Payrola Alberto Ramon,13784019,Belgica 3200,-26.8123971,-65.3162493,Hernan
+2690,Guerineau Clemente,23239617,Belgrano 217,-26.8191384,-65.2958702,Hernan
+2691,Guerineau Clemente Ernesto,7086452,Belgrano 217,-26.8191384,-65.2958702,Hernan
+946,Mafud Cristian Mauricio,24671894,Bernabe Araoz 1200,-26.7929147,-65.261192,Hernan
+1755,Paz Tadeo Jose,44658694,Bernabe Araoz 1200,-26.7929147,-65.261192,Hernan
+1255,Bolsi Agustin,24079257,Bernardo Houssay 102,-26.8054471,-65.3100421,Hernan
+1880,Dorado Milton Javier,33374704,Bernardo Houssay 194,-26.8086523,-65.3109023,Hernan
+1252,Blasco Oscar Ruben,5511215,Berutti 380,-26.8080253,-65.2987512,Hernan
+1775,Muller Luisina Antonella,37070678,Berutti 500,-26.8065208,-65.2983986,Hernan
+1745,Muller Melisa Florencia,35062596,Berutti 516,-26.8052152,-65.2981627,Hernan
+1746,Muller Jorge Gustavo,16567827,Berutti 516,-26.8052152,-65.2981627,Hernan
+1774,Muller Luana Milagro,43850288,Berutti 516,-26.8052152,-65.2981627,Hernan
+1246,Becerra Florencia,24981789,Berutti 561,-26.8058147,-65.2981464,Hernan
+1251,Bertini Victor Emiliano,27650777,Berutti 563,-26.8057632,-65.2981333,Hernan
+1947,Calcaprina Cino Corrado,25318552,Bolivia 250,-26.8123059,-65.2730246,Hernan
+666,Pautassi Franco,44638136,Bolivia 525,-26.8124184,-65.2720038,Hernan
+667,Pautassi Maria Dolores,46053792,Bolivia 525,-26.8124184,-65.2720038,Hernan
+668,Pautassi Enzo Dario,23079689,Bolivia 525,-26.8124184,-65.2720038,Hernan
+1900,Ordoñez Nadra Rodrigo Martin,45196959,Borges 2765,-26.8081965,-65.3113335,Hernan
+1901,Ordoñez Nadra Facundo,43227146,Borges 2765,-26.8081965,-65.3113335,Hernan
+1052,Divizia Tomas,43850185,Borges 3194,-26.8090967,-65.3067577,Hernan
+1892,Toro Francisco Elias,10012820,Boulevard 9 de Julio 1276,-26.8195916,-65.288741,Hernan
+2293,Toro Francisco Javier,27962887,Boulevard 9 de Julio 1276,-26.8195916,-65.288741,Hernan
+1748,Pidutti Maria Florencia,23931588,Boulevard 9 de Julio 14,-26.8235669,-65.2666023,Hernan
+2710,Lopez Naon Mercedes Ana,23238195,Boulevard 9 de Julio 1650,-26.8185917,-65.2943171,Hernan
+1798,D`andrea Juan Carlos,7084059,Boulevard 9 de Julio 698,-26.8216858,-65.27656,Hernan
+300,Moyano Maria Luz,27186989,Brasil 1050,-26.8083043,-65.2839554,Hernan
+1824,Antolini Paola Elizabeth,24503071,Brasil 1180,-26.8083043,-65.2839554,Hernan
+1077,Giron Natalia Alejandra,27131707,Brasil 1817,-26.8083043,-65.2839554,Hernan
+1259,Bujazha Maria Andrea,25736416,Brasil 2045,-26.8083043,-65.2839554,Hernan
+1896,Meza Juan Cruz,38699396,Buenos Aires 2042,-26.8274339,-65.3035984,Hernan
+933,Fernandez Juan Luis,24340203,Buenos Aires 2048,-26.8270133,-65.3058338,Hernan
+2694,Gutierrez Maria Florencia,28221246,Buenos Aires 2048,-26.8270133,-65.3058338,Hernan
+913,Sequeira Ricardo Daniel,13858385,Calle Este 58,-26.81585555,-65.27471926,Hernan
+914,Sequeira Gimena,33415293,Calle Este 58,-26.81585555,-65.27471926,Hernan
+908,Salim Ruben Cayetano,7087970,Camino del Peru 26,-26.8179551,-65.2650996,Hernan
+1079,Gimenez Francisco,12787858,Caracas 2415,-26.8101671,-65.3058105,Hernan
+1187,Adler Conrado,27017103,Caracas 2429,-26.8105881,-65.3041761,Hernan
+943,Macedo Javier Martin,25922010,Caracas 2465,-26.8099938,-65.3065338,Hernan
+1033,Noguera Felisa Juana,5246519,Caracas 2465,-26.8099938,-65.3065338,Hernan
+935,Lopez Pondal Gonzalo Jose,35523774,Caracas 2591,-26.8096929,-65.3078699,Hernan
+936,Lopez Pondal Gonzalo Jose,12597541,Caracas 2591,-26.8096929,-65.3078699,Hernan
+937,Lopez Pondal Teresita Maria,34606041,Caracas 2591,-26.8096929,-65.3078699,Hernan
+938,Lopez Pondal Lourdes Maria,38115821,Caracas 2591,-26.8096929,-65.3078699,Hernan
+929,Barbaglia Hugo Daniel,26684876,Cariola 2078,-26.81466,-65.2975171,Hernan
+1919,Malizia Sebastian,22340443,Carrillo 2151,-26.8075106,-65.3099899,Hernan
+2700,Lopez Naon Marcos Agustin,20707161,Catamarca 1500,-26.8233019,-65.2935645,Hernan
+2701,Lopez Naon Rosario,45124683,Catamarca 1500,-26.8233019,-65.2935645,Hernan
+930,De Rosa Francisco Jose,27364992,Catamarca 1600,-26.82286343,-65.29484774,Hernan
+932,Durba Rodolfo Esteban,18187582,Catamarca 1600,-26.8229864,-65.2952012,Hernan
+1752,Moran Maria Del Mar,44640160,Catamarca 1600,-26.8229864,-65.2952012,Hernan
+1758,Rico Sucar Maria Delfina,44032088,Catamarca 1600,-26.82286343,-65.29484774,Hernan
+1781,Rico Sucar Francisco Javier,46527844,Catamarca 1600,-26.82286343,-65.29484774,Hernan
+1785,Cruz Fogliata Maria Lujan,45277546,Catamarca 1600,-26.82286343,-65.29484774,Hernan
+2692,Guerineau Carlos Luis,14225870,Catamarca 1600,-26.8229864,-65.2952012,Hernan
+2693,Guerineau Eugenia Maria,32371875,Catamarca 1600,-26.8229864,-65.2952012,Hernan
+1895,Blasco Facundo,22336136,Chacho Peñaloza 858,-26.8193218,-65.284891,Hernan
+2278,Merletti Mariano,26028332,Chacho Peñaloza 865,-26.8193218,-65.284891,Hernan
+2510,Merletti Franco,29338451,Chacho Peñaloza 865,-26.8193218,-65.284891,Hernan
+1803,Escaño Maria Marta,23519696,Cnel Pringles 1120,-26.8162562,-65.2848163,Hernan
+1805,Gramajo Clainberg Mauricio Matias,41818237,Cnel Pringles 796,-26.8176223,-65.2774007,Hernan
+879,Pindar Carlos Alberto,10233319,Colombia 1050,-26.8072754,-65.2790948,Hernan
+880,Pindar Maria Mercedes,36866637,Colombia 1050,-26.8072754,-65.2790948,Hernan
+1904,Saenz Jose Agustin,17861169,Colon 2630,-26.8161362,-65.3086509,Hernan
+2234,Vidal Catalina,44741782,Concordia 51,-26.8158572,-65.2832963,Hernan
+2235,Vidal Santiago Enrique,47499209,Concordia 51,-26.8158572,-65.2832963,Hernan
+2481,Fordham Ignacio,39077471,Concordia 735,-26.8231603,-65.2838922,Hernan
+1804,Fajre Luis Esteban,22089496,Concordia 770,-26.8250424,-65.2841246,Hernan
+1924,Muzzo Daniel Gustavo,21327339,Constancio Vigil 2666,-26.8125905,-65.3096942,Hernan
+1771,Medina Stella Maris,27876507,Cordoba 2052,-26.8224516,-65.3046694,Hernan
+2289,Marzocchetti Italo Alejandro,22805653,Darwin 1280,-26.8285563,-65.2905683,Hernan
+1749,Adler Lautaro,45672080,Diego de Villarroel 1246,-26.8123769,-65.287377,Hernan
+1750,Adler Martina,43774878,Diego de Villarroel 1246,-26.8123769,-65.287377,Hernan
+1776,Adler Diego,22073593,Diego de Villarroel 1246,-26.8123769,-65.287377,Hernan
+1250,Bernardinez Cesar Octavio,25380820,Diego de Villarroel 2063,-26.8158633,-65.2693243,Hernan
+1838,Sobral Rocio,25719366,Diego de Villarroel 2063,-26.8158633,-65.2693243,Hernan
+1812,Yacumo Santiago,36866201,Diego de Villarroel 498,-26.8154285,-65.2721843,Hernan
+1810,Ginard Claudia Ines,17494555,Domiciano Romano 610,-26.8244727,-65.2707791,Hernan
+1793,De Camilo Antonela,38115905,El Salvador 1903,-26.8053821,-65.2952753,Hernan
+1794,De Camilo Andrea Veronica,35185421,El Salvador 1903,-26.8053821,-65.2952753,Hernan
+1201,Albornoz Patricio,42445091,El Salvador 1957,-26.8051068,-65.2960237,Hernan
+1061,Listelli Jose David,26400203,El Salvador 2057,-26.8188615,-65.2788544,Hernan
+1186,Alancay Rene David,16314288,Federico Leloir 757,-26.8026202,-65.3112781,Hernan
+2476,Fortuna Antonio Mario,13475564,Federico Rossi 257,-26.8194543,-65.276422,Hernan
+2477,Fortuna Mario Kiyoshi,37725832,Federico Rossi 257,-26.8194543,-65.276422,Hernan
+2478,Fortuna Virginia Yukiko,35199617,Federico Rossi 257,-26.8194543,-65.276422,Hernan
+2479,Kamiya Norma Ines,17041752,Federico Rossi 257,-26.8194543,-65.276422,Hernan
+2270,Muller Luciana,26544535,Federico Rossi 490,-26.8251493,-65.2778178,Hernan
+1878,Blasco Maria Isabel,24409531,Federico Rossi 712,-26.8243166,-65.2773903,Hernan
+939,Lopez Rios Hector Osvaldo,14358125,Fleming 2915,-26.8071303,-65.3119812,Hernan
+1027,Mitrovich Nicolas,34606083,Florida Norte 425,-26.8167242,-65.2869142,Hernan
+1946,Stenvers Hector Luis,11910665,Florida Sur 450,-26.8180624,-65.2936075,Hernan
+1825,Aranda Hector Rodolfo,13848289,Frias Silva 1153,-26.8074956,-65.2844441,Hernan
+1814,Alarcon Claudio Federico,28290325,Frias Silva 200,-26.8053936,-65.2655814,Hernan
+1897,De La Vega Monica Patricia,14023857,Frias Silva 405,-26.8101657,-65.2699703,Hernan
+906,Sabeh Gladys Noemi,13710235,Frias Silva 601,-26.8097457,-65.2725118,Hernan
+1743,Abi Cheble Guadalupe Maria,45185238,Frias Silva 748,-26.8084921,-65.2793189,Hernan
+1766,Abi Cheble Santiago Jeremias,43850216,Frias Silva 748,-26.8084921,-65.2793189,Hernan
+1788,Abi Cheble Elias Francisco,43502233,Frias Silva 748,-26.8084921,-65.2793189,Hernan
+1790,Abi Cheble Valentina Maria,42006763,Frias Silva 748,-26.8084921,-65.2793189,Hernan
+1868,Garcia Maria Cecilia,27575275,Frias Silva 780,-26.8091992,-65.2760732,Hernan
+1811,Viola Ferro Franco,34133531,Frias Silva 959,-26.8082253,-65.2806072,Hernan
+1939,Ferro Ana Maria,10910124,Frias Silva 959,-26.8082253,-65.2806072,Hernan
+1797,Cuenya Santiago Jose,24982836,Guemes 231,-26.816177,-65.2909248,Hernan
+2238,Ponce Cesar Arnaldo,24200734,Heller 875,-26.8265121,-65.2761226,Hernan
+916,Staneff Lourdes,43774874,Higueritas 1256,-26.8059821,-65.2860001,Hernan
+1952,Jaramillo Augusto Manuel,28721498,Honduras 388,-26.8118407,-65.2745328,Hernan
+1945,Jaramillo Maria Marta Del Carmen,30268444,Honduras 396,-26.8116352,-65.2744803,Hernan
+1056,Dorado Javier Jesus,11084901,Houssay 194,-26.8086523,-65.3109023,Hernan
+1076,Garlati Humberto Javier,20925125,Isla Soledad 2861,-26.7985023,-65.3084451,Hernan
+949,Mangini Bruno Lisandro,23517618,Islas Malvinas 311,-26.8078302,-65.3033903,Hernan
+1836,Valoys Tomas,39078970,Italia 2900,-26.8105462,-65.3137137,Hernan
+2269,Ruiz Campo Alejandro Jose,26028736,Ituzaingo 488,-26.8214853,-65.2734597,Hernan
+1879,Blasco Facundo,34880753,Ituzaingo 768,-26.8206264,-65.2778568,Hernan
+1928,Horgan Guillermo Joaquin,5198234,Ituzaingo 948,-26.8202389,-65.2800008,Hernan
+1800,De La Orden Fernando,26923981,Jujuy 1281,-26.8280965,-65.2747508,Hernan
+1278,Cajal Diego Ernesto,27732563,Julio A Roca 150,-26.7916199,-65.2608492,Hernan
+1031,Moya Ana Claudia,20760339,Julio A Roca 151,-26.7916199,-65.2608492,Hernan
+1240,Angelicola Fabrizio,40086599,Julio A Roca 151,-26.7916199,-65.2608492,Hernan
+1241,Angelicola Mariano,38116189,Julio A Roca 151,-26.7916199,-65.2608492,Hernan
+1882,Pretel Tomas Ismael,45512927,Julio A Roca 90,-26.7916199,-65.2608492,Hernan
+1761,Ahumada Aguirre Emillia,44637859,La Paz 546,-26.8245632,-65.2745458,Hernan
+1762,Ahumada Aguirre Lola,45731047,La Paz 546,-26.8245632,-65.2745458,Hernan
+1833,Linzey Mauricio Jose,24671471,La Rioja 2100,-26.8299908,-65.3094101,Hernan
+1834,Linzey Patricio Jose,45748641,La Rioja 2100,-26.8299908,-65.3094101,Hernan
+1912,Bartolucci Lucia,26029146,La Rioja 3500,-26.82405774,-65.32188301,Hernan
+1927,Horgan Guillermina Ana,22336235,Lamadrid 1111,-26.8053602,-65.2855703,Hernan
+1770,Medina Maria Fernanda,22073086,Lamadrid 1951,-26.8192799,-65.298225,Hernan
+2286,Palacios Rey Florencia,41126297,Lamadrid 900,-26.8225814,-65.2806798,Hernan
+2288,Palacios Eduardo Enrique,16685786,Lamadrid 900,-26.8225814,-65.2806798,Hernan
+2291,Palacios Rey Luciano,42269711,Lamadrid 900,-26.8225814,-65.2806798,Hernan
+1134,Farolfi Gabriela Noemi,20219549,Lamadrid 912,-26.822456,-65.2814871,Hernan
+1891,Cano Alonso Pablo,21756462,Lamadrid 917,-26.8224314,-65.2816113,Hernan
+2287,Palacios Rey Agostina,43499166,Lamadrid 950,-26.82225426,-65.28226233,Hernan
+2290,Mas Daniel Jorge,10645870,Lamadrid 950,-26.822309,-65.2823227,Hernan
+1827,Atim Cesar Augusto,24737195,Las Acacias 375,-26.8143034,-65.2728262,Hernan
+1941,Huerta Lorenzetti Ignacio Nicolas,31323408,Las Acacias 405,-26.814276,-65.2727995,Hernan
+920,Ugo Constanza Maria,29666197,Las Acacias 630,-26.814276,-65.2727995,Hernan
+921,Ugo Luis Alberto,28680257,Las Acacias 630,-26.814276,-65.2727995,Hernan
+917,Staneff Roberto Domingo,22263853,Las Higueritas 1256,-26.8060761,-65.2854567,Hernan
+922,Staneff Luciano,45962225,Las Higueritas 1256,-26.8060761,-65.2854567,Hernan
+1835,Contreras Alvaro Eugenio,25923950,Las Higueritas 1605,-26.8048907,-65.2914332,Hernan
+1898,Etchandy Maria Valeria,26638570,Las Higueritas 1605,-26.8048907,-65.2914332,Hernan
+944,Macedo Julieta,44814599,Las Higueritas 1665,-26.8049028,-65.2916799,Hernan
+945,Macedo Tomas,42548688,Las Higueritas 1665,-26.8049028,-65.2916799,Hernan
+950,Macedo Hernan Alberto,24409480,Las Higueritas 1665,-26.8049028,-65.2916799,Hernan
+1744,Marcellini Urbani Daniel Anibal,20706608,Las Higueritas 2658,-26.8023388,-65.3074643,Hernan
+1772,Marcellini Atar Juan Diego,45275195,Las Higueritas 2658,-26.8023388,-65.3074643,Hernan
+1773,Marcellini Atar Maria De La Paz,44186701,Las Higueritas 2658,-26.8023388,-65.3074643,Hernan
+1074,Galliano Martin,25735166,Las Higueritas 2702,-26.8021341,-65.3082363,Hernan
+884,Rodriguez Pedro Evaristo,25217572,Las Rosas 147,-26.8139573,-65.2774295,Hernan
+1243,Arce Galvez Daniel Marcelo,17619441,Lima 2496,-26.8085482,-65.3052665,Hernan
+1244,Arce Galvez Damian Ezequiel,40434401,Lima 2496,-26.8085482,-65.3052665,Hernan
+1053,Domian Didier,31429897,Lima 2499,-26.8082413,-65.3063188,Hernan
+1055,Domian Frederic,24052448,Lima 2499,-26.8082413,-65.3063188,Hernan
+1189,Aiziczon Fernando Andres,22264584,Lobo de La Vega 250,-26.8137724,-65.3109641,Hernan
+1832,Guraiib Augusto Jorge Elias,23517980,Los Ceibos 1974,-26.8092147,-65.2972098,Hernan
+1915,Kottler Sebastian,23931658,Los Ceibos 2010,-26.8090371,-65.2980012,Hernan
+291,Merched Falum Maria Daniela,27364656,Los Ceibos 515,-26.8135522,-65.2721107,Hernan
+2695,Iosa Obeid Franco Isaias,34604089,Los Lapachos 4,-26.83076398,-65.29832459,Hernan
+1302,Carilla Julieta,26326175,Los Tarcos 154,-26.83130556,-65.2991699,Hernan
+1684,Courel Esteban,25212743,Los Tarcos 456,-26.83115238,-65.2991699,Hernan
+1841,Araujo Tirso Flavio,21327881,Luis Braile 2177,-26.80616895,-65.30004659,Hernan
+934,Lomascolo Teresita Ines,21328284,Luis Braile 2740,-26.8046937,-65.309448,Hernan
+1911,Elwart Maria Luz,33703267,Maciel 154,-26.8148719,-65.2738543,Hernan
+905,Sabeh Pedro Javier,23519177,Maciel 90,-26.8155069,-65.2740262,Hernan
+907,Sabeh Ignacio,45963818,Maciel 90,-26.8155069,-65.2740262,Hernan
+1125,Graells Cristian Alfonso,10402245,Maderuelo 17,-26.8093109,-65.3006637,Hernan
+2480,Rueda Maria Cristina,5922442,Martin Fierro 121,-26.8163599,-65.2855885,Hernan
+1869,Chamut Carlos Ramon,12870193,Martin Fierro 550,-26.8209373,-65.2867684,Hernan
+1747,Martinez Folquer Maria Luz,31030832,Mendoza 2801,-26.8263813,-65.3121042,Hernan
+1058,Fagalde Cecilia Maria,16039502,Moreno 898,-26.8035546,-65.2947641,Hernan
+1075,Garcia Hamilton Fernando,24802484,Moreno 898,-26.8035546,-65.2947641,Hernan
+1078,Gimenez Lascano Santiago Oscar,43001918,Moreno 898,-26.8035546,-65.2947641,Hernan
+1764,Gimenez Lascano Merceditas,45962280,Moreno 898,-26.8035546,-65.2947641,Hernan
+1026,Miotti Tomas,44477523,Mozart 1670,-26.8029789,-65.2930905,Hernan
+1245,Barthaburu Veronica,28476454,Mozart 1680,-26.8032954,-65.2914079,Hernan
+1686,Corbalan Mariano Manuel,24340187,Mozart 1725,-26.8186552,-65.2912487,Hernan
+1037,Paez De La Torre Juan Manuel,27960636,Mozart 1750,-26.8031571,-65.2925597,Hernan
+940,Lorenzetti Maria Eugenia,25318562,Mozart 1751,-26.8113668,-65.2702901,Hernan
+942,Luque Bianca,47917174,Mozart 1751,-26.8113668,-65.2702901,Hernan
+1050,Morcos Aldana,45439844,Mozart 1752,-26.8029789,-65.2930905,Hernan
+295,Messina Bartolome Hector,6857779,Oeste 105,-26.8152365,-65.2752136,Hernan
+296,Messina David Mauricio,23519692,Oeste 105,-26.8152365,-65.2752136,Hernan
+297,Messina Luis Alejandro,17377989,Oeste 105,-26.8152365,-65.2752136,Hernan
+952,Matrichuk Fernando Martin,26582548,Pacara S/n,-26.8011842,-65.3094765,Hernan
+1899,Siriani Roberto Mitri,23015681,Pampa 1375,-26.8242419,-65.2927565,Hernan
+1036,Odstrcil Guillermo Federico,27364840,Paraguay 1872,-26.811202,-65.2758106,Hernan
+1906,Zamora Sonia Cristina,20455342,Paraguay 2090,-26.811202,-65.2758106,Hernan
+1907,Brizuela Ignacio,42718477,Paraguay 2090,-26.811202,-65.2758106,Hernan
+1908,Brizuela Rodolfo Miguel,16177000,Paraguay 2090,-26.811202,-65.2758106,Hernan
+1909,Brizuela Milagros,44814086,Paraguay 2090,-26.811202,-65.2758106,Hernan
+1910,Brizuela Sofia,47602937,Paraguay 2090,-26.811202,-65.2758106,Hernan
+1942,Jaramillo Lorena Roxana,34953646,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1943,Jaramillo Maria Belen,38184286,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1944,Jaramillo Luciana,40275711,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1949,Jaramillo Guillermo,22428919,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1950,Jaramillo Juan Manuel,26408304,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1951,Jaramillo Lina Noelia,35185362,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1953,Jaramillo Federico Manuel,21027934,Paraguay 602,-26.8118174,-65.2731539,Hernan
+1967,Jabif Hernan Matias,25542569,Paraguay 634,-26.8076711,-65.294335,Hernan
+1126,Graells Patricio Alejo,33538840,Pedro de Maderuelo 17,-26.8093109,-65.3006637,Hernan
+1923,Coll Araoz Maria Victoria,28261524,Pedro de Villalba 1071,-26.8108637,-65.281242,Hernan
+915,Simonetto Ana Lorena,25543053,Pedro de Villalba 1102,-26.8112089,-65.282791,Hernan
+1905,Chaya Sebastian Enrique,26385098,Pedro de Villalba 1102,-26.8112089,-65.282791,Hernan
+301,Muntaner Jorge Bartolome,12209502,Pedro de Villalba 1169,-26.8145332,-65.2939011,Hernan
+302,Muntaner Gabriel,32201784,Pedro de Villalba 1169,-26.8145332,-65.2939011,Hernan
+303,Muntaner Benjamin,35185462,Pedro de Villalba 1169,-26.8104424,-65.2852935,Hernan
+883,Poliche Galvez Sergio Daniel,17619273,Pedro de Villalba 144,-26.8140636,-65.2662229,Hernan
+1921,Gettas Maria Soledad,24538433,Pedro de Villalba 1717,-26.8090549,-65.2936699,Hernan
+1054,Domian Cristian,26029783,Pedro de Villalba 1867,-26.8082413,-65.3063188,Hernan
+1795,Diambra Mario Alberto,10218882,Pedro de Villalba 1920,-26.8086246,-65.2963785,Hernan
+1123,Gonzalez Tomas Antonio,20884192,Pedro de Villalba 1960,-26.808503,-65.2969405,Hernan
+1124,Gonzalez Tomas Omar,35272349,Pedro de Villalba 1960,-26.808503,-65.2969405,Hernan
+910,Santos Fernando Eugenio,24200784,Pedro de Villalba 634,-26.8127477,-65.2736442,Hernan
+909,Santos Esparrell Mariana,42206225,Pedro de Villalba 727,-26.81253765,-65.27432875,Hernan
+299,Montero Luis Alberto,20285806,Pedro de Villalba 899,-26.8113075,-65.2783327,Hernan
+1826,Ardiles Elina Mercedes,27651860,Pedro de Villalba 910,-26.8107402,-65.28284,Hernan
+1127,Graells Walter Ricardo,24982792,Pedro Maderuelo 17,-26.8093109,-65.3006637,Hernan
+912,Scarlata Jose Antonio,17613470,Peru 1207,-26.8085107,-65.2865045,Hernan
+1128,Gray Alejandro Jose,34159472,Peru 1376,-26.8083749,-65.2872159,Hernan
+1129,Gray Ana Ines,41276027,Peru 1376,-26.8083749,-65.2872159,Hernan
+1130,Gray Ana Sofia,38115703,Peru 1376,-26.8083749,-65.2872159,Hernan
+1131,Gray Diego Nicolas,33977619,Peru 1376,-26.8083749,-65.2872159,Hernan
+1132,Gray Luis Ignacio,31842586,Peru 1376,-26.8083749,-65.2872159,Hernan
+1133,Gray Luis Ignacio,14984031,Peru 1376,-26.8083749,-65.2872159,Hernan
+1048,Pintado Nicolas,31812924,Peru 1499,-26.8077202,-65.2902146,Hernan
+1049,Pintado Juan Antonio,11064253,Peru 1499,-26.8077202,-65.2902146,Hernan
+1920,Martinez Sofia Maria,30759539,Peru 1780,-26.8072193,-65.2932287,Hernan
+1041,Pasteris Luciana,45725887,Peru 2001,-26.8064031,-65.2969915,Hernan
+1042,Pasteris Natalia Alejandra,44978384,Peru 2001,-26.8064031,-65.2969915,Hernan
+1043,Pasteris Juan Jose Andres,20498734,Peru 2001,-26.8064031,-65.2969915,Hernan
+1902,Lorenzetti Maria Pabla,24750754,Peru 478,-26.8113668,-65.2702901,Hernan
+1940,Huerta Lorenzetti Carlos Jorge,13950797,Peru 535,-26.8115972,-65.2700393,Hernan
+1948,Huerta Lorenzetti Carlos Federico,24981142,Peru 535,-26.8115972,-65.2700393,Hernan
+1884,Mohamad Lucas Sebastian,24803457,Peru 714,-26.8109009,-65.2745681,Hernan
+1888,Albornoz Martin Gustavo,23239140,Pje Beethoven 1780,-26.80406378,-65.29295186,Hernan
+1890,Fonollat Nicolas Fernando,38116131,Pje Cabildo 2678,-26.8045146,-65.3074871,Hernan
+911,Santos Juan Carlos,12267048,Pje Escriba de Balaguer 163,-26.81270162,-65.2780827,Hernan
+1751,Blanco Muthuan Sofia,44583271,Pje Gardel 2298,-26.8044023,-65.3010775,Hernan
+1925,Marangoni Reto Graciela,10645736,Pje Jose Marti 1184,-26.816688,-65.2865591,Hernan
+1806,Fogliata Ana Silvia,17615032,Pje Las Hortencias 862,-26.8266536,-65.2768898,Hernan
+292,Merkusa Gustavo Adolfo,21745234,Pje Los Arces 1259,-26.8134311,-65.2870469,Hernan
+1057,El Kadi Patricia,24340715,Pje Los Ceibos 1374,-26.810724,-65.2888139,Hernan
+1753,Bugeau Valentina,44747838,Pje Los Sauces 204,-26.8123048,-65.311284,Hernan
+1754,Bugeau Carlos Federico Evaristo,20219136,Pje Los Sauces 204,-26.8123048,-65.311284,Hernan
+1029,Morcos Bernabe Carin,23116356,Pje Mozart 1750,-26.80312835,-65.29257043,Hernan
+1030,Morcos Matias,43499105,Pje Mozart 1770,-26.80303835,-65.29280239,Hernan
+923,Acevedo Angela Isabel,20758760,Pje Santa Cruz 740,-26.8223026,-65.3022235,Hernan
+2262,Tula Eva Yolanda,5476558,Pje Santiago del Estero 1229,-26.823105,-65.28981423,Hernan
+1759,Villalonga Agñero Camila Maria,43648601,Pje Venus 162,-26.8203836,-65.2660885,Hernan
+1760,Villalonga Cristian Agustin,18186662,Pje Venus 162,-26.8203836,-65.2660885,Hernan
+1782,Villalonga Aguero Juliana Maria,41650062,Pje Venus 162,-26.8203836,-65.2660885,Hernan
+1783,Villalonga Aguero Cristian Agustin,39207855,Pje Venus 162,-26.8203836,-65.2660885,Hernan
+1784,Villalonga Agñero Solana Maria,45729385,Pje Venus 162,-26.8203836,-65.2660885,Hernan
+1914,Risso Osvaldo Domingo,18403863,Pje Zamora 1935,-26.814202,-65.2978121,Hernan
+1555,Guagnini Emilio,24822738,Pringles 1065,-26.8186853,-65.2711662,Hernan
+1809,Gianfrancisco Miguel,8065052,Pringles 1160,-26.8162462,-65.2850733,Hernan
+1801,Dian Daniel Claudio,12149379,Pringles 359,-26.8187218,-65.2706055,Hernan
+1188,Adler Franklin Jacobo,7092345,Quito 2499,-26.8105857,-65.300995,Hernan
+927,Amicone Daniel Eduardo,25211074,Reconquista 387,-26.8164484,-65.2996021,Hernan
+1881,Pretel Isael Agustin,40274544,Roca 90,-26.8084169,-65.2975037,Hernan
+2260,Topa Raul Roque,10645612,Ruben Dario 140,-26.8173492,-65.2804103,Hernan
+2261,Topa Lucia Del Milagro,40089720,Ruben Dario 140,-26.8173492,-65.2804103,Hernan
+2251,Martinez Saracho Analia,20219123,Ruben Dario 145,-26.8174432,-65.2806425,Hernan
+2252,Martinez Saracho Ezequiel,22336823,Ruben Dario 145,-26.8174432,-65.2806425,Hernan
+1799,D`andrea Juan Carlos,27575099,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Hernan
+1038,Palacios Francisco Maria,30540839,Saavedra Lamas 1100,-26.7982146,-65.307571,Hernan
+953,Mazza Jose Luis,13338980,Saavedra Lamas 27,-26.8096249,-65.309891,Hernan
+954,Mazza Fabrizio,37500609,Saavedra Lamas 27,-26.8096249,-65.309891,Hernan
+1260,Burke Tomas Walter,20219665,Saavedra Lamas 347,-26.8062554,-65.3089303,Hernan
+1261,Burke Santiago,44814202,Saavedra Lamas 347,-26.8062554,-65.3089303,Hernan
+1256,Brahim Claudio Marcelo,22617470,Saavedra Lamas 358,-26.8060842,-65.309076,Hernan
+1813,Petrelli Paula,23931107,Saavedra Lamas 358,-26.8060842,-65.309076,Hernan
+1262,Buteler Rodolfo,29788437,Saavedra Lamas 410,-26.8193157,-65.2849034,Hernan
+1060,Levin Pablo Andres,25543500,Saavedra Lamas 525,-26.8042614,-65.3087302,Hernan
+1247,Bermudez Joaquin,43162161,Saavedra Lamas 565,-26.8039539,-65.3086439,Hernan
+1248,Bermudez Patricio,47772148,Saavedra Lamas 565,-26.8039539,-65.3086439,Hernan
+1249,Bermudez Sergio Ruben,17947412,Saavedra Lamas 565,-26.8039539,-65.3086439,Hernan
+1254,Bolognini Silvia Elizabeth,21334912,Saavedra Lamas 565,-26.8039539,-65.3086439,Hernan
+1913,Re Mauricio Carlos,22953576,Sabin 2900,-26.811395,-65.2971884,Hernan
+1966,Jabif Joaquin Esteban,26445347,Salas y Valdez 1211,-26.8118381,-65.2858792,Hernan
+1938,Fernandez Fernandez Nicolas,38116075,Salas y Valdez 1283,-26.8117133,-65.2865833,Hernan
+1828,Bach Tomas,43362646,Salas y Valdez 1291,-26.8116488,-65.2869384,Hernan
+1829,Bach Marcos,40918754,Salas y Valdez 1291,-26.8116488,-65.2869384,Hernan
+1830,Bach Solana,44477615,Salas y Valdez 1291,-26.8116488,-65.2869384,Hernan
+1831,Bach Valentina,39976601,Salas y Valdez 1291,-26.8116488,-65.2869384,Hernan
+1025,Mendez Uriburu Maria Melchora,16450002,Salas y Valdez 1790,-26.8105463,-65.294705,Hernan
+293,Merlo Pedro Esteban,12352029,Salas y Valdez 598,-26.814179,-65.273513,Hernan
+294,Merlo Pablo Nocolas,31589386,Salas y Valdez 598,-26.814179,-65.273513,Hernan
+885,Rivolta Carlos Augusto N,17860236,Salas y Valdez 834,-26.8134608,-65.278109,Hernan
+886,Rivolta Luciano,41345181,Salas y Valdez 834,-26.8134608,-65.278109,Hernan
+887,Rivolta Mariano,42221482,Salas y Valdez 834,-26.8134608,-65.278109,Hernan
+1242,Antunez Mario Alejandro,24802049,Salta 58,-26.8126648,-65.2903657,Hernan
+1870,Graña Claudio,30268993,San Javier 2400,-26.81736684,-65.30301241,Hernan
+2292,Novillo Abel Luis,24671448,San Luis 1475,-26.8283604,-65.2738356,Hernan
+1808,Gervassoni Carlos Anibal,23239051,San Martin 152,-26.815236,-65.2916675,Hernan
+924,Agu Pablo Javier,22127625,San Martin 781,-26.8229205,-65.2936595,Hernan
+925,Agu Martinini Catalina,45666687,San Martin 781,-26.8229205,-65.2936595,Hernan
+926,Agu Martinini Guadalupe,44814037,San Martin 781,-26.8225936,-65.2933976,Hernan
+2259,Teran Lucia,17614298,San Martin ESQ San Luis,-26.8171981,-65.2864669,Hernan
+2277,Nougues Luis Fernando,17634705,San Martin ESQ San Luis,-26.8171981,-65.2864669,Hernan
+1875,Alcocer Maria Gabriela,23027747,Santa Fe 2265,-26.8150783,-65.3024156,Hernan
+1874,Benedicto Eduardo Rafael,31425473,Santiago del Estero 1400,-26.82274682,-65.29148593,Hernan
+1873,Veliz Diego Martin,23519834,Santo Domingo 1317,-26.8063701,-65.2863894,Hernan
+1893,Puente Jose Maria,20284292,Santo Domingo 1340,-26.8064176,-65.2871903,Hernan
+882,Pilo Jose Claudio,26531177,Santo Domingo 148,-26.8102221,-65.2654876,Hernan
+1039,Palacios Maria Laura,27017742,Santo Domingo 1604,-26.8055305,-65.2917472,Hernan
+941,Lorenzetti Juan Carlos,7690225,Santo Domingo 1615,-26.8053031,-65.2916406,Hernan
+1872,Rivadeneira Carlos Damian,25444773,Santo Domingo 1860,-26.8049356,-65.2945091,Hernan
+665,Paiz Magli Pablo Augusto,28721731,Santo Domingo 190,-26.8100876,-65.2662339,Hernan
+1032,Noguera Luna Miguel Angel,43502205,Santo Domingo 1906,-26.8048606,-65.2952096,Hernan
+1034,Noguera Miguel Angel,20284715,Santo Domingo 1906,-26.8048606,-65.2952096,Hernan
+1916,Laborda Delacroix Pablo Andres,22665399,Santo Domingo 1958,-26.8046726,-65.2959743,Hernan
+1917,Laborda Delacroix Camila,44638240,Santo Domingo 1958,-26.8046726,-65.2959743,Hernan
+1763,Abalos Maria Sofia,44703090,Santo Domingo 1985,-26.8044824,-65.2959335,Hernan
+1253,Bo Guillermo Javier,24671652,Santo Domingo 2100,-26.8041507,-65.2978301,Hernan
+1922,Trouve Veronica Eugenia,25719598,Santo Domingo 535,-26.8091054,-65.2714559,Hernan
+44,Luque Maria Eugenia,24409760,Santo Domingo 726,-26.808702,-65.2745798,Hernan
+1815,Grunauer Luque Martin,42547086,Santo Domingo 726,-26.808702,-65.2745798,Hernan
+45,Luquez Ariel Omar,27364122,Santo Domingo 75,-26.8131606,-65.2657704,Hernan
+290,Martinini Luciano,44478403,Santo Domingo 83,-26.8050485,-65.2936363,Hernan
+919,Tablada Ortiz Severo,12161169,Santo Domingo 935,-26.8075628,-65.2795534,Hernan
+918,Staneff Susana Monica,20219987,Santo Domingo 945,-26.8075417,-65.2796661,Hernan
+1871,Garcia Luis Fabian,18203120,Santo Domingo 945,-26.8075417,-65.2796661,Hernan
+2233,Loza Ariel Marcelo,22073038,Sarmiento 1035,-26.8189663,-65.2812497,Hernan
+2246,Loza Martin,39478629,Sarmiento 1035,-26.8189663,-65.2812497,Hernan
+2247,Loza Florencia,38742407,Sarmiento 1035,-26.8189663,-65.2812497,Hernan
+2318,Sancho Miñano Carlos Alberto,8084126,Sarmiento 1715,-26.8162763,-65.2947501,Hernan
+2271,Muratore Ramiro,25444884,Sarmiento 510,-26.8205386,-65.273819,Hernan
+2230,Lopez Rubio Lucas Fernando,20759118,Sarmiento 784,-26.820044,-65.2774064,Hernan
+2231,Lopez Rubio Martina,42548583,Sarmiento 784,-26.820044,-65.2774064,Hernan
+2511,Molinero Maria Gabriela,21744827,Sarmiento 784,-26.820044,-65.2774064,Hernan
+2253,Linzey Aleydis Maria,31323205,Sarmiento 937,-26.81975715,-65.27771165,Hernan
+1765,Yala Paulina,45862432,Thames 1275,-26.8052843,-65.292432,Hernan
+1839,Tejeda Alvaro Luis,25843968,Thames 1290,-26.8052843,-65.292432,Hernan
+1786,Yala Pablo Marcelo,23116524,Thames 900,-26.8052843,-65.292432,Hernan
+2228,Locascio Alejandra,24200630,Universo 59,-26.818862,-65.2674322,Hernan
+2229,Locascio Alvaro,24200628,Universo 59,-26.818862,-65.2674322,Hernan
+1257,Buhler Herbert,28680601,Uruguay 194,-26.8090214,-65.3067812,Hernan
+1258,Buhler Herberto Raul,8068364,Uruguay 194,-26.8090214,-65.3067812,Hernan
+2263,Uasuf Jorge Alfredo,20284262,Valenzuela 7,-26.816287,-65.2773994,Hernan
+2264,Uasuf Valentina Maria,43202958,Valenzuela 7,-26.816287,-65.2773994,Hernan
+2294,Uasuf Maria Julieta,45961293,Valenzuela 7,-26.816287,-65.2773994,Hernan
+1802,Diaz Alvillos Guido Alberto,25736144,Valenzuela 850,-26.8257229,-65.2787862,Hernan
+1767,Robinson Julio Esteban,43771085,Valenzuela 87,-26.8170784,-65.2776375,Hernan
+1756,Diaz Otero Jimena,33538963,Venezuela 660,-26.8087651,-65.2807525,Hernan
+1757,Diaz Otero Dupuy Soledad,31429905,Venezuela 660,-26.809337,-65.2810697,Hernan
+1777,Diaz Otero Victoria,43652004,Venezuela 660,-26.80886042,-65.28080537,Hernan
+1778,Diaz Otero Nahuel,32144046,Venezuela 660,-26.8087651,-65.2807525,Hernan
+1780,Diaz Otero Alberto Ramon,13848762,Venezuela 660,-26.8087651,-65.2807525,Hernan
+2239,Predovic Ana,32413640,Zabalia 97,-26.8185176,-65.2713272,Hernan
+2240,Predovic Jorge,33374605,Zavalia 97,-26.8185176,-65.2713272,Hernan
+2241,Predovic Jorge Andres,11007895,Zavalia 97,-26.8185176,-65.2713272,Hernan
+2248,Predovic Ivan,37097266,Zavalia 97,-26.8185176,-65.2713272,Hernan

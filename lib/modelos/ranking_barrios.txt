@@ -1,0 +1,67 @@
+*Ranking de Barrios*
+```    Barrio                      V   D
+ 1. Barrio Telefonico          66
+ 2. Country Las Yungas         45
+ 3. Country Marcos Paz         39
+ 4. Country del Jockey         35
+ 5. Country Golf Club          28
+ 6. Barrio Las Marias          26
+ 7. Nuevo Country del Golf     24
+ 8. Country Jockey Club        24
+ 9. Barrio Las Acacias         15
+10. Barrio San Jose II         15
+11. Country Yerba Buena Golf   13
+12. Barrio Portal del Cerro    13
+13. Barrio San Jose III        11
+14. Barrio Miraflores          10
+15. Country Las Praderas        9
+16. Barrio 5 de Octubre         7
+17. Barrio Apunt                7
+18. Country Marcops Paz         6
+19. Barrio Los Alisos           6
+20. Barrio Nicolas Avellaneda   5
+21. Barrio Los Aromos           5
+22. Barrio 200 viviendas        5
+23. Barrio Nicolas Avellaneda   5
+24. Barrio Horco Molle          5
+25. Barrio La Esperanza         5
+26. Yerba Buena Golf Country    5
+27. Barrio Los Tipales          4
+28. Country del Golf            4
+29. Barrio Juramento            4
+30. Barrio San Expedito         4
+31. Barrio Los Olivos           4
+32. Country Los Azahares        4
+33. Barrio Batalla de Tucuman   3
+34. Barrio Procrear             3
+35. Barrio Castillo             3
+36. Barrio Terrazas de San Jo   3
+37. Barrio Las Rosas I          3
+38. Barrio 60 viviendas         3
+39. Barrio Capsmi               3
+40. Barrio Bernel               3
+41. Country Golf                3
+42. Barrio La Cañada            3
+43. Barrio Araujo               3
+44. Barrio San Javier           3
+45. Country Vilanova            3
+46. Barrio Nicolas Avellaneda   3
+47. Barrio La Delfina           3
+48. Barrio San Eduardo          2
+49. Country del Jockey Club     2
+50. Barrio Terrazas Park        2
+51. Barrio Las Colinas I        2
+52. Barrio Lomas de Imbaud      2
+53. Barrio Praderas             2
+54. Country Los Olivos          2
+55. Barrio Nicolas Avellaneda   2
+56. Country del Pilar           2
+57. Barrio 40 viviendas         2
+58. Nuevo Country Golf          2
+59. Barrio Nicolas Avellaneda   2
+60. Country Los Paltos          2
+61. Barrio La Rinconada         2
+62. Barrio Nicolas Avellaneda   2
+63. Barrio Terrazas del Semin   2
+    TOTAL              535
+```

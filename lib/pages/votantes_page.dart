@@ -1,15 +1,13 @@
-// import 'dart:async';
-// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils.dart';
 import '/colores.dart';
-import '/widgets/votantes_item.dart';
-import '/modelos/escuela.dart';
-import '/modelos/votante.dart';
 import '/modelos/datos.dart';
+import '/modelos/escuela.dart';
 import '/modelos/mesa.dart';
+import '/utils.dart';
+import '/widgets/votantes_item.dart';
+import '../modelos/votante.dart';
 
 class VotantesPage extends StatefulWidget {
   final Mesa mesa;
@@ -35,28 +33,35 @@ class _VotantesPageState extends State<VotantesPage> {
   void cambiarEstadoMesa() {
     mesa.esCerrada = !mesa.esCerrada;
     Datos.marcarMesa(mesa);
+    if (mesa.esCerrada) Get.back();
     setState(() {});
   }
 
-  get escuela => Escuela.traer(mesa.numero);
-  get mesa => widget.mesa;
-  get votantes => mesa.esCerrada ? mesa.favoritos : mesa.votantes;
-  get favoritos => mesa.favoritos;
+  Escuela get escuela => Escuela.traer(mesa.numero);
+  Mesa get mesa => widget.mesa;
+  Votantes get votantes => mesa.esCerrada ? mesa.favoritos : mesa.votantes;
+  Votantes get favoritos => mesa.favoritos;
 
   @override
   Widget build(BuildContext context) {
     final estilo = TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: Theme.of(context).primaryColor);
+    final n = favoritos.length;
     return SafeArea(
       child: Scaffold(
         appBar: crearTitulo(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Mesa ${mesa.numero} '),
+              Column(
+                children: [
+                  Text('${mesa.escuela.escuela} ', style: TextStyle(fontSize: 14)),
+                  Text('Mesa ${mesa.numero} '),
+                ],
+              ),
               Column(
                 children: [
                   Text('${mesa.votantes.length} votantes', style: estilo),
-                  Text('${favoritos.length} favoritos', style: estilo.copyWith(fontSize: 20)),
+                  Text(n.info('favorito'), style: estilo.copyWith(fontSize: 20)),
                 ],
               )
             ],
@@ -98,7 +103,7 @@ class _VotantesPageState extends State<VotantesPage> {
           label: Text(mesa.esCerrada ? 'Abrir mesa' : 'Cerrar mesa'),
           onPressed: () {
             cambiarEstadoMesa();
-            if (mesa.esCerrada) Get.back();
+            // if (mesa.esCerrada) Get.back();
           },
         ),
       );

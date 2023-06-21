@@ -1,0 +1,65 @@
+id,nombre,dni,domicilio,latitude,longitude,referente
+979,Pasteris Luis Alberto,10167174,Av Aconquija 859,-26.8157221,-65.2788944,Barico
+1181,Fernandez Murga Arturo Jose,17074157,Bascary 850,-26.8053602,-65.2855703,Barico
+1935,D`andrea Sergio Francisco,17619218,Boulevard 9 de Julio 154,-26.8230188,-65.2699047,Barico
+1933,D`andrea Juan Carlos,7084059,Boulevard 9 de Julio 698,-26.8216858,-65.27656,Barico
+732,Claps Hortencia Maria,29397541,Brasil 851,-26.8083043,-65.2839554,Barico
+733,Claps Alberto Pablo,11116533,Brasil 851,-26.8083043,-65.2839554,Barico
+958,Meloni Osvaldo,14023762,Calle Este 135,-26.8149011,-65.2742289,Barico
+984,Pindar Carlos Alberto,10233319,Colombia 1050,-26.8072754,-65.2790948,Barico
+959,Mena Julieta,31812921,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+960,Mena Juan Pablo,34880716,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+961,Mena Javier,30920126,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+962,Mena Agustina,40699671,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+963,Mena Florencia,30117891,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+964,Mena Santiago,38115771,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+965,Mena Nicolas,32846873,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+966,Mena Mariana,33966181,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+967,Mena Marcelo Jose,27961593,Diego de Villarroel 953,-26.8135901,-65.2810653,Barico
+1931,Cutin Ignacio Enrique,35483812,Federico Rossi 55,-26.8171863,-65.276389,Barico
+1932,Cutin Edgardo Hugo,10791603,Federico Rossi 55,-26.8171863,-65.276389,Barico
+737,De La Puente Maria Eugenia,17074168,Frias Silva 440,-26.8102711,-65.2703655,Barico
+969,Mirabal De La Puente Alejandro Javier,36998327,Frias Silva 440,-26.8102711,-65.2703655,Barico
+970,Mirabal De La Puente Fabio Eugenio,42523318,Frias Silva 440,-26.8102711,-65.2703655,Barico
+972,Mirabal De La Puente Francisco Emanuel,39144186,Frias Silva 440,-26.8102711,-65.2703655,Barico
+973,Mirabal De La Puente Maximiliano Andres,35185472,Frias Silva 440,-26.8102711,-65.2703655,Barico
+974,Mirabal Fabio Alejandro,16784682,Frias Silva 440,-26.8102711,-65.2703655,Barico
+1930,Cutin Horacio Esteban,20218336,Ituzaingo 670,-26.8210082,-65.2760249,Barico
+1936,Etchegorry Victor Daniel,20218306,Lamadrid 225,-26.8244465,-65.2699695,Barico
+975,Mirande Maria,17990506,Las Rosas 295,-26.8119715,-65.276899,Barico
+403,Alvarez Maximo,35185599,Lola Mora 87,-26.8137541,-65.2845986,Barico
+729,Boquete Javier Carlos,14387589,Lola Mora Oeste 157,-26.8128489,-65.2848452,Barico
+976,Naval Norma Maria,13278301,Los Ceibos 1136,-26.8113607,-65.2850901,Barico
+1550,Sal Mauricio Jose,14352002,Los Fresnos 74,-26.83130556,-65.29923428,Barico
+1179,Diez Ojeda Gustavo Benjamin,14023676,Los Pinos 176,-26.8049943,-65.3242775,Barico
+1180,Diez Ojeda Maria Candelaria,37500843,Los Pinos 176,-26.8049943,-65.3242775,Barico
+1539,Gomez Lassalle German Guillermo,8036807,Paraguay 1330,-26.8089115,-65.2879865,Barico
+957,Medici Hugo Enrique,8370902,Peru 1048,-26.8095579,-65.2815297,Barico
+1067,Viejobueno Jose Maria,29190325,Peru 1151,-26.8087832,-65.2846801,Barico
+1068,Viejobueno Josefina,34880587,Peru 1151,-26.8087832,-65.2846801,Barico
+1069,Viejobueno Maria Belen,25318666,Peru 1151,-26.8087832,-65.2846801,Barico
+404,Arandia Carlos Eugenio,8097490,Peru 776,-26.8105665,-65.2762385,Barico
+1070,Yanotti Luis Alberto,12399323,Peru 871,-26.8098973,-65.2785864,Barico
+1071,Yanotti Maria Laura,34563420,Peru 871,-26.8098973,-65.2785864,Barico
+1072,Yanotti Maria Pilar,32376170,Peru 871,-26.8098973,-65.2785864,Barico
+955,Martinez Zavalia Sebastian Ricardo,24364570,Pje San Francisco de Asis 185,-26.81562748,-65.26719923,Barico
+1540,Grosse Alejo,13378283,Quito 2594,-26.8105857,-65.300995,Barico
+1541,Grosse Ana,24059411,Quito 2598,-26.8105857,-65.300995,Barico
+1934,D`andrea Juan Carlos,27575099,Ruben Dario Esq Lamadrid,-26.82246505,-65.28123113,Barico
+405,Arnedo Maximiliano,33139086,Salas y Valdez 492,-26.8146672,-65.2719439,Barico
+731,Centeno Alfredo David,13295630,Salas y Valdez 673,-26.8139516,-65.2743056,Barico
+1542,Herrera Claudia Lorena,26139359,Salta 191,-26.8114913,-65.2898687,Barico
+1073,Zerdan Adriana Eugenia De Fatima,13784671,San Martin 11,-26.8140879,-65.291687,Barico
+724,Barrojo Teofilo Ariel,29836036,Santo Domingo 350,-26.8050485,-65.2936363,Barico
+734,Craig Carlos Eduardo,10747771,Santo Domingo 964,-26.807757,-65.2799409,Barico
+735,Craig Pablo,35331495,Santo Domingo 964,-26.807757,-65.2799409,Barico
+736,Craig Lucas,37050234,Santo Domingo 964,-26.807757,-65.2799409,Barico
+1551,Yapur Gaya Maria Bernarda,32412017,Sarmiento 1898,-26.8156139,-65.2993813,Barico
+1552,Yapur Gaya Geronimo,41649213,Sarmiento 1898,-26.8156139,-65.2993813,Barico
+1553,Yapur Gaya Daniel,34186858,Sarmiento 1898,-26.8156139,-65.2993813,Barico
+1554,Yapur Daniel,13278870,Sarmiento 1898,-26.8156139,-65.2993813,Barico
+728,Benedicto Adriana Patricia Del Valle,13848639,Venezuela 100,-26.8135686,-65.2815752,Barico
+730,Centeno Joaquin,30469647,Venezuela 48,-26.8139516,-65.2743056,Barico
+725,Bartolucci Eduardo Luis,10820163,Venezuela 73,-26.8142298,-65.2816648,Barico
+726,Bartolucci Emilia,33815375,Venezuela 73,-26.8142298,-65.2816648,Barico
+727,Bartolucci Lucio,34186682,Venezuela 73,-26.8142298,-65.2816648,Barico

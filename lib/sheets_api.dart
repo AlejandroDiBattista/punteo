@@ -23,10 +23,28 @@ class SheetsApi {
   static Spreadsheet? libro;
   static Worksheet? favoritos;
   static Worksheet? mesas;
+  static Worksheet? preguntas;
+  static Worksheet? entregas;
+  static Worksheet? respuestas;
+
+  static Future _init() async {
+    libro ??= await gsheets.spreadsheet(_sheetsId,
+        render: ValueRenderOption.formattedValue, input: ValueInputOption.userEntered);
+    mesas ??= libro!.worksheetByTitle('mesas');
+    favoritos ??= libro!.worksheetByTitle('favoritos');
+    entregas ??= libro!.worksheetByTitle('entregas');
+    preguntas ??= libro!.worksheetByTitle('preguntas');
+    respuestas ??= libro!.worksheetByTitle('respuestas');
+  }
 
   static Future<List<Map<String, dynamic>>> traerFavoritos() async {
     await _init();
     return await _traer(favoritos!);
+  }
+
+  static Future<List<Map<String, dynamic>>> traerEntregas() async {
+    await _init();
+    return await _traer(entregas!);
   }
 
   static Future<List<Map<String, dynamic>>> traerCierres() async {
@@ -34,9 +52,19 @@ class SheetsApi {
     return await _traer(mesas!);
   }
 
+  static Future<List<Map<String, dynamic>>> traerPreguntas() async {
+    await _init();
+    return await _traer(preguntas!);
+  }
+
   static Future<void> registrarFavorito(List<dynamic> datos) async {
     await _init();
     await favoritos!.values.appendRow(datos);
+  }
+
+  static Future<void> registrarEntrega(List<dynamic> datos) async {
+    await _init();
+    await entregas!.values.appendRow(datos);
   }
 
   static Future<void> registrarCierre(List<dynamic> datos) async {
@@ -44,17 +72,26 @@ class SheetsApi {
     mesas!.values.appendRow(datos);
   }
 
-  static Future _init() async {
-    libro ??= await gsheets.spreadsheet(_sheetsId,
-        render: ValueRenderOption.formattedValue, input: ValueInputOption.userEntered);
-    mesas ??= libro!.worksheetByTitle('mesas');
-    favoritos ??= libro!.worksheetByTitle('favoritos');
+  static Future<void> registrarRespuestas(List<int> datos) async {
+    await _init();
+    await _enviar(respuestas!, datos);
+  }
+
+  static Future<void> _enviar(Worksheet destino, List<int> datos) async {
+    await _init();
+    destino.values.appendRow(datos);
   }
 
   static Future<List<Map<String, dynamic>>> _traer(Worksheet origen) async {
     var lineas = await origen.values.allRows();
 
     final campos = lineas.first.map((e) => e.toLowerCase()).toList();
-    return lineas.skip(1).map((valores) => Map.fromIterables(campos, valores)).toList();
+    return lineas.skip(1).map((valores) {
+      final map = <String, dynamic>{};
+      for (var i = 0; i < campos.length; i++) {
+        map[campos[i]] = i < valores.length ? valores[i] : null;
+      }
+      return map;
+    }).toList();
   }
 }

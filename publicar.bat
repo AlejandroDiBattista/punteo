@@ -3,7 +3,7 @@ setlocal
 
 echo Construyendo sitio web...
 
-@REM cmd /c flutter clean
+cmd /c flutter clean
 cmd /c flutter build web --no-tree-shake-icons 
 @REM flutter build web && xcopy "build\web\*.*" "C:\Users\administrator\Documents\GitHub\contactos" /E /I /Y && cd "C:\Users\administrator\Documents\GitHub\contactos" && git add . && git commit -m "Agregando archivos generados por flutter build web" && git push
 @REM --no-tree-shake-icons 
@@ -18,9 +18,9 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo Copiando datos al repositorio...
-xcopy "build\web\*.*" "C:\Users\administrator\Documents\GitHub\contactos" /E /I /Y
+xcopy "build\web\*.*" "C:\tmp\timbreo-flutter" /E /I /Y
 
-cd "C:\Users\administrator\Documents\GitHub\contactos"
+cd "C:\tmp\timbreo-flutter"
 
 echo Publicando sitio...
 git add .

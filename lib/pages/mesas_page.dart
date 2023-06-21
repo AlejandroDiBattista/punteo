@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../colores.dart';
-import '../utils.dart';
+
 import '/pages/votantes_page.dart';
+import '../colores.dart';
 import '../modelos/datos.dart';
 import '../modelos/escuela.dart';
 import '../modelos/mesa.dart';
+import '../utils.dart';
 // import '../modelos/votante.dart';
 
 class MesasPage extends StatefulWidget {
@@ -19,7 +20,8 @@ class MesasPage extends StatefulWidget {
 class _MesasPageState extends State<MesasPage> {
   @override
   Widget build(BuildContext context) {
-    final mesas = this.widget.escuela.mesas;
+    var mesas = this.widget.escuela.mesas;
+    mesas.sort();
     return SafeArea(
       child: Scaffold(
         appBar: crearTitulo(Text(widget.escuela.escuela)),
@@ -44,11 +46,12 @@ class _MesasPageState extends State<MesasPage> {
         title: crearDesdeHasta(mesa, index),
         subtitle: crearRangoVotantes(mesa),
         onTap: () => irVotantes(mesa),
+        onLongPress: () => cambiarEstadoMesa(mesa),
         trailing: Icon(Icons.check, color: colorEstado));
   }
 
   Widget crearDesdeHasta(Mesa mesa, int indice) {
-    final color = mesa.esCerrada ? Colors.green : (mesa.esAnalizada ? Colors.blue : Colors.black);
+    final color = mesa.esCerrada ? Colors.green : (mesa.esAnalizada ? Colors.red : Colors.black);
     return Row(
       children: [
         Container(
@@ -66,17 +69,20 @@ class _MesasPageState extends State<MesasPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           crearNombre("desde: ", mesa.votantes.first.nombre),
           crearNombre("hasta: ", mesa.votantes.last.nombre),
+          SizedBox(
+            height: 4,
+          ),
+          crearResultados(mesa)
         ],
       );
 
   Widget crearCantidadVotantes(Mesa mesa) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(' ${mesa.votantes.length} votantes', style: TextStyle(fontSize: 12)),
-        if (mesa.favoritos.length > 0)
-          Text(' ${mesa.favoritos.length} favoritos',
-              style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
+        Text(mesa.favoritos.length.info('favorito'),
+            style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
         if (mesa.numero == Datos.usuarioActual.mesa)
           Text('Votas acá', style: TextStyle(fontSize: 12, color: Theme.of(context).primaryColor)),
       ]);
@@ -88,10 +94,32 @@ class _MesasPageState extends State<MesasPage> {
       ]);
 
   void irVotantes(Mesa mesa) async {
-    print('irVotantes: ${mesa.numero}');
-    // Datos.marcarMesa(mesa, "entrar");
-    await Navigator.push(context, MaterialPageRoute(builder: (context) => VotantesPage(mesa: mesa)));
-    // Datos.marcarMesa(mesa, "salir");
+    return;
+    // print('irVotantes: ${mesa.numero}');
+    // // Datos.marcarMesa(mesa, "entrar");
+    // await Navigator.push(context, MaterialPageRoute(builder: (context) => VotantesPage(mesa: mesa)));
+    // // Datos.marcarMesa(mesa, "salir");
+    // setState(() {});
+  }
+
+  void cambiarEstadoMesa(Mesa mesa) async {
+    mesa.esCerrada = !mesa.esCerrada;
+    Datos.marcarMesa(mesa);
     setState(() {});
   }
+
+  Widget crearResultados(Mesa mesa) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            resultado("votos", mesa.votos),
+            resultado("entregado", mesa.entregas),
+            resultado("votaron", mesa.votaron),
+            resultado("%", mesa.participacion.truncate(), true)
+          ],
+        ),
+      );
+
+
 }

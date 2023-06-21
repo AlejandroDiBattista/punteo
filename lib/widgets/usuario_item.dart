@@ -1,93 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '/colores.dart';
-import '/modelos/datos.dart';
-import '/modelos/favorito.dart';
-import '/modelos/votante.dart';
+import '/modelos/usuario.dart';
+import '/utils.dart';
 
 class UsuarioItem extends StatelessWidget {
   const UsuarioItem({super.key, required this.usuario, required this.index});
 
-  final Votante usuario;
+  final Usuario usuario;
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    final sesiones = Favorito.calcularSesiones(usuario.dni);
-    final tiempo = Favorito.calcularMinutosTrabajado(usuario.dni);
-    final activo = Favorito.esUsuarioActivo(usuario.dni);
-    final ultimoAcceso = Favorito.ultimoAcceso(usuario.dni);
-
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      child: Row(
-        children: [
-          Center(
-              child: switch (index) {
-            0 => Icon(Icons.military_tech, color: Colors.yellow[600]),
-            1 => Icon(Icons.military_tech, color: Colors.grey),
-            2 => Icon(Icons.military_tech, color: Colors.orange),
-            _ => Text("${index + 1}")
-          }),
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        child: Row(children: [
+          podio(index),
           SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text('  ${Datos.cantidadFavoritos(usuario.dni)}  ',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colores.terminar,
-                            )),
-                        Icon(Icons.star, color: Colors.yellow, size: 16),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Row(
-                  children: [
-                    Text('DNI ${usuario.dni} - ${usuario.domicilio} '),
-                    if (usuario.longitude != 0) Icon(Icons.location_on, color: Colors.red, size: 14),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Text("${sesiones.length} sesiones, $tiempo minutos",
-                    style: TextStyle(fontSize: 16, color: Colores.terminar)),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Text(
-                    activo
-                        ? 'En línea ahora'
-                        : 'Último acceso hace ${calculateDateDifference(ultimoAcceso, DateTime.now())} ',
-                    style: TextStyle(fontSize: 16, color: activo ? Colors.red : Colors.black)),
-              ),
-            ],
-          ),
-        ],
-      ),
+          Row(children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
+              nombre(),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                domicilio(),
+                sesiones(),
+                acceso(),
+                extras(),
+                mesasPrioritarias(),
+              ])
+            ]),
+            favorito()
+          ]),
+        ]));
+  }
+
+  Widget acceso() {
+    final estilo = TextStyle(fontSize: 16, color: usuario.activo ? Colors.red : Colors.black);
+
+    return Text(usuario.activo ? 'En línea ahora' : 'Hace ${fecha(usuario.ultimoAcceso)}', style: estilo);
+  }
+
+  Widget sesiones() => Text("${usuario.cantidadSesiones.info('sesión')} | ${minutos(usuario.tiempoTrabajado)}",
+      style: TextStyle(fontSize: 16, color: Colors.blue));
+
+  Widget extras() => Text("Analizados: ${usuario.cantidadAnalizados} | Cerradas: ${usuario.mesasCerradas}",
+      style: TextStyle(fontSize: 14, color: Colors.blue));
+
+  Widget mesasPrioritarias() =>
+      Text(usuario.mesasPendientes.info("Falta # mesa", "Faltan # mesas", "Mesas prioritarias completas 👏🏼👏🏼"),
+          style: TextStyle(fontSize: 16, color: usuario.mesasPendientes > 0 ? Colors.red : Colors.green));
+
+  Widget domicilio() => SizedBox(
+      width: Get.width - 120,
+      child: Row(children: [
+        Text('DNI ${usuario.dni} | '),
+        Text(usuario.domicilio, style: TextStyle(fontSize: 12)),
+        Icon(Icons.location_on, color: usuario.conUbicacion ? Colors.red : Colors.grey, size: 12)
+      ]));
+
+  Widget nombre() => SizedBox(
+      width: Get.width - 120,
+      child: Text('${usuario.nombre}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)));
+
+  Widget podio(int posicion) => switch (posicion) {
+        < 0 => Icon(Icons.workspace_premium, color: Colors.yellow[700]),
+        0 => Icon(Icons.military_tech, color: Colors.yellow[700]),
+        1 => Icon(Icons.military_tech, color: Colors.grey),
+        2 => Icon(Icons.military_tech, color: Colors.orange[800]),
+        _ => SizedBox(width: 24, child: Text("${posicion + 1}", textAlign: TextAlign.center))
+      };
+
+  Widget favorito() {
+    final favoritos = usuario.favoritos.length;
+    final destacar = TextStyle(fontSize: 24, color: Colors.blue);
+    return Row(
+      children: [Text('$favoritos', style: destacar), SizedBox(width: 4), Icon(Icons.star, color: Colors.amber)],
     );
   }
 }
 
-String calculateDateDifference(DateTime startDate, DateTime endDate) {
+String minutos(int tiempo) {
+  final h = (tiempo / 60).truncate();
+  final m = tiempo % 60;
+  return '${h.info('hora')} ${m.info('minuto')}'.trim();
+}
+
+String fecha(DateTime startDate) {
+  DateTime endDate = DateTime.now();
   Duration difference = endDate.difference(startDate);
 
   int days = difference.inDays;
   int hours = difference.inHours % 24;
-
-  return '$days días y $hours horas';
+  int minutes = difference.inMinutes % 60;
+  if (difference.inMinutes < 60) return minutes.info('minuto');
+  return '${days.info('día')} ${hours.info('hora')}'.trim();
 }
